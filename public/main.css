@@ -1,0 +1,4991 @@
+/***************************************************************************************************************************************
+ * This is the general styling used by all pages.
+ * It includes elements like the navbar, nav menu, earch, bar, footer etcetera
+ * 
+****************************************************************************************************************************************/
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+@font-face
+{
+    font-family: 'Berlin Sans FB';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Berlin Sans FB'), url('/fonts/BRLNSR.woff2') format('woff2');
+}
+
+@font-face
+{
+    font-family: 'Berlin Sans FB Bold';
+    font-style: normal;
+    font-weight: bold;
+    src: local('Berlin Sans FB Bold'), url('/fonts/BRLNSB.woff2') format('woff2');
+}
+
+
+html
+{
+    background-color: #000000;
+    -webkit-touch-callout: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    scroll-behavior: smooth;
+    font-size: large; /* -- 20% larger than standard -- */
+}
+
+html:root
+{   
+    --genGreenTypeBright: #0ee806;
+    --genGreenTypeLight: #14d60d;
+    --genGreenTypeLight2: #1fc316;
+    --genGreenTypeMid: #1da216;
+    --genGreenTypeMid2: #148b10;
+    --genGreenTypeDark1: #136e25;
+    --genGreenTypeDark2:#11521e;
+    --genGreenGradMid: #1da21675;
+    --genGreenGradMid2: #1da21650;
+    --genWhiteTypeBright: #ffffff;
+    --genWhiteTypeLight: #dfdfdf;
+    --genWhiteTypeMid: #ababab;
+    --genWhiteTypeMid2: #cecece;
+    --genWhiteTypeDark: #6b6a6a;
+    --genGreyTypeBright: #3a3a3a;
+    --genGreyTypeLight: #333333;
+    --genGreyTypeMid: #2a2a2a;
+    --genGreyTypeDark: #1e1e1e;
+    --scrollbarClr: #282828;
+    --scrollbarHoverClr: #333333;
+    --scrollbarActiveClr: #444444;
+    --color0:#000;
+    --color1: var(--genGreenTypeLight2);
+    --color2: var(--genWhiteTypeBright);
+    --color3:#212121a2;
+    --color4:#18181f;
+    --color5:#656565be;
+    --color6:#d3d3d3;
+    --color7: #03901d;
+    --color8: #e7e7e7;
+    --color9: #b4b4b4;
+    --color10: #888888;
+    --color11: #252525;
+    --warningClr: #ff0000;
+    --genModalBcg: #171717;
+    --genModalOptHover: #222222;
+    --notifyGoodBcg: #42af56;
+    --notifyBadBcg: #d95a5a;
+    --genBorderSpacing: 1.875rem;
+    --genMaxContainerWidth: 110.625rem;
+    --scrollBarWidth: 0.4375rem;
+    --genBtnIconSize: 1rem;
+    --genBtnTextSize: 0.875rem;
+    --genTick_chkBaseW: 0rem;
+    --fzTxt: 0.75rem;
+    --fzIcon: 1.25rem;
+    --bcgFilt: 0.125rem;
+    --companyLogoSize: 3.375rem;
+    --navbarGradientSize: 1.5625rem;
+    --pageGradientDirection: ;
+    --topGradientDirection: to bottom;
+    --btmGradientDirection: to top;
+    --sideNavBarWidth: 0rem;
+    --sideNavBarPadding: 0.3125rem;
+    --sideNavBarIconSize: 1.5625rem;
+    --sideNavBarIconClr: var(--genWhiteTypeLight);
+    --btmNavBarHeight: 0rem;
+    --btmNavBarPadding: 0.3125rem;
+    --btmNavBarIconSize: 1.375rem;
+    --btmNavBarIconClr: var(--genWhiteTypeLight);
+    --navBarHeight: 4.375rem;
+    --navBarGenClr: var(--color8);
+    --navBarBcgSolid: #2f2e2e;
+    --navElementColor_green: var(--genGreenTypeLight);
+    --navMenuBcgClr: #1d1c1c;
+    --navMenuBorderRadius: 0.9375rem;
+    --navMenuBorderThickness: 0.0625rem;
+    --navMenuBorderClr: var(--genGreenTypeLight);
+    --navBarMenuWidth: 17.1875rem;
+    --navBarNotificationPosT: calc(var(--navBarHeight) - 0.625rem);
+    --navBarNotificationPosR: -18.75rem;
+    --navBarNotificationHeaderHeight: 2.5rem;
+    --navBarNotificationFooterHeight: 2.8125rem;
+    --navBarNotificationImgWidth: 2.5rem;
+    --navBarNotificationImgHeight: 3.4375rem;
+    --navBarProfilePosT: calc(var(--navBarHeight) - 0.625rem);
+    --navBarProfilePosR: -18.75rem;
+    --navBarProfileCardLinkClr: #cdcdcd;
+    --quickSearchTransition: 300ms;
+    --quickSearchBdrRad: 0.3125rem;
+    --quickSearchInputBoxBcg: var(--navMenuBcgClr);
+    --quickSearchInputBdrHeight: 3.75rem;
+    --quickSearchInputClr: var(--genWhiteTypeDark);
+    --quickSearchInputIconWidth: 3.75rem;
+    --quickSearchResultCardHeight: 6.875rem;
+    --quickSearchResultCardThumbWidth: 4.0625rem;
+    --quickSearchResultDetTagSectIconSize: 0.875rem;
+    --quickSearchResultDetTagSectIconFill: var(--genGreenTypeMid);
+    --switchProfileFadeTranstion: 750ms;
+    --switchProfHeaderHeight: 3.75rem;
+    --switchProfOptImgBoxWidth: 7.8125rem;
+    --editProfileBcgImgHeight: 12.5rem;
+    --editProfileBcgImgHeightPlus: calc((var(--editProfileBcgImgHeight) + var(--navBarHeight)));
+    --basicSliderCardDivision: 4;
+    --basicSlideIconWidth: 1.1875rem;
+    --basicSlideArrowIconWidth: 2.1875rem;
+    --slideCardBorderRadius: 1.5625rem;
+    --slideCardSpacing: 0.75rem;
+    --slideCardPlayIconClr: var(--genGreenTypeMid);
+    --slideCardProgress_currClr: var(--genGreenTypeBright);
+    --basicCatalogCardWidth: 10.9375rem;
+    --basicSingleColPadding: 3.125rem;
+    --clModalActionMenuSvgSize: 1.125rem;
+    --clModalActionMenuClr: var(--genWhiteTypeMid);
+    --notifyIconBoxWidth: 3.75rem;
+    --genStaticBdrH: 6.25rem;
+    --genStatic_pd: 1rem;
+    --footerTextClrGreen: var(--genGreenTypeLight);
+    --footerTxtClrBright: var(--color8);
+    --footerTxtClrMid: #b7b7b7;
+    --footerTxtClrDark: var(--color10);
+}
+
+body
+{
+    font-family: 'Berlin Sans FB', sans-serif;
+    min-height: 100vh;
+    min-height: 100svh;
+}
+
+@supports(-webkit-tap-highlight-color: #00000000)
+{
+    body
+    {
+        -webkit-tap-highlight-color: #00000000;
+    }
+}
+
+body.bodystart
+{
+    overflow: auto;
+}
+
+body.bodystop
+{
+    overflow: hidden;
+}
+
+html:has(body[gen-menu-modal-is-dragging="true"])
+{
+    overscroll-behavior: none none !important;
+    touch-action: none !important;
+    scroll-behavior: auto;
+}
+
+html:has(body[gen-menu-modal-is-dragging="true"])
+::-webkit-scrollbar-thumb
+{
+    background-color: #00000000;
+}
+
+html:has(body[data-modal-state="open"]),
+html:has(.offline_mdl_bdr.static),
+html:has(.join_fence)
+{
+    overflow: hidden !important;
+}
+
+
+
+::-moz-selection
+{
+    background: #202720;
+    color: var(--genGreenTypeLight);
+}
+
+::selection
+{
+    background: #202720;
+    color: var(--genGreenTypeLight);
+}
+
+::-ms-input-placeholder
+{
+    fill:  var(--genWhiteTypeDark);
+    color: var(--genWhiteTypeDark);
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+::-moz-placeholder
+{
+    fill:  var(--genWhiteTypeDark);
+    color: var(--genWhiteTypeDark);
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    opacity: 1;
+}
+
+::-webkit-input-placeholder
+{
+    fill:  var(--genWhiteTypeDark);
+    color: var(--genWhiteTypeDark);
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+::placeholder
+{
+    fill:  var(--genWhiteTypeDark);
+    color: var(--genWhiteTypeDark);
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+/* ============== OFFLINE NOTICE ============= */
+
+.offline_mdl_bdr
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background-image: radial-gradient(circle at 50% 50%, var(--genGreyTypeMid) 0%, var(--genGreyTypeDark) 60%);
+    z-index: 10000000000002;
+}
+
+.offline_mdl_bdr .offline_mdl_box
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.offline_mdl_box .offline_mdl_icon_bdr
+{
+    width: 7.25rem;
+    height: 7.25rem;
+}
+
+.offline_mdl_icon_bdr .offline_mdl_icon_box
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.offline_mdl_icon_box .offline_mdl_icon_svg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--genGreenTypeLight);
+}
+
+.offline_mdl_box .offline_mdl_ttl_box
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin-top: 1rem;
+}
+
+.offline_mdl_ttl_box .offline_mdl_ttl_txt
+{
+    color: var(--genWhiteTypeBright);
+    font-size: 1.875rem;
+    text-align: center;
+}
+
+.offline_mdl_box .offline_mdl_det_box
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 0.5rem 0 1.25rem;
+}
+
+.offline_mdl_det_box .offline_mdl_det_txt
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* -----------------preloader----------------- */
+#preloader
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000cd;
+    -webkit-backdrop-filter: blur(1.5625rem);
+    backdrop-filter: blur(1.5625rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000000000000;
+}
+
+#preloader.preloadClose
+{
+    display: none !important;
+}
+
+#spinner
+{
+    width: 3.75rem;
+    height: 3.125rem;
+    border-right: 0.9375rem solid #21c92cb8;
+    border-bottom: 0.625rem solid #b1b1b1;
+    border-left: 0.9375rem solid #21c92cb8;
+    border-top: 0.6875rem solid transparent;
+    border-radius: 0.625rem;
+    animation: spi 2000ms linear infinite;
+}
+
+
+@keyframes spi
+{
+    0%
+    {
+        transform: translateY(-50%);
+    }
+    50%
+    {
+        transform: translateY(0%);
+    }
+    100%
+    {
+        transform: translateY(-50%);
+    }
+}
+
+
+
+
+
+
+/* ================ PRELOADER 2 ============== */
+
+.preload_2_bdr
+{
+    width: 100%;
+    height: 100%;
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preload_2_box
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preload_2_spinner
+{
+    width: 3.125rem;
+    height: 3.125rem;
+    fill: var(--genGreenTypeLight);
+}
+
+
+
+
+
+
+
+/* ============== APP LOGO ============== */
+
+.company_logoBdr
+{
+    width: var(--companyLogoSize);
+    height: var(--companyLogoSize);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.company_logoBdr .company_logoBox
+{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.company_logoBox .company_logoImg
+{
+    width: clamp(100% , 100% , 100%);
+    height: clamp(100% , 100% , 100%);
+}
+
+
+
+
+
+
+
+
+/* ================== APP ================ */
+
+main
+{
+    width: 100%;
+}
+
+.main > div
+{
+    width: 100%;
+}
+
+content
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 300ms ease-in-out;
+}
+
+content .content
+{
+    width: 100%;
+    min-height: 100vh;
+    padding-left: var(--sideNavBarWidth);
+    overflow: hidden;
+}
+
+
+.give_space
+{
+    width: 100%;
+    height: var(--navBarHeight);
+    background: none;
+    background-color: transparent;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.empty:empty
+{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty:empty::after
+{
+    content: '';
+    display: inline-block;
+    width: 3.125rem;
+    height: 3.125rem;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231DA216' d='M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z'%3E%3CanimateTransform attributeName='transform' dur='0.75s' repeatCount='indefinite' type='rotate' values='0 12 12;360 12 12'/%3E%3C/path%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+
+input[disabled="true"],
+input[disabled],
+textarea[disabled="true"],
+textarea[disabled],
+select[disabled="true"],
+select[disabled]
+{
+    filter: brightness(0.5);
+    text-decoration: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor:not-allowed;
+    pointer-events: none;
+}
+
+input::-webkit-search-cancel-button,
+input::-webkit-search-decoration,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration
+{
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+select
+{
+    font-family: 'Berlin Sans FB', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-family: 'Berlin Sans FB Bold', sans-serif;
+}
+
+::before, ::after,
+button, button *,
+input, input::placeholder,
+textarea, textarea::placeholder
+{
+    font-family: 'Berlin Sans FB', sans-serif;
+    outline: none;
+    border: none;
+    background-color: #00000000;
+}
+
+a
+{
+    font-family: 'Berlin Sans FB', sans-serif;
+    text-decoration: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+a:active, a:link, a:visited, a:any-link, a:focus, a:focus-visible, a:focus-within,
+ul
+{
+    outline: none;
+    border: none;
+    border-color: #00000000;
+    text-decoration: none;
+    list-style: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+@supports(-webkit-user-drag: none)
+{
+    a, a:active, a:link, a:visited, a:any-link, a:focus, a:focus-visible, a:focus-within
+    {
+        -webkit-user-drag: none;
+    }
+}
+
+
+
+
+/* ----------- General Button Layout with/without an icon ---------- */
+
+button:not(:disabled)
+{
+    cursor: pointer;
+}
+
+.openGenMenuModalBtn
+{
+    cursor: pointer;
+}
+
+.genBtnBox
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    min-width: 6.25rem;
+    height: -moz-fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem 1.25rem;
+    border-radius: 1.5625rem;
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    transition: all 150ms ease-in-out;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.genBtnBox.thin
+{
+    min-width: 0rem;
+    padding-left: .625rem;
+    padding-right: .625rem;
+}
+
+.genBtnBox.hide
+{
+    display: none;
+}
+
+.genBtnBox:active
+{
+    transform: scale(0.96);
+}
+
+.genBtnBox .genBtnIcon
+{
+    width: var(--genBtnIconSize);
+    height: var(--genBtnIconSize);
+    margin-right: 0.4375rem;
+}
+
+.genBtnIcon .genBtnSvg
+{
+    width: clamp(100% , 100% , 100%);
+    height: clamp(100% , 100% , 100%);
+}
+
+.genBtnBox .genBtnText
+{
+    font-size: var(--genBtnTextSize);
+    text-transform: capitalize;
+}
+
+
+
+/* ------------- Buttons with icons only ------------ */
+.genIconBtn,
+.genBtnBox.genIconBtn
+{
+    min-width: 0rem;
+    border-radius: 50%;
+    padding: 0.625rem;
+}
+
+.genIconBtn .genBtnIcon
+{
+    width: calc((var(--genBtnIconSize) + (var(--genBtnIconSize) / 2.5)));
+    height: calc((var(--genBtnIconSize) + (var(--genBtnIconSize) / 2.5)));
+    margin: 0;
+}
+
+.wlIconSvg.hide
+{
+    display: none;
+}
+
+.wlIconSvg.wlIconIN
+{
+    fill: var(--warningClr);
+}
+
+
+/* ============== General button Clrs ============= */
+
+.lightSolidBtn
+{
+    color: var(--genWhiteTypeLight); 
+    fill: var(--genWhiteTypeLight);
+    background-color: var(--genGreenTypeMid);
+}
+
+.midSolidBtn
+{
+    color: var(--genWhiteTypeLight);
+    fill: var(--genWhiteTypeLight);
+    background-color: var(--genGreenTypeMid2);
+}
+
+.darkSolidBtn
+{
+    color: var(--genWhiteTypeMid);
+    fill: var(--genWhiteTypeMid);
+    background-color: var(--genGreenTypeDark2);
+}
+
+.greySolidBtn
+{
+    color: var(--genWhiteTypeMid2);
+    fill: var(--genWhiteTypeMid2);
+    background-color: var(--genGreyTypeMid);
+}
+
+.hollowBtn
+{
+    color: var(--genGreenTypeMid);
+    fill: var(--genGreenTypeMid);
+    border: 0.125rem solid var(--genGreenTypeMid);
+    background-color: #00000000;
+}
+
+
+.inactiveBtn
+{
+    color: var(--navBarBcgSolid);
+    fill: var(--navBarBcgSolid);
+    border: 0.125rem solid var(--navBarBcgSolid);
+    background-color: #00000000;
+    cursor: not-allowed;
+}
+
+
+.lightSolidBtn:active
+{
+    color: var(--genWhiteTypeBright);
+    fill: var(--genWhiteTypeBright);
+    background-color: var(--genGreenTypeLight2);
+}
+
+.midSolidBtn:active
+{
+    background-color: var(--genGreenTypeLight);
+}
+
+.darkSolidBtn:active
+{
+    color: var(--genWhiteTypeLight);
+    fill: var(--genWhiteTypeLight);
+    background-color: var(--genGreenTypeDark1);
+}
+
+.greySolidBtn:active
+{
+    color: var(--genWhiteTypeLight);
+    fill: var(--genWhiteTypeLight);
+    background-color: var(--genGreyTypeLight);
+}
+
+.hollowBtn:active
+{
+    color: var(--genWhiteTypeMid2);
+    fill: var(--genWhiteTypeMid2);
+    border-color: var(--genWhiteTypeMid2);
+}
+
+/* ----- For transparent backgrounds ------ */
+.transBtn,
+.transBtn:active
+{
+    color: var(--genWhiteTypeLight);
+    fill: var(--genWhiteTypeLight);
+    border-color: #00000000;
+    background-color: #00000000;
+}
+
+.transBtn .genBtnIcon
+{
+    transition: all 150ms ease-in-out;
+}
+
+
+
+
+
+/* ========== Floating back-to-top Button ========= */
+.backtotop_float
+{
+    position: fixed;
+    bottom: calc((var(--btmNavBarHeight) + var(--genBorderSpacing)));
+    right: var(--genBorderSpacing);
+    box-shadow: 0rem 0.125rem 0.125rem 0.125rem #111111;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transform: translateX(100%);
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.backtotop_float.float
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0%);
+}
+
+
+/* -------- Placing on the LEFT side of the screen ------- */
+html:has( .backtotop_float_left) .backtotop_float
+{
+    right: unset;
+    left: calc((var(--genBorderSpacing) + var(--sideNavBarWidth)));
+    transform: translateX(-100%);
+}
+
+html:has( .backtotop_float_left) .backtotop_float.float
+{
+    transform: translateX(0%);
+}
+
+
+
+
+/* ============= Toggle Btn ============= */
+.genCheckBoxBase
+{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.genCheckBoxBase:has( .genCheckBoxInput:disabled)
+{
+    filter: brightness(0.25);
+}
+
+.genCheckBoxBase .genCheckBoxInput
+{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+}
+
+.genCheckBoxBase .genCheckBoxToggle
+{
+    position: relative;
+    width: 1.875rem;
+    height: 0.9375rem;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: var(--shoclistAutoPlayTogglePadding);
+    border-radius: 1.25rem;
+    background-color: var(--genWhiteTypeDark);
+    transition: all 300ms ease;
+    cursor: pointer;
+}
+
+.genCheckBoxToggle .genCheckBoxToggleCircle
+{
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background-color: var(--genWhiteTypeLight);
+    transform: translateX(-75%);
+    transition: all 300ms ease;
+}
+
+.genCheckBoxInput:checked ~ .genCheckBoxToggle
+{
+    background-color: var(--genGreenTypeMid);
+}
+
+.genCheckBoxInput:checked ~ .genCheckBoxToggle .genCheckBoxToggleCircle
+{
+    transform: translateX(25%);
+}
+
+
+
+/* ============ Tick Checkbox Buttons ========= */
+
+.genTick_chkBase
+{
+    width: var(--genTick_chkBaseW);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.genTick_chkSelState[data-cards-are-selectable="true"] .genTick_chkBase
+{
+    --genTick_chkBaseW: 2.1875rem;
+    opacity: 1;
+    visibility: visible;
+}
+
+.genTick_chkBdr
+{
+    width: 100%;
+    height: 100%;
+}
+
+.genTick_chkBdr .genTick_chkBox
+{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.genTick_chkBox .genTick_chkFldLbl
+{
+    position: relative;
+    width: 1.5625rem;
+    height: 1.5625rem;
+    border-radius: 0.3125rem;
+    background-color: #00000000;
+    cursor: pointer;
+}
+
+.genTick_chkFldLbl:has(.genTick_chkFldCls:checked)
+{
+    background-color: var(--genGreenTypeMid);
+}
+
+.genTick_chkFldLbl:has(.genTick_chkFldCls:not(:checked))::after
+{
+    --space: 0.15625rem;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc((100% - (var(--space) * 2)));
+    height: calc((100% - (var(--space) * 2)));
+    border-radius: 0.3125rem;
+    border: var(--space) solid var(--genWhiteTypeMid);
+    background-color: #00000000;
+    transition: all 300ms ease-in-out;
+}
+
+.genTick_chkFldLbl .genTick_chkFldCls
+{
+    position: fixed;
+    top: -1000%;
+    left: -1000%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.genTick_chkFldCls:not(:checked) ~ .genTick_chkFldIconBox
+{
+    opacity: 0;
+}
+
+.genTick_chkFldLbl .genTick_chkFldIconBox
+{
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
+}
+
+.genTick_chkFldIconBox .genTick_chkFldIconSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--genWhiteTypeMid);
+    fill: #000000;
+}
+
+
+
+
+
+
+/* ================ IMAGES =============== */
+
+img[alt]
+{
+    font-size: 0.75rem;
+}
+
+* .img_preload_box,
+.img_preload_box
+{
+    position: relative;
+    width: clamp(100%, 100%, 100%);
+    height: clamp(100%, 100%, 100%);
+    filter: blur(0.9375rem);
+}
+
+.img_preload_box.loaded
+{
+    filter: blur(0rem);
+}
+
+.img_preload_box.loaderror
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: blur(0rem);
+    background-color: var(--genGreyTypeLight);
+}
+
+.img_preload_box.loaderror::after 
+{
+    --img_preload_error_size: 40%;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M18 8a2 2 0 1 1-4 0a2 2 0 0 1 4 0'/%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M11.943 1.25h.114c2.309 0 4.118 0 5.53.19c1.444.194 2.584.6 3.479 1.494c.895.895 1.3 2.035 1.494 3.48c.19 1.411.19 3.22.19 5.529v.088c0 1.909 0 3.471-.104 4.743c-.104 1.28-.317 2.347-.795 3.235q-.314.586-.785 1.057c-.895.895-2.035 1.3-3.48 1.494c-1.411.19-3.22.19-5.529.19h-.114c-2.309 0-4.118 0-5.53-.19c-1.444-.194-2.584-.6-3.479-1.494c-.793-.793-1.203-1.78-1.42-3.006c-.215-1.203-.254-2.7-.262-4.558Q1.25 12.792 1.25 12v-.058c0-2.309 0-4.118.19-5.53c.194-1.444.6-2.584 1.494-3.479c.895-.895 2.035-1.3 3.48-1.494c1.411-.19 3.22-.19 5.529-.19m-5.33 1.676c-1.278.172-2.049.5-2.618 1.069c-.57.57-.897 1.34-1.069 2.619c-.174 1.3-.176 3.008-.176 5.386v.844l1.001-.876a2.3 2.3 0 0 1 3.141.104l4.29 4.29a2 2 0 0 0 2.564.222l.298-.21a3 3 0 0 1 3.732.225l2.83 2.547c.286-.598.455-1.384.545-2.493c.098-1.205.099-2.707.099-4.653c0-2.378-.002-4.086-.176-5.386c-.172-1.279-.5-2.05-1.069-2.62c-.57-.569-1.34-.896-2.619-1.068c-1.3-.174-3.008-.176-5.386-.176s-4.086.002-5.386.176' clip-rule='evenodd'/%3E%3C/svg%3E");
+    content: '';
+    position: absolute;
+    width: var(--img_preload_error_size);
+    height: var(--img_preload_error_size);
+    display: inline-block;
+    background-color: var(--genWhiteTypeMid);
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    aspect-ratio: 1/1;
+    z-index: 5;
+}
+
+.img_preload_box .img_preload_sibling
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    inset: 0;
+    filter: blur(0.9375rem);
+    animation: lazyImgPreload 2s linear infinite;
+    z-index: 10;
+}
+
+.img_preload_box.loaded .img_preload_sibling,
+.img_preload_box.loaderror .img_preload_sibling
+{
+    display: none;
+    filter: blur(0rem);
+    animation: none;
+}
+
+@keyframes lazyImgPreload
+{
+    0%
+    {
+        filter: brightness(0.75);
+        background-color: var(--genGreenTypeDark2);
+    }
+    50%
+    {
+        filter: brightness(1.25);
+        background-color: var(--genGreenTypeMid);
+    }
+    100%
+    {
+        filter: brightness(0.75);
+        background-color: var(--genGreenTypeDark2);
+    }
+}
+
+.img_preload_box,
+.img_preload_box .img_preload_sibling,
+img
+{
+    backface-visibility: hidden !important;
+    -moz-user-select: -moz-none !important;
+    -moz-user-select: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none !important;
+}
+
+.img_preload_box.loaderror img[loading="lazy"]
+{
+    display: none;
+}
+
+.img_preload_box.loaded img[loading="lazy"]
+{
+    animation: lazyImgPostLoad 300ms linear;
+}
+
+@keyframes lazyImgPostLoad
+{
+    0%
+    {
+        filter: blur(10.9375rem) brightness(0);
+    }
+    75%
+    {
+        filter: blur(10.9375rem) brightness(1);
+    }
+    100%
+    {
+        filter: blur(0rem);
+    }
+}
+
+
+
+
+
+
+
+/* ========== TOggLe fuLLscrEEn ========== */
+
+.goToFullScreenBtn .maximize
+{
+    display: block;
+}
+
+.goToFullScreenBtn .minimize
+{
+    display: none;
+}
+
+.goToFullScreenBtn.isFullScreen .maximize
+{
+    display: none;
+}
+
+.goToFullScreenBtn.isFullScreen .minimize
+{
+    display: block;
+}
+
+
+
+
+
+/* =============== PAGE GRADIENT (NOT DONE) ============= */
+.pageGradient
+{
+    position: fixed;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--navbarGradientSize);
+    background: -o-linear-gradient(to bottom, #000000ff, #00000000);
+    background: -moz-linear-gradient(to bottom, #000000ff, #00000000);
+    background: -webkit-linear-gradient(to bottom, #000000ff, #00000000);
+    background: linear-gradient(var(--pageGradientDirection), #000000ff, #00000000);
+    opacity: 1;
+    visibility: visible;
+    transition: all 300ms ease-in-out;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 100;
+    display: none;
+}
+
+.pageGradient.hide
+{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.pageGradient.topPageGradient
+{
+    --pageGradientDirection: to bottom;
+    top: 0;
+}
+
+.pageGradient.btmPageGradient
+{
+    --pageGradientDirection: to top;
+    bottom: 0;
+}
+
+
+
+
+
+
+
+/* =========== TOP NAVBAR =========== */
+.topNavBar
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--btmNavBarHeight);
+    padding-left: var(--sideNavBarWidth);
+    background: -o-linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+    background: -moz-linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+    background: -webkit-linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+    background: linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.topNavBar.float
+{
+    background: -o-linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+    background: -moz-linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+    background: -webkit-linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+    background: linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+}
+
+.topNavBar.darken 
+{
+    background: #000000;
+}
+
+.topNavBar.initialize
+{
+    --btmNavBarHeight: 4rem;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.topNavBar.active
+{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.topNavBar .topNavBdr
+{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.topNavBdr .topNavBox
+{
+    width: 100%;
+    max-width: var(--genMaxContainerWidth);
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 var(--genBorderSpacing);
+}
+
+.topNavBox .topNav_section
+{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.3125rem;
+}
+
+.topNav_section .topNav_openNavNotify
+{
+    margin-right: 0.4375rem;
+}
+
+.topNav_titleBox .topNav_titleText
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 1.125rem;
+}
+
+
+
+
+
+
+
+/* ========== SIDE NAVBAR ========== */
+
+.sideNavBar
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: var(--sideNavBarWidth);
+    height: 100vh;
+    background-color: #000000;
+    transition: all 300ms ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 100;
+}
+
+html:root:has( .sideNavBar.initialize)
+{
+    --sideNavBarWidth: 4rem;
+}
+
+.sideNavBar.initialize
+{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+
+html:root:has( .sideNavBar.hidden)
+{
+    --sideNavBarWidth: 0rem !important;
+}
+
+.sideNavBar.hidden
+{
+    opacity: 0 ;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.sideNavBar .sideNavBdr
+{
+    width: 100%;
+    height: 100%;
+}
+
+.sideNavBdr .sideNavBox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.9375rem 0;
+}
+
+.sideNavBox .sideNav_section
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sideNav_section .sideNavItemsBdr
+{
+    width: 100%;
+}
+
+.sideNav_section:first-child
+{
+    gap: 0.9375rem;
+}
+
+.sideNavItemsBdr .sideNavItemsBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.4375rem;
+}
+
+.sideNavItemsBox .sideNavItemsCardBase
+{
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+.sideNavItemsCardBase:last-child
+{
+    margin-bottom: 0;
+}
+
+.sideNavItemsCardBase .sideNavItemsCardBdr
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem 0.3125rem;
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.sideNavItemsCardBdr:active
+{
+    --sideNavBarIconClr: var(--genGreenTypeLight2);
+}
+
+.sideNavItemsCardBdr.active
+{
+    --sideNavBarIconClr: var(--genGreenTypeBright);
+}
+
+.sideNavItemsCardBdr.active::after
+{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(100% 100% at 50% 50%, var(--genGreenTypeMid2) 0%, #00000000 65%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.sideNavItemsCardBdr .sideNavItemsCardBox
+{
+    position: relative;
+    width: var(--sideNavBarIconSize);
+    height: var(--sideNavBarIconSize);
+}
+
+.sideNavItemsCardBox .sideNavItemsCardIcon
+{
+    width: 100%;
+    height: 100%;
+}
+
+.sideNavItemsCardIcon .sideNavItemsCardSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--sideNavBarIconClr);
+    transition: all 300ms ease-in-out;
+}
+
+.sideNavItemsCardSvg.myListSvg path
+{
+    stroke: var(--sideNavBarIconClr);
+    color: var(--sideNavBarIconClr);
+    transition: all 300ms ease-in-out;
+}
+
+.sideNavItemsCardBdr .sideNavOutlineIcon
+{
+    display: block;
+}
+
+.sideNavItemsCardBdr .sideNavBoldIcon
+{
+    display: none;
+}
+
+.sideNavItemsCardBdr.active .sideNavOutlineIcon
+{
+    display: none;
+}
+
+.sideNavItemsCardBdr.active .sideNavBoldIcon
+{
+    display: block;
+}
+
+.sideNavItemsCardBox .sideNavItemsCardTitleBdr
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: -moz-fit-content;
+    min-width: fit-content;
+    width: fit-content;
+    width: 6.25rem;
+    margin-left: calc((var(--sideNavBarWidth) / 2));
+    padding: 0.4375rem 0.9375rem;
+    border-radius: 0.625rem;
+    background-color: var(--genGreenTypeMid2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%);
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.sideNavItemsCardTitleBdr .sideNavItemsCardTitleBox
+{
+    width: 100%;
+    height: 100%;
+}
+
+.sideNavItemsCardTitleBox .sideNavItemsCardTitleText
+{
+    width: 100%;
+    text-wrap: none;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--genWhiteTypeBright);
+}
+
+
+
+
+
+
+/*  ============= BOTTOM NAVBAR ============ */
+
+.btmNavBar
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--btmNavBarHeight);
+    background: -o-linear-gradient(to top, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+    background: -moz-linear-gradient(to top, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+    background: -webkit-linear-gradient(to top, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+    background: linear-gradient(to top, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
+    z-index: 100;
+}
+
+html:root:has(.btmNavBar.hidden)
+{
+    --btmNavBarHeight: 0rem !important;
+}
+
+.btmNavBar.hidden
+{
+    opacity: 0 ;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.btmNavBar .btmNavBdr
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btmNavBdr .btmNavBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.btmNavBox .btmNavItemsCardBase
+{
+    width: 100%;
+}
+
+.btmNavItemsCardBase .btmNavItemsCardBdr
+{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem 0.3125rem;
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.btmNavItemsCardBdr:active
+{
+    --btmNavBarIconClr: var(--genGreenTypeLight2);
+}
+
+.btmNavItemsCardBdr.active
+{
+    --btmNavBarIconClr: var(--genGreenTypeBright);
+}
+
+.btmNavItemsCardBdr.active::after
+{
+    content: '';
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(100% 100% at 50% 100%, var(--genGreenTypeMid2) 0%, #00000000 60%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.btmNavItemsCardBdr .btmNavItemsCardBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btmNavItemsCardBox .btmNavItemsCardIcon
+{
+    position: relative;
+    width: var(--btmNavBarIconSize);
+    height: var(--btmNavBarIconSize);
+    margin-bottom: 0.3125rem;
+}
+
+.btmNavItemsCardIcon .btmNavItemsCardSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--btmNavBarIconClr);
+    transition: all 300ms ease-in-out;
+}
+
+.btmNavItemsCardBdr .btmNavOutlineIcon
+{
+    display: block;
+}
+
+.btmNavItemsCardBdr .btmNavBoldIcon
+{
+    display: none;
+}
+
+.btmNavItemsCardBdr.active .btmNavOutlineIcon
+{
+    display: none;
+}
+
+.btmNavItemsCardBdr.active .btmNavBoldIcon
+{
+    display: block;
+}
+
+.btmNavItemsCardSvg.myListSvg path
+{
+    stroke: var(--btmNavBarIconClr);
+    color: var(--btmNavBarIconClr);
+    transition: all 300ms ease-in-out;
+}
+
+.btmNavItemsCardBox .btmNavItemsCardTitleBdr
+{
+    width: 100%;
+    height: 100%;
+}
+
+.btmNavItemsCardTitleBdr .btmNavItemsCardTitleBox
+{
+    width: 100%;
+    height: 100%;
+}
+
+.btmNavItemsCardTitleBox .btmNavItemsCardTitleText
+{
+    font-size: 0.75rem;
+    color: var(--btmNavBarIconClr);
+    text-align: center;
+    transition: all 300ms ease-in-out;
+}
+
+
+
+
+
+
+/* ========= NAVBAR UNDERLAYER ========== */
+
+.navbar_UnderLayer
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000075;
+    -webkit-backdrop-filter: blur(0.625rem);
+    backdrop-filter: blur(0.625rem);
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 90;
+    display: none;
+}
+
+.navbar_UnderLayer.active
+{
+    display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ============== NOTIFICATION STATUS BAR ============= */
+.notifyBdr
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: calc((var(--navBarHeight) - 0.9375rem));
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    transition: all var(--notifyTransitionStyle) ease-in;
+    z-index: 10000000000001;
+}
+
+.notifyBdr.notifyAtv
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0%);
+}
+
+.notifyBdr.notifyGood
+{
+    background-color: var(--notifyGoodBcg);
+}
+
+.notifyBdr.notifyBad
+{
+    background-color: var(--notifyBadBcg);
+}
+
+.notifyBdr .notifyBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem 1.5625rem;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.notifyBox .notifyText
+{
+    color: #000000;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.notifyBdr .notifyIconBox
+{
+    position: absolute;
+    right: 0rem;
+    top: 50%;
+    width: var(--notifyIconBoxWidth);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.notifyIconBox .notifyIcon
+{
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+
+
+
+
+
+
+
+/* ============== QUICK SEARCH ============ */
+
+.quickSearchBase
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.5rem;
+    background-color: #000000c9;
+    -webkit-backdrop-filter: blur(0.625rem);
+    backdrop-filter: blur(0.625rem);
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--quickSearchTransition) ease-in-out;
+    pointer-events: none;
+    z-index: 125;
+}
+
+.quickSearchBase.active
+{
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.quickSearchBase .quickSearchBcg
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.quickSearchBase .quickSearchBdr
+{
+    width: 100%;
+    max-width: 40.625rem;
+}
+
+.quickSearchBdr .quickSearchBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--genBorderSpacing);
+    transform: translateY(25%) scale(0.75);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--quickSearchTransition) ease-in-out;
+}
+
+.quickSearchBase.active .quickSearchBox
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0%) scale(1.0);
+}
+
+.quickSearchBox .quickSearchNoteBdr
+{
+    width: 100%;
+    margin: 0.625rem 0;
+}
+
+.quickSearchNoteBdr .quickSearchNoteBox
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.quickSearchNoteBox .quickSearchNoteText
+{
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--genWhiteTypeLight);
+}
+
+.quickSearchNoteBox .quickSearchNoteKey
+{
+    padding: 0.4375rem;
+    font-size: 0.75rem;
+    color: var(--genGreenTypeLight);
+    border-radius: 0.4375rem;
+    background-color: var(--quickSearchInputBoxBcg);
+}
+
+/* -------- Input Area ------ */
+.quickSearchBox .quickSearchInputBdr
+{
+    width: 100%;
+    height: var(--quickSearchInputBdrHeight);
+    margin-bottom: 0.9375rem;
+}
+
+.quickSearchInputBdr .quickSearchInputBox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    border-radius: var(--quickSearchBdrRad);
+    background-color: var(--quickSearchInputBoxBcg);
+    border-bottom: 0.125rem solid #ffffff55;
+    overflow: hidden;
+    transition: all var(--quickSearchTransition) ease-in-out;
+}
+
+.quickSearchInputBox:focus-within
+{
+    --quickSearchInputClr: var(--genWhiteTypeLight);
+    border-color: var(--genGreenTypeLight);
+}
+
+.quickSearchInputBox .quickSearchInputFieldClass
+{
+    width: 100%;
+    height: 100%;
+    padding: 0.625rem var(--quickSearchInputIconWidth);
+    outline: none;
+    border: none;
+    color: var(--quickSearchInputClr);
+    font-size: 1rem;
+    background-color: #00000000;
+    transition: all var(--quickSearchTransition) ease-in-out;
+}
+
+.quickSearchInputBox .quickSearchInputIcon
+{
+    position: absolute;
+    top: 0;
+    width: var(--quickSearchInputIconWidth);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.quickSearchInputIcon.quickSearchInputLeftIcon
+{
+    left: 0;
+}
+
+.quickSearchInputIcon.quickSearchInputRightIcon
+{
+    right: 0;
+}
+
+.quickSearchInputIcon.quickSearchCloseIcon
+{
+    --quickSearchInputClr: var(--genWhiteTypeLight);
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.quickSearchInputIcon.quickSearchClearInput
+{
+    display: none;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.quickSearchClearInput.isTyping
+{
+    display: flex;
+}
+
+.quickSearchInputIcon.quickSearchToCatalog
+{
+    --quickSearchInputClr: var(--genWhiteTypeLight);
+    top: 25%;
+    height: 50%;
+    display: flex;
+    border-left: 0.0625rem solid var(--genWhiteTypeMid);
+    cursor: pointer;
+    pointer-events: all;
+}
+
+.quickSearchToCatalog.isTyping
+{
+    display: none;
+}
+
+.quickSearchInputIcon .quickSearchInputSvg
+{
+    fill: var(--quickSearchInputClr);
+    transition: all var(--quickSearchTransition) ease-in-out;
+}
+
+.quickSearchInputLeftIcon .quickSearchInputSvg
+{
+    width: calc((var(--quickSearchInputIconWidth) / 2.5));
+    height: calc((var(--quickSearchInputIconWidth) / 2.5));
+}
+
+.quickSearchToCatalog .quickSearchInputSvg
+{
+    width: calc((var(--quickSearchInputIconWidth) / 2.0));
+    height: calc((var(--quickSearchInputIconWidth) / 2.0));
+}
+
+.quickSearchClearInput .quickSearchInputSvg
+{
+    width: calc((var(--quickSearchInputIconWidth) / 2.5));
+    height: calc((var(--quickSearchInputIconWidth) / 2.5));
+}
+
+
+
+/* ------- Result Area ------- */
+
+.quickSearchBox .quickSearchResultBdr
+{
+    position: relative;
+    width: 100%;
+    max-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--quickSearchBdrRad);
+    background-color: var(--navMenuBcgClr);
+    overflow: hidden auto;
+    transition: all var(--quickSearchTransition) 300ms ease-in-out;
+}
+
+.quickSearchResultBdr .quickSearchResultAllBtn
+{
+    width: 100%;
+    height: var(--quickSearchInputBdrHeight);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.quickSearchResultAllBtn.active
+{
+    display: flex;
+}
+
+.quickSearchResultBdr .quickSearchResultBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.quickSearchResultBox .quickSearchResultCardBdr
+{
+    width: 100%;
+    height: var(--quickSearchResultCardHeight);
+    border-bottom: 0.0625rem solid #333333;
+    transition: all var(--quickSearchTransition) ease-in-out;
+    cursor: pointer;
+}
+
+.quickSearchResultCardBdr:hover
+{
+    background-color: var(--navBarBcgSolid);
+}
+
+.quickSearchResultCardBdr .quickSearchResultCardBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.625rem 0.9375rem;
+}
+
+.quickSearchResultCardBox .quickSearchResultCardThumbBdr
+{
+    width: var(--quickSearchResultCardThumbWidth);
+    height: 100%;
+}
+
+.quickSearchResultCardThumbBdr .quickSearchResultCardThumbBox
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 0.3125rem;
+    overflow: hidden;
+}
+
+.quickSearchResultCardThumbBox .quickSearchResultCardThumbImg
+{
+    width: clamp(100% , 100% , 100%);
+    height: clamp(100% , 100% , 100%);
+    object-fit: cover;
+    object-position: center;
+}
+
+.quickSearchResultCardBox .quickSearchResultDetBdr
+{
+    width: calc((100% - var(--quickSearchResultCardThumbWidth)));
+    height: 100%;
+    padding-left: 0.625rem;
+}
+
+.quickSearchResultDetBdr .quickSearchResultDetBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quickSearchResultDetBox .quickSearchResultDetTitleBox
+{
+    width: 100%;
+}
+
+.quickSearchResultDetTitleBox .quickSearchResultDetTitleText
+{
+    --quickSearchResultDetTitleTextNo: 2;
+    --quickSearchResultDetTitleTextH: 1.4;
+    position: relative;
+    -webkit-line-clamp: var(--quickSearchResultDetTitleTextNo);
+    -webkit-box-orient: vertical;
+    line-clamp:  var(--quickSearchResultDetTitleTextNo);
+    display: -webkit-box;
+    max-height: calc(var(--quickSearchResultDetTitleTextNo) * 1em * var(--quickSearchResultDetTitleTextH));
+    line-height: var(--quickSearchResultDetTitleTextH);
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    color: var(--genWhiteTypeLight);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+.quickSearchResultDetBox .quickSearchResultDetTagBdr
+{
+    width: 100%;
+    margin: 0.3125rem 0;
+}
+
+.quickSearchResultDetTagBdr .quickSearchResultDetTagBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.quickSearchResultDetTagBox .quickSearchResultDetTagSectBox
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.3125rem;
+}
+
+.quickSearchResultDetTagSectBox .quickSearchResultDetTagSectText
+{
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--genWhiteTypeMid);
+    text-transform: uppercase;
+}
+
+.quickSearchResultDetTagSectBox.quickSearchResultDetTagDividerBox
+{
+    display: none;
+}
+
+.quickSearchResultDetTagScoreBox .quickSearchResultDetTagScoreIcon
+{
+    width: var(--quickSearchResultDetTagSectIconSize);
+    height: var(--quickSearchResultDetTagSectIconSize);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0.1875rem;
+}
+
+.quickSearchResultDetTagScoreIcon .quickSearchResultDetTagScoreSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--quickSearchResultDetTagSectIconFill);
+}
+
+.quickSearchResultDetBox .quickSearchResultDetDescBox
+{
+    width: 100%;
+}
+
+.quickSearchResultDetDescBox .quickSearchResultDetDescText
+{
+    --quickSearchResultDetDescTextNo: 2;
+    --quickSearchResultDetDescTextH: 1.4;
+    position: relative;
+    -webkit-line-clamp: var(--quickSearchResultDetDescTextNo);
+    -webkit-box-orient: vertical;
+    line-clamp:  var(--quickSearchResultDetDescTextNo);
+    display: -webkit-box;
+    max-height: calc(var(--quickSearchResultDetDescTextNo) * 1em * var(--quickSearchResultDetDescTextH));
+    line-height: var(--quickSearchResultDetDescTextH);
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    color: var(--genWhiteTypeMid);
+    font-size: 0.75rem;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================ Basic (General) Carousel ============== */
+
+.more_content
+{
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, auto);
+    gap: 2.1875rem;
+}
+
+.basic_slider_bdr
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 10;
+}
+
+.basic_slider_title_bdr
+{
+    width: 100%;
+    height: 4.6875rem;
+    padding: 0.625rem var(--genBorderSpacing);
+}
+
+.basic_slider_title_box
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.basic_slider_title_box h2
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+}
+
+.basic_slider_title_box h2 .big
+{
+    color: #14d60d;
+    font-size: 1.25rem;
+}
+
+.basic_slider_title_box h2 .small
+{
+    color: #fff;
+    font-size: 1.125rem;
+}
+
+.basic_slider_title_box p
+{
+    font-size: 0.8125rem;
+    color: #c0bebe;
+    text-align: left;
+}
+
+.basic_slider_ctnt
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.basic_slider_box
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.basic_slider_box  .basic_slide_arrow
+{
+    position: absolute;
+    top: 0;
+    width: 2.1875rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+    transition: 300ms;
+    cursor: pointer;
+    z-index: 25;
+}
+
+
+.basic_slider_box .basic_slide_arrow.left_slide_arrow
+{
+    left: 0;
+}
+
+.basic_slider_box .basic_slide_arrow.right_slide_arrow
+{
+    right: 0;
+}
+
+.basic_slider_box  .basic_slide_arrow.left_slide_arrow
+{
+    background-image: -o-linear-gradient(to right,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+    background-image: -moz-linear-gradient(to right,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+    background-image: -webkit-linear-gradient(to right,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+    background-image: linear-gradient(to right,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+}
+
+.basic_slider_box  .basic_slide_arrow.right_slide_arrow
+{
+    background-image: -o-linear-gradient(to left,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+    background-image: -moz-linear-gradient(to left,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+    background-image: -webkit-linear-gradient(to left,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+    background-image: linear-gradient(to left,#000000d2, #000000ad, #0000008b, #00000059, #00000000);
+}
+
+.basic_slide_arrow .basic_slide_arrowIcon
+{
+    width: var(--basicSlideArrowIconWidth);
+    height: var(--basicSlideArrowIconWidth);
+    fill: var(--genWhiteTypeMid);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 300ms ease-in-out;
+    cursor: none;
+}
+
+.basic_slider_card_box
+{
+    --basicCatalogDivisionGap: 0.46875rem;
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    display: grid;
+    grid-auto-columns: calc((100% / var(--basicSliderCardDivision)) - (var(--basicCatalogDivisionGap)));
+    grid-auto-flow: column;
+    gap: var(--basicCatalogDivisionGap);
+    margin-bottom: 0.625rem;
+    padding: 0.3125rem var(--genBorderSpacing);
+    scroll-padding-left: var(--genBorderSpacing);
+    scroll-padding-right: var(--genBorderSpacing);
+    scroll-snap-type:x proximity;
+    scroll-behavior: smooth;
+    scrollbar-color: #00000000 #00000000;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.basic_slider_card_box::-webkit-scrollbar
+{
+    display: none;
+}
+
+.basic_slider_card_box.isBasicSliderDown
+{
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+}
+
+.basic_slider_card_box .slide_card_base
+{
+    scroll-snap-align: start;
+}
+
+.slide_card_base.max_sizing
+{
+    max-width: 15.625rem;
+    /* max-height: 25rem; */
+}
+
+.slide_card_base.notShowStatusMatch
+{
+    display: none;
+    overflow: hidden;
+}
+
+.slide_card_base.notShowTypeMatch
+{
+    display: none;
+    overflow: hidden;
+}
+
+.slide_card_base .slide_card_bdr
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.slide_card_bdr.max_sizing
+{
+    max-width: 12.5rem;
+    max-height: 18.75rem;
+}
+
+.slide_card_bdr .slide_card_bcg
+{
+    --slide_card_bcgW: 0rem;
+    --slide_card_bcgH: 0.125rem;
+    position: absolute;
+    top: calc(0% + var(--slide_card_bcgH));
+    width: calc(100% + var(--slide_card_bcgW));
+    height: 100%;
+    border-radius: var(--slideCardBorderRadius);
+    background-color: var(--genGreenTypeMid);
+    transition: all 300ms ease-in-out;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.slide_card_bdr:active .slide_card_bcg
+{
+    --slide_card_bcgW: 0.1875rem;
+    --slide_card_bcgH: 0rem;
+}
+
+.slide_card_bdr .slide_card_box
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.slide_card_box .slide_card
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--slideCardBorderRadius);
+    background: #000000;
+    aspect-ratio: 18/32;
+    cursor: pointer;
+    transition: 300ms;
+    overflow: hidden;
+    z-index: 4;
+}
+
+.slide_card .cardLinkCover
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000000;
+    z-index: 5;
+}
+
+.slide_card .cardAddToListBdr
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: calc(var(--slideCardSpacing) - 0.25rem);
+    opacity: 1;
+    visibility: visible;
+    transition: all 300ms ease-in-out;
+    z-index: 6;
+}
+
+.cardAddToListBdr .cardAddToListBox
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    background-color: #000000b4;
+    transition: border-radius 0ms 300ms ease-in-out;
+}
+
+.cardAddToListBox .cardAddToListIconBox
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--slideCardSpacing);
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.cardAddToListIconBox .cardAddToListIcon
+{
+    width: var(--basicSlideIconWidth);
+    height: var(--basicSlideIconWidth);
+    fill: var(--genWhiteTypeLight);
+    transition: all 300ms ease-in-out;
+}
+
+.slide_card .cardImgBox
+{
+    width: 100%;
+    height: 100%;
+    border-radius: var(--slideCardBorderRadius);
+    overflow: hidden;
+    z-index: 2;
+}
+
+.cardImgBox .cardImg
+{
+    width: clamp(100%, 100%, 100%);
+    height: clamp(100%, 100%, 100%);
+    object-fit: cover;
+    object-position: center;
+    transition: all 300ms ease-in-out;
+}
+
+.slide_card .cardQualityBox
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: var(--slideCardSpacing);
+    z-index: 4;
+    display: none;
+}
+
+.cardQualityBox .cardQualityText
+{
+    color: var(--genWhiteTypeBright);
+    font-size: 1.25rem;
+    text-shadow: 0 0 0.4375rem #000000;
+    letter-spacing: 0.0625rem;
+}
+
+.slide_card .cardInfoBdr
+{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    background: #00000055;
+    transition: 300ms;
+    z-index: 3;
+}
+
+.cardInfoBdr .cardInfoBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--slideCardSpacing);
+    background: linear-gradient(to top, #000000ed, #000000be, #00000099, #00000000);
+}
+
+.cardInfoBox .cardInfo_tagBdr
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 0.4375rem;
+    gap: 0.25rem;
+}
+
+.cardInfo_tagBdr .cardInfo_tagBox
+{
+    padding: 0.125rem 0.3125rem;
+    border-radius: 0.25rem;
+    background-color: var(--genGreenGradMid);
+}
+
+.cardInfo_tagBox .cardInfo_tagText
+{
+    color: var(--genGreenTypeLight);
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.cardInfoBox .cardInfo_titleBox
+{
+    width: 100%;
+}
+
+.cardInfo_titleBox .cardInfo_titleText
+{
+    --cardInfoTitleTextNo: 2;
+    --cardInfoTitleTextH: 1.4;
+    position: relative;
+    -webkit-line-clamp: var(--cardInfoTitleTextNo);
+    -webkit-box-orient: vertical;
+    line-clamp:  var(--cardInfoTitleTextNo);
+    display: -webkit-box;
+    max-height: calc(var(--cardInfoTitleTextNo) * 1em * var(--cardInfoTitleTextH));
+    line-height: var(--cardInfoTitleTextH);
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    width: 100%;
+    color: var(--genWhiteTypeBright);
+    font-size: 0.875rem;
+    text-transform: capitalize;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+
+
+/* ======== History (Continue Watching) ======== */
+.cardProgressBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardProgressBox .cardProgressHeader
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.4375rem 0;
+}
+
+.cardProgressHeader .cardProgressName
+{
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.cardProgressName .cardProgressName_text
+{
+    color: var(--genWhiteTypeMid);
+    font-size: 0.6875rem;
+}
+
+.cardProgressHeader .cardProgressTime
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.125rem;
+    font-size: 0.6875rem;
+    color: var(--genWhiteTypeMid);
+}
+
+.cardProgressTime .cardProgressTime_current
+{
+    color: var(--slideCardProgress_currClr);
+}
+
+.cardProgressTime .cardProgressTime_divider
+{
+    font-size: 0.625rem;
+}
+
+.cardProgressBox .cardProgressBarBdr
+{
+    width: 100%;
+    height: 0.1875rem;
+    border-radius: var(--slideCardBorderRadius);
+    overflow: hidden;
+}
+
+.cardProgressBarBdr .cardProgressBarBox
+{
+    width: 100%;
+    height: 100%;
+    background-color: var(--genWhiteTypeDark);
+}
+
+.cardProgressBarBox .cardProgressBar_currLength
+{
+    width: var(--cardProgressBarCurrLengthWidth);
+    height: 100%;
+    border-radius: var(--slideCardBorderRadius);
+    background-color: var(--slideCardProgress_currClr);
+}
+
+
+
+
+
+
+/* ========= View More Items ========= */
+
+.view_more_bdr
+{
+    width: 100%;
+    height: 100%;
+}
+
+.view_more_bdr .view_more_box
+{
+    background-color: #202020;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    padding: var(--slideCardSpacing);
+}
+
+.view_more_box .view_more_name
+{
+    font-size: 1rem;
+    color: var(--genWhiteTypeLight);
+    text-align: center;
+}
+
+.view_more_box .view_more_dot_box
+{
+    padding: 0.3125rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3125rem;
+}
+
+.view_more_dot_box .view_more_dots
+{
+    border: 0.3125rem solid var(--genWhiteTypeLight);
+    border-radius: 50%;
+    transition: 300ms;
+}
+
+
+/* ====== Multitude of Basic Slider carousels ==== */
+.more_content
+{
+    display: grid;
+    grid-template-columns: minmax(0, auto);
+    gap: 2.1875rem;
+    z-index: 10;
+}
+
+
+
+/*  =========== Basic Catalog ============ */
+
+.basicCatalogTitleBdr
+{
+    width: 100%;
+    margin: 1.5625rem 0;
+}
+
+.basicCatalogTitleBdr .basicCatalogTitleBox
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 var(--genBorderSpacing);
+}
+
+.basicCatalogTitleBox .basicCatalogTitleText
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.5625rem;
+}
+
+.basicCatalogTitleText .basicCatalogTitleTextFirst
+{
+    color: var(--genGreenTypeLight);
+}
+
+.basicCatalogTitleText .basicCatalogTitleTextOthers
+{
+    color: var(--genWhiteTypeLight);
+}
+
+.basicCatalogBase
+{
+    width: 100%;
+}
+
+.basicCatalogBdr
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+
+.basicCatalogBox
+{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--basicCatalogCardWidth), 1fr));
+    grid-template-rows: auto;
+    justify-items: center;
+    gap: 0.9375rem;
+    transition: 100ms;
+}
+
+.basicCatalogBox.max_sizing
+{
+    max-width: var(--genMaxContainerWidth);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ============ GENERAL CONFRIMATION MODAL ============ */
+.confirmModalBase
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms ease-in-out;
+    z-index: 210;
+}
+
+.confirmModalBase.active
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+.confirmModalBase .confirmModalBcg
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000c3;
+    -webkit-backdrop-filter: blur(0.625rem);
+    backdrop-filter: blur(0.625rem);
+    z-index: -1;
+}
+
+.confirmModalBase .confirmModalBdr
+{
+    width: calc((100% - (var(--genBorderSpacing) * 2)));
+    max-width: 31.25rem;
+    height: 100%;
+    max-height: 15.625rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6.25);
+    transition: all 300ms ease-in-out;
+    z-index: 2;
+}
+
+.confirmModalBase.active .confirmModalBdr
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0rem);
+    transition: all 500ms ease-in-out;
+}
+
+.confirmModalBdr .confirmModalBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem var(--genBorderSpacing);
+    border-radius: 0.625rem;
+    border-left: 0.1875rem solid var(--genGreenTypeDark1);
+    border-right: 0.1875rem solid var(--genGreenTypeDark1);
+    background-color: var(--genModalBcg);
+    overflow: hidden;
+}
+
+.confirmModalBox .confirmModalQtnBox
+{
+    margin-bottom: 0.9375rem;
+}
+
+.confirmModalQtnBox .confirmModalQtnText
+{
+    font-size: 1rem;
+    color: var(--genWhiteTypeLight);
+    text-align: center;
+}
+
+.confirmModalBox .confirmModalWarnBox
+{
+    margin-bottom: 0.625rem;
+}
+
+.confirmModalWarnBox.hidden
+{
+    display: none;
+}
+
+.confirmModalWarnBox .confirmModalWarnText
+{
+    font-size: 0.8125rem;
+    color: var(--genWhiteTypeMid);
+    text-align: center;
+}
+
+.confirmModalBox .confirmModalOptBox
+{
+    display: flex;
+    flex-direction: row;
+    gap: 0.625rem;
+    margin-top: 0.9375rem;
+}
+
+
+
+
+
+
+
+
+
+/* =========== GENERAL (STATIC) MODAL =========== */
+.genStaticBase
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #000000c3;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+    z-index: 115;
+}
+
+.genStaticBase.active
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+.genStaticBase .genStaticBcg
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-backdrop-filter: blur(0.625rem);
+    backdrop-filter: blur(0.625rem);
+    z-index: -1;
+}
+
+.genStaticBase .genStaticBdr
+{
+    width: 100%;
+    max-width: 43.75rem;
+    height: 0;
+    border-top-left-radius: 0.9375rem;
+    border-top-right-radius: 0.9375rem;
+    background-color: #111111;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.genStaticBase.active .genStaticBdr
+{
+    height: calc((100% - var(--genStaticBdrH)));
+}
+
+.genStaticBdr .genStaticBox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden auto;
+}
+
+
+
+/* -------- DL Modal Header ------- */
+.genStaticBox .genStaticHdrBdr
+{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #111111;
+    z-index: 10;
+}
+
+.genStaticHdrBdr .genStaticHdrBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--genStatic_pd) var(--genStatic_pd) 0;
+    border-bottom: 0.0625rem solid #ffffff20;
+}
+
+.genStaticHdrBox .genStaticHdr_top
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.genStaticHdr_top .genStaticHdr_BckBtnBdr
+{
+    margin-right: 0.5rem;
+}
+
+.genStaticHdr_top .genStaticHdr_TitleBox
+{
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.genStaticHdr_TitleBox .genStaticHdr_TitleText
+{
+    font-size: 1rem;
+    color: var(--genWhiteTypeLight);
+}
+
+.genStaticHdrBox .genStaticHdr_btm
+{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.genStaticBox .genStaticCtntBdr
+{
+    width: 100%;
+}
+
+.genStaticCtntBdr .genStaticCtntBox
+{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* =========== DRAG AND SORTABLE LIST ========= */
+
+.genDraggableElement.dragging
+{
+    opacity: 0;
+}
+
+.genDraggableElement.notDragging
+{
+    pointer-events: none;
+}
+
+.genDraggablePreview
+{
+    position: fixed;
+    width: clamp(--cusPrvWidth , --cusPrvWidth, --cusPrvWidth);
+    height: clamp(--cusPrvWidth , --cusPrvWidth, --cusPrvWidth);
+    padding: inherit;
+    background-color: #ffffff20 !important;
+    opacity: 1;
+    transition: none !important;
+    text-decoration: none;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========== GENERAL (DRAGGABLE) MENU MODAL =========== */
+.genMenuModalBdr
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 15.625rem;
+    height: -moz-fit-content;
+    height: fit-content;
+    max-height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden auto;
+    z-index: 205;   
+}
+
+.genMenuModalBdr[aria-expanded="true"]
+{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 100ms ease-in-out, visibility 0ms;
+}
+
+.genMenuModalBdr.isDragging *
+{
+    transition: none !important;
+    cursor: grabbing !important;
+}
+
+.genMenuModalBdr .genMenuModalBcg
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: #000000c3;
+    -webkit-backdrop-filter: blur(0.625rem);
+    backdrop-filter: blur(0.625rem);
+    z-index: -1;
+}
+
+.genMenuModalBdr .genMenuModalBox
+{
+    position: relative;
+    width: 100%;
+    max-width: 35.125rem;
+    height: 100%;
+    max-height: calc((100vh - 0.625rem));
+    border-radius: 0.9375rem;
+    background-color: var(--genModalBcg);
+    overflow: hidden auto;
+}
+
+.genMenuModalBox.disableClicks *
+{
+    pointer-events: none !important;
+}
+
+.genMenuModalBox.disableScroll
+{
+    overflow: hidden hidden !important;
+}
+
+.genMenuModalBox.isTop
+{
+    border-radius: 0rem !important;
+}
+
+.genMenuModalBox .genMenuModalDragHandleBdr
+{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    z-index: 5;
+}
+
+.genMenuModalDragHandleBdr .genMenuModalDragHandleBox
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.genMenuModalDragHandleBox .genMenuModalDragHandleIcon
+{
+    width: 2.5rem;
+    height: 0.3125rem;
+    border-radius: 2.5rem;
+    background-color: #333333;
+}
+
+.genMenuModalStickyBdr
+{
+   position: sticky;
+   top: 0;
+   width: 100%;
+   background-color: var(--genModalBcg);
+   z-index: 5;
+}
+
+.genMenuModalStickyBdr.top
+{
+    top: 0;
+}
+
+.genMenuModalStickyBdr.btm
+{
+    bottom: 0;
+}
+
+.genMenuModalStickyBdr .genMenuModalStickyBox
+{
+   width: 100%;
+   padding: 1rem 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.5rem;
+}
+
+.genMenuModalCtntBdr
+{
+    width: 100%;
+}
+
+.genMenuModalCtntBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.625rem 0;
+}
+
+.genMenuModalCtntBox .genMenuModalCtntSectBox
+{
+    width: 100%;
+    margin-top: 1.25rem;
+    padding: 0.625rem 1.25rem;
+}
+
+.genMenuModalCtntSectBox:has(+ .genMenuModalCtntDescBox)
+{
+    padding-bottom: 0;
+}
+
+.genMenuModalCtntSectBox:first-child
+{
+    margin-top: 0;
+}
+
+.genMenuModalCtntSectBox .genMenuModalCtntSectText
+{
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--genGreenTypeMid);
+    text-transform: uppercase;
+}
+
+.genMenuModalCtntBox .genMenuModalCtntDescBox
+{
+    width: 100%;
+    padding: 0.625rem 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.genMenuModalCtntDescBox .genMenuModalCtntDescText
+{
+    font-size: 0.8125rem;
+    color: var(--genWhiteTypeMid);
+}
+
+.genMenuModalCtntBox .genMenuModalCtntBtnBox
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.9375rem 1.25rem;
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.genMenuModalCtntBtnBox:active
+{
+    --clModalActionMenuClr: var(--genWhiteTypeMid2);
+    --clModalActionMenuSvgFill: var(--genWhiteTypeLight);
+    background-color: var(--genModalOptHover);
+}
+
+.genMenuModalCtntBtnBox.selected
+{
+    --clModalActionMenuClr: var(--genGreenTypeMid);
+    background-color: var(--genModalOptHover);
+}
+
+.genMenuModalCtntBtnBox.selected::after
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0rem;
+    width: 0.9375rem;
+    height: 0.4375rem;
+    background-color: #00000000;
+    border-left: 0.125rem solid var(--genGreenTypeLight);
+    border-bottom: 0.125rem solid var(--genGreenTypeLight);
+    transform: translate(-50% , -75%) rotate(-45deg);
+    z-index: 3;
+}
+
+.genMenuModalCtntBtnBox.important
+{
+    --clModalActionMenuClr: var(--notifyBadBcg);
+}
+
+.genMenuModalCtntBtnBox.hidden
+{
+    display: none;
+}
+
+
+.genMenuModalCtntBtnBox .genMenuModalCtntBtnIcon
+{
+    width: var(--clModalActionMenuSvgSize);
+    height: var(--clModalActionMenuSvgSize);
+    margin-right: 0.9375rem;
+}
+
+.genMenuModalCtntBtnIcon .genMenuModalCtntBtnSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--clModalActionMenuClr);
+    transition: all 300ms ease-in-out;
+}
+
+.genMenuModalCtntBtnBox .genMenuModalCtntBtnText
+{
+    margin-right: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--clModalActionMenuClr);
+    text-align: left;
+    transition: all 300ms ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================== GENERAL ACTION MODAL ================= */
+.genAtnModalBdr
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 300ms ease-in-out;
+    z-index: 200;
+}
+
+.genAtnModalBdr.active
+{
+    opacity: 1;
+    visibility: visible;
+}
+
+.genAtnModalBdr .genAtnModalBcg
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000c3;
+    -webkit-backdrop-filter: blur(0.625rem);
+    backdrop-filter: blur(0.625rem);
+    z-index: -1;
+}
+
+.genAtnModalBdr .genAtnModalBox
+{
+    width: 100%;
+    max-width: 43.75rem;
+    height: 100%;
+    max-height: 25rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6.25rem);
+    transition: all 300ms ease-in-out;
+    z-index: 2;
+}
+
+.genAtnModalBdr.active .genAtnModalBox
+{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0rem);
+    transition: all 500ms ease-in-out;
+}
+
+.genAtnModalBox .genAtnModalCtnt
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3125rem;
+    border-radius: 0.625rem;
+    border-top: 0.1875rem solid var(--genGreenTypeDark1);
+    border-bottom: 0.1875rem solid var(--genGreenTypeDark1);
+    background-color: var(--genModalBcg);
+    overflow: hidden;
+}
+
+.genAtnModalCtnt .genAtnModalHeader
+{
+    position: relative;
+    width: 100%;
+    height: var(--switchProfHeaderHeight);
+    padding: 0.625rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 0.0625rem solid #444444;
+}
+
+.genAtnModalHeader .genAtnModalHeaderText
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+
+.genAtnModalHeaderText .large
+{
+    color: var(--genGreenTypeLight);
+    font-size: 1.25rem;
+}
+
+.genAtnModalHeaderText .small
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 1.125rem;
+}
+
+.genAtnModalHeader .genAtnModalHeaderIconBox
+{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3125rem;
+    transform: translate(-50% , -50%);
+    cursor: pointer;
+}
+
+.genAtnModalCtnt .genAtnModalOptBcg
+{
+    width: 100%;
+    height: calc(100% - var(--switchProfHeaderHeight));
+    overflow-y: auto;
+}
+
+.genAtnModalOptBcg .genAtnModalOptBdr
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.625rem;
+}
+
+.genAtnModalOptBdr .genAtnModalOptBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.9375rem 1.25rem;
+    outline: none;
+    border: none;
+    border-radius: 0.625rem;
+    background-color: transparent;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.genAtnModalOptBox.inactive
+{
+    display: none;
+}
+
+.genAtnModalOptBdr .genAtnModalOptBox:active
+{
+    background-color: #222222;
+}
+
+.genAtnModalOptBox .genAtnModalOptIconBox,
+.genAtnModalShareIconBox
+{
+    width: 3.125rem;
+    height: 3.125rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #333333;
+    overflow: hidden;
+}
+
+.genAtnModalHeaderIconBox .genAtnModalHeaderIcon,
+.genAtnModalOptIconBox .genAtnModalOptIconSvg
+{
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: var(--genWhiteTypeLight);
+}
+
+.genAtnModalShareIconBox .genAtnModalShareIcon
+{
+    width: 100%;
+    height: 100%;
+}
+
+.genAtnModalOptBox .genAtnModalOptTextBox
+{
+    width: calc(100% - 3.125rem);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.genAtnModalOptTextBox .genAtnModalOptText
+{
+    width: 100%;
+    height: 100%;
+    color: #cdcdcd;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+
+
+/* -------- For General Text Descriptions ------- */
+
+.genAtnModalDescTextBdr
+{
+    width: 100%;
+    height: 100%;
+}
+
+.genAtnModalDescTextBdr .genAtnModalDescTextBox
+{
+    position: relative;
+    max-height: calc(var(--trendingDetTitleTextNo) * 1em * var(--trendingDetTitleTextH));
+    line-height: var(--trendingDetTitleTextH);
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    width: 100%;
+    height: 100%;
+    padding: 0.9375rem 1.25rem;
+    color: var(--genWhiteTypeMid);
+    font-size: 1rem;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+
+
+/* ------------ Add To Watchlist -------------- */
+
+.add_to_WatchListBox .add_to_WatchListIcon
+{
+    display: block;
+}
+
+.add_to_WatchListBox .remove_from_WatchListIcon
+{
+    display: none;
+    fill: var(--genGreenTypeLight) !important;
+}
+
+.add_to_WatchListBox.active .add_to_WatchListIcon
+{
+    display: none;
+}
+
+.add_to_WatchListBox.active .remove_from_WatchListIcon
+{
+    display: block;
+}
+
+
+
+
+/* ------------ Create New Watchlist Modal ------------ */
+
+.newCLBdr
+{
+    width: 100%;
+    display: none;
+    margin-bottom: 2.5rem;
+}
+
+.newCLBdr.active
+{
+    display: block;
+}
+
+.newCLBdr .newCLBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.newCLBox .newCLInputBdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.25rem 0.625rem 0;
+}
+
+.newCLInputBdr .newCLInputBox
+{
+    width: 80%;
+    height: fit-content;
+    border-bottom: 0.125rem solid var(--genWhiteTypeDark);
+    transition: all 300ms ease-in-out;
+    overflow: hidden;
+}
+
+.newCLInputBox:focus-within
+{
+    border-color: var(--genGreenTypeDark1);
+}
+
+.newCLInputBox .newCLInputClass
+{
+    width: 100%;
+    height: 100%;
+    height: 2.5rem;
+    padding: 0.3125rem;
+    color: var(--genWhiteTypeLight);
+    font-size: 0.875rem;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.newCLInputBox .newCLTextAreaClass
+{
+    width: 100%;
+    height: -moz-fit-content;
+    height: fit-content;
+    max-height: 15.625rem;
+    padding: 0.3125rem;
+    color: var(--genWhiteTypeLight);
+    font-size: 0.875rem;
+    outline: none;
+    border: none;
+    resize: none;
+    background-color: transparent;
+}
+
+@supports(field-sizing: content)
+{
+    .newCLInputBox .newCLTextAreaClass
+    {
+        field-sizing: content;
+        max-height: -moz-fit-content;
+        max-height: fit-content;
+    }
+}
+
+.newCLBox .newCLWarnBdr
+{
+    width: 100%;
+}
+
+.newCLWarnBdr .newCLWarnBox
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem;
+}
+
+.newCLWarnBox .newCLWarnText
+{
+    width: 80%;
+    display: none;
+    color: var(--genWhiteTypeMid);
+    font-size: 0.875rem;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.newCLWarnText.active
+{
+    display: block;
+}
+
+.newCLWarnText.empty
+{
+    color: var(--warningClr);
+}
+
+.newCLBox .newCLAtnBdr
+{
+    width: 100%;
+}
+
+.newCLAtnBdr .newCLAtnBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.newCLAtnBox .newCLAtnBtn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.9375rem 1.5625rem;
+    font-size: 0.875rem;
+    border-radius: 0.3125rem;
+    outline: none;
+    transition: all 300ms ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+/* ============ FOOTER =========== */
+
+.footer_wrapper
+{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: var(--navBarHeight);
+    z-index: 1;
+}
+
+.footer_base
+{
+    width: 100%;
+    width: calc((100% - var(--sideNavBarWidth)));
+    padding: 0 var(--genBorderSpacing);
+    background-image: -o-linear-gradient(to bottom, #000000, var(--genGreyTypeDark));
+    background-image: -moz-linear-gradient(to bottom, #000000, var(--genGreyTypeDark));
+    background-image: -webkit-linear-gradient(to bottom, #000000, var(--genGreyTypeDark));
+    background-image: linear-gradient(to bottom, #000000, var(--genGreyTypeDark));
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.footer_base .footer_bdr
+{
+    width: 100%;
+    height: 100%;
+    padding: 3.125rem 0 calc((1.5625rem + var(--btmNavBarHeight)));
+}
+
+.footer_bdr .footer_box
+{
+    width: 100%;
+    min-height: 15.625rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5625rem;
+}
+
+.footer_box .footer_boxCtnt
+{
+    height: 100%;
+}
+
+.footer_box .footer_logoBox
+{
+    width: 7.8125rem;
+    display: flex;
+    justify-content: start;
+}
+
+.footer_logoBox .footer_logo
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.footer_logo .lhead
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: fit-content;
+    font-size: 3.125rem;
+    color: var(--navElementColor_green);
+    cursor: pointer;
+}
+
+.footer_logo .lname
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    font-size: 1.875rem;
+    color: var(--footerTxtClrBright);
+    cursor: pointer;
+}
+
+.footer_box .footer_abt
+{
+    width: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.footer_boxCtnt .footer_abt_titleBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    text-align: left;
+    padding: 0 0 0.625rem;
+}
+
+.footer_abt_titleBox .footer_abt_title.front
+{
+    color: var(--footerTextClrGreen);
+    font-size: 1.125rem;
+}
+
+.footer_abt_titleBox .footer_abt_title.back
+{
+    color: var(--footerTxtClrBright);
+    font-size: 0.875rem;
+}
+
+.footer_abt_titleBox .footer_abt_textBox
+{
+    width: 100%;
+}
+
+.footer_abt_textBox .footer_abt_text
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9375rem;
+    margin: 0 0 2.5rem 0;
+    color: var(--footerTxtClrMid);
+    font-size: 0.8125rem;
+}
+
+.footer_abt .footer_Important_linksBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.625rem;
+}
+
+.footer_Important_linksBox .footer_Important_links
+{
+    display: flex;
+    align-items: center;
+    color: var(--footerTextClrGreen);
+    font-size: 0.75rem;
+    text-align: left;
+    transition: 200ms ease-in-out;
+}
+
+.footer_Important_links:active
+{
+    color: var(--footerTxtClrBright);
+}
+
+.footer_box .footer_OtherLinks
+{
+    width: 15.625rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.footer_OtherLinks .footer_UsefulLinksBdr
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5625rem;
+    margin-bottom: 2.5rem;
+}
+
+.footer_UsefulLinksBdr .footer_UsefulLinksBox
+{
+    width: 6.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.footer_UsefulLinksBox .footer_UsefulLinks
+{
+    width: 100%;
+    color: var(--footerTxtClrMid);
+    font-size: 0.8125rem;
+    transition: 200ms ease-in-out;
+}
+
+.footer_UsefulLinks:active
+{
+    color: var(--footerTxtClrBright);
+}
+
+.backtotopofpageBox
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.625rem 0;
+}
+
+
+.developer_creditsBdr
+{
+    width: 100%;
+}
+
+.developer_creditsBdr .developer_creditsBox
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.developer_creditsBox .developer_creditsText
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 0.75rem;
+}
+
+.developer_creditsText .developer_creditsName
+{
+    position: relative;
+    color: var(--genGreenTypeLight);
+    cursor: pointer;
+}
+
+.developer_creditsName::after
+{
+    content: '';
+    position: absolute;
+    right: 50%;
+    bottom: 0;
+    width: 0%;
+    height: 0.125rem;
+    border-radius: 0.625rem;
+    background-color: var(--genGreenTypeLight);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: all 300ms ease-in-out;
+}
+
+.developer_creditsName:active::after
+{
+    right: 5%;
+    width: 90%;
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
+@media(hover: hover)
+{
+
+    .lightSolidBtn:hover
+    {
+        background-color: var(--genGreenTypeLight2);
+        color: var(--genWhiteTypeBright);
+        fill: var(--genWhiteTypeBright);
+    }
+
+    .midSolidBtn:hover
+    {
+        background-color: var(--genGreenTypeMid);
+    }
+    
+    .darkSolidBtn:hover
+    {
+        background-color: var(--genGreenTypeDark1);
+        color: var(--genWhiteTypeLight);
+        fill: var(--genWhiteTypeLight);
+    }
+
+    .greySolidBtn:hover
+    {
+        color: var(--genWhiteTypeLight);
+        fill: var(--genWhiteTypeLight);
+        background-color: var(--genGreyTypeLight);
+    }
+    
+    .hollowBtn:hover
+    {
+        border-color: var(--genWhiteTypeMid2);
+        color: var(--genWhiteTypeMid2);
+        fill: var(--genWhiteTypeMid2);
+    }
+
+    .transBtn:hover
+    {
+        color: var(--genGreenTypeLight);
+        background-color: #00000000;
+    }
+
+    .transBtn:hover .genBtnIcon
+    {
+        fill: var(--genGreenTypeLight);
+    }
+
+    .sideNavItemsCardBdr:hover
+    {
+        --sideNavBarIconClr: var(--genGreenTypeLight2);
+    }
+
+    .sideNavItemsCardBdr:hover .sideNavItemsCardTitleBdr
+    {
+        left: 100%;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .btmNavItemsCardBdr:hover
+    {
+        --btmNavBarIconClr: var(--genGreenTypeLight2);
+    }
+    
+    .navBarIconBox .navBarIcon:hover
+    {
+        fill: var(--navElementColor_green);
+    }
+
+    .navBarNotificationHeaderBtn:hover .navBarNotificationHeaderIconSvg,
+    .navBarNotificationHeaderBtn:hover .navBarNotificationHeaderText,
+    .navBarNotificationFooterBox:hover .navBarNotificationFooterText
+    {
+        fill: var(--genGreenTypeLight2);
+        color: var(--genGreenTypeLight2);
+    }
+
+    .navBarNotificationCardBdr:hover
+    {
+        background-color: #3d3d3d;
+    }
+
+    .navBarProfileCard:hover
+    {
+        --navBarProfileCardLinkClr: var(--navElementColor_green);
+        background-color: #3d3d3d;
+    }
+
+    .basic_slider_box:hover .basic_slide_arrow
+    .selectPicSectCarouselBox:hover .selectPicCarouselArrBox
+    {
+        pointer-events: all;
+    }
+
+    .basic_slider_box:hover .basic_slide_arrow .basic_slide_arrowIcon,
+    .selectPicSectCarouselBox:hover .selectPicCarouselArrBox .selectPicCarouselArr
+    {
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+        pointer-events: all;
+    }
+
+    .slide_card_bdr:hover .slide_card_bcg
+    {
+        --slide_card_bcgW: 0.1875rem;
+        --slide_card_bcgH: 0rem;
+    }
+
+    .slide_card:hover .cardImg
+    {
+        transform: scale(1.15);
+    }
+
+    .slide_card:hover .cardInfoBdr
+    {
+        background: #00000085;
+    }
+
+    .cardAddToListIconBox:hover .cardAddToListIcon
+    {
+        fill: var(--genGreenTypeLight);
+    }
+
+    .genDraggableElement.dragging:hover,
+    .genDraggableElement.notDragging:hover
+    {
+        background-color: #00000000 !important;
+    }
+
+    .genMenuModalCloseIcon:hover .genMenuModalCloseSvg
+    {
+        --clModalActionMenuSvgFill: var(--genWhiteTypeMid2);
+    }
+
+    .genMenuModalCtntBtnBox:hover
+    {
+        --clModalActionMenuSvgFill: var(--genWhiteTypeLight);
+        background-color: var(--genModalOptHover);
+    }
+
+    .genAtnModalOptBdr .genAtnModalOptBox:hover
+    {
+        background-color: #222222;
+    }
+
+    .footer_Important_links:hover
+    {
+        color: var(--footerTxtClrBright);
+    }
+
+    .footer_UsefulLinks:hover
+    {
+        color: var(--footerTxtClrBright);
+    }
+    
+    .developer_creditsName:hover::after
+    {
+        right: 5%;
+        width: 90%;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@media(hover: none)
+{
+
+    .basic_slider_box .basic_slide_arrow,
+    .selectPicCarouselArrBox.selectPicCarouselArrRightBox
+    {
+        cursor: none;
+        pointer-events: all;
+    }
+
+    .basic_slide_arrow .basic_slide_arrowIcon,
+    .selectPicCarouselArrBox .selectPicCarouselArr
+    {
+        opacity: 1;
+        visibility: visible;
+        cursor: pointer;
+        pointer-events: all;
+
+    }
+}
+
+.basic_slider_box .basic_slide_arrow.hide,
+.selectPicCarouselArrBox.hide
+{
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.basic_slider_box .basic_slide_arrow.hide .basic_slide_arrowIcon,
+.selectPicCarouselArrBox.hide .selectPicCarouselArr
+{
+    opacity: 0;
+    visibility: hidden;
+    cursor: none;
+    pointer-events: none;
+}
+
+
+
+
+
+
+
+/* ==================== RESPONSIVENESS ====================== */
+
+@media only screen and (min-width: 120rem)
+{
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 9;
+    }
+}
+
+
+@media only screen and (max-width: 120rem)
+{
+
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 7;
+    }
+}
+
+@media only screen and (max-width: 95rem)
+{
+
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 6;
+    }
+}
+
+@media only screen and (max-width: 68.75rem)
+{
+
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 5;
+    }
+}
+
+
+@media only screen and (max-width: 55.25rem)
+{
+
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 4;
+    }
+
+    .slide_card .cardInfoBdr h3
+    {
+        font-size: 0.875rem;
+    }
+
+    .footer_bdr .footer_box
+    {
+        flex-direction: column;
+        gap: 2.1875rem;
+    }
+
+    .footer_bdr .footer_boxCtnt
+    {
+        width: 100%;
+    }
+
+    .footer_boxCtnt .footer_abt_titleBox
+    {
+        padding-bottom: 0;
+    }
+
+    .footer_abt_textBox .footer_abt_text
+    {
+        gap: 0;
+        margin: 0 0 0.625rem;
+    }
+
+    .developer_creditsBdr .developer_creditsBox
+    {
+        justify-content: start;
+    }
+}
+
+
+@media only screen and (max-width: 48rem)
+{
+    html:root
+    {
+        --scrollBarWidth: 0rem;
+        --navBarNotificationPosT: calc(var(--navBarHeight) - 0.625rem);
+        --navBarNotificationPosR: -18.75rem;
+        --navBarProfilePosT: calc(var(--navBarHeight) - 0.625rem);
+        --navBarProfilePosR: -18.75rem;
+        --genStaticBdrH: 0rem;
+    }
+
+    ::-webkit-scrollbar
+    {
+        display: none;
+        pointer-events: none;
+    }
+
+    .offline_mdl_box .offline_mdl_icon_bdr
+    {
+        width: 6rem;
+        height: 6rem;
+    }
+
+    .offline_mdl_ttl_box .offline_mdl_ttl_txt
+    {
+        font-size: 1.25rem;
+    }
+
+    .offline_mdl_det_box .offline_mdl_det_txt
+    {
+        font-size: 0.875rem;
+    }
+
+    html
+    {
+        scrollbar-width: none;
+    }
+
+    body[gen-menu-modal-is-dragging="true"]
+    {
+        overflow: hidden !important;
+    }
+
+    .quickSearchBase
+    {
+        align-items: flex-start;
+    }
+
+    .quickSearchBox .quickSearchResultBdr
+    {
+        max-height: calc(75vh - 150px);
+    }
+
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 3;
+    }
+
+    .basic_slider_title_box h2 .big
+    {
+        font-size: 1.0625rem;
+    }
+
+    .basic_slider_title_box h2 .small
+    {
+        font-size: 0.9375rem;
+    }
+
+    .basic_slider_title_box p
+    {
+        font-size: 0.6875rem;
+    }
+
+    .basicCatalogBox
+    {
+        --basicCatalogCardWidth: 10.3125rem;
+    }
+
+    .genStaticBase .genStaticBdr
+    {
+        max-width: none;
+        border-radius: 0rem;
+    }
+    
+    .genMenuModalBdr
+    {
+        position: fixed;
+        left: 0%;
+        right: 0%;
+        bottom: 0%;
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        display: flex;
+        justify-content: center;
+        align-items: end;
+        border-radius: 0rem;
+        overflow: hidden;
+        transition: all 300ms ease-in-out;
+        z-index: 130;
+    }
+    
+    .genMenuModalBdr[aria-expanded="true"]
+    {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .genMenuModalBdr .genMenuModalBcg
+    {
+        display: block;
+    }
+    
+    .genMenuModalBdr .genMenuModalBox
+    {
+        height: -moz-fit-content;
+        height: fit-content;
+        max-height: 100%;
+        padding: 0;
+        border-radius: 1.5625rem;
+        border-bottom-left-radius: 0rem;
+        border-bottom-right-radius: 0rem;
+        overflow: hidden auto;
+        transform: translateY(100%);
+        transition: all 150ms ease-in-out;
+    }
+    
+    .genMenuModalBdr[aria-expanded="true"] .genMenuModalBox
+    {
+        transform: translateY(0%);
+    }
+
+    .genMenuModalBox .genMenuModalDragHandleBdr
+    {
+        display: flex;
+    }
+
+    .genAtnModalBdr .genAtnModalBox
+    {
+        max-width: none;
+        max-height: none;
+    }
+
+    .genAtnModalBox .genAtnModalCtnt
+    {
+        border: none;
+        border-radius: 0rem;
+    }
+
+    .genAtnModalCtnt .genAtnModalHeader
+    {
+        justify-content: start;
+    }
+
+    .genAtnModalHeader .genAtnModalHeaderText
+    {
+        margin-left: 0.625rem;
+    }
+
+    .genAtnModalHeaderText .large
+    {
+        font-size: 1.125rem;
+    }
+
+    .genAtnModalHeaderText .small
+    {
+        font-size: 0.875rem;
+    }
+
+    .genAtnModalOptBdr .genAtnModalOptBox
+    {
+        padding: 0.9375rem 0.3125rem;
+    }
+
+    .genAtnModalOptBox .genAtnModalOptIconBox
+    {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .genAtnModalHeaderIconBox .genAtnModalHeaderIcon,
+    .genAtnModalOptIconBox .genAtnModalOptIconSvg
+    {
+        width: 1rem;
+    }
+
+    .genAtnModalOptTextBox .genAtnModalOptText
+    {
+        font-size: 0.75rem;
+    }
+
+    .genAtnModalDescTextBdr .genAtnModalDescTextBox
+    {
+        font-size: 0.875rem;
+    }
+
+}
+
+
+@media only screen and (max-width: 48rem),
+only screen and (max-height: 30.375rem)
+{
+    html:root
+    {
+        --navbarGradientSize: 0rem;
+    }
+
+    .pageGradient
+    {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    html:root:has( .sideNavBar.initialize)
+    {
+        --sideNavBarWidth: 0rem;
+    }
+    
+    .sideNavBar.initialize
+    {
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+
+    html:root:has( .btmNavBar.initialize)
+    {
+        --btmNavBarHeight: 4rem;
+    }
+    
+    .btmNavBar.initialize
+    {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+}
+
+@media only screen and (max-width: 48rem) and (hover: hover)
+{
+    .genMenuModalBdr .genMenuModalBox
+    {
+        scrollbar-width: none;
+    }
+
+    .genMenuModalBox::-webkit-scrollbar
+    {
+        width: 0;
+        height: 0;
+        display: none;
+    }
+}
+
+
+
+@media only screen and (max-width: 37.5rem)
+{
+    html:root
+    {
+        --companyLogoSize: 3.125rem;
+        --genBorderSpacing: 0.9375rem;
+    }
+
+    .basic_slider_box  .basic_slide_arrow,
+    .selectPicSectCarouselBox .selectPicCarouselArrBox
+    {
+        width: 1.875rem;
+    }
+
+    .newCLInputBdr .newCLInputBox,
+    .newCLWarnBox .newCLWarnText
+    {
+        width: 100%;
+    }
+    
+}
+
+@media only screen and (max-width: 37.5rem) and (hover: none)
+{
+
+    .basic_slider_box .basic_slide_arrow,
+    .selectPicSectCarouselBox .selectPicCarouselArrBox
+    {
+        cursor: none;
+        pointer-events: none;
+    }
+
+    .basic_slide_arrow .basic_slide_arrowIcon,
+    .selectPicCarouselArrBox .selectPicCarouselArr
+    {
+        opacity: 0;
+        visibility: hidden;
+        cursor: none;
+        pointer-events: none;
+
+    }
+}
+
+
+@media only screen and (max-width: 35.3125rem)
+{
+    html:root
+    {
+        --genBtnIconSize: 0.9375rem;
+        --genBtnTextSize: 0.8125rem;
+        --notifyIconBoxWidth: 3.125rem;
+        --switchProfOptImgBoxWidth: 6.25rem;
+        --editProfileBcgImgHeight: 9.375rem;
+    }
+
+    .confirmModalQtnBox .confirmModalQtnText
+    {
+        font-size: 0.875rem;
+    }
+
+    .confirmModalWarnBox .confirmModalWarnText
+    {
+        font-size: 0.75rem;
+    }
+
+    .basic_slider_title_box p
+    {
+        font-size: 0.75rem;
+    }
+
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 3;
+    }
+}
+
+
+@media only screen and (max-width: 30.3125rem)
+{
+    html:root
+    {
+        --quickSearchInputIconWidth: 3.125rem;
+    }
+
+    .quickSearchNoteBox .quickSearchNoteText
+    {
+        font-size: 0.8125rem;
+    }
+
+    .quickSearchNoteBox .quickSearchNoteKey
+    {
+        font-size: 0.625rem;
+    }
+
+    .quickSearchInputIcon.quickSearchToCatalog
+    {
+        display: none;
+    }
+
+    .basicCatalogBox
+    {
+        --basicCatalogCardWidth: 9.375rem;
+        gap: 0.75rem 0.4375rem;
+    }
+
+    .basic_slider_card_box
+    {
+        --basicSliderCardDivision: 2;
+    }
+
+    .notifyIconBox
+    {
+        --notifyIconBoxWidth: 100%;
+        top: 0;
+        height: 100%;
+    }
+
+    .notifyIconBox .notifyIcon
+    {
+        display: none;
+    }
+
+    .genStaticHdr_TitleBox .genStaticHdr_TitleText
+    {
+        font-size: 0.9375rem;
+    }
+}
+
+
+@media only screen and (max-width: 25rem)
+{
+    html:root
+    {
+        --editProfileBcgImgHeight: 7.5rem;
+    }
+
+    .btmNavItemsCardTitleBox .btmNavItemsCardTitleText
+    {
+        font-size: 0.625rem;
+    }
+
+    .basicCatalogBox
+    {
+        --basicCatalogCardWidth: 7.5rem;
+    }
+}
+
+
+@media only screen and (max-width: 21.875rem)
+{
+
+    .slide_card .cardInfoBdr h3
+    {
+        font-size: 0.75rem;
+    }
+
+    .basicCatalogBox
+    {
+        --basicCatalogCardWidth: 6.25rem;
+    }
+
+    .specialEp_box .specialEp_SpImgBdr
+    {
+        top: -3.4375rem;
+        width: 6.25rem;
+        height: 12.5rem;
+    }
+
+}
+
+
+@media only screen and (max-width: 15.625rem)
+{
+    .basic_slider_card_box
+    {
+        grid-auto-columns: 100%;
+    }
+}
+
+
+/* =============== NON-TOUCH SCREENS ============== */
+
+@media(hover: hover)
+{
+    ::-webkit-scrollbar
+    {
+        display: block;
+        width: var(--scrollBarWidth);
+        height: var(--scrollBarWidth);
+        pointer-events: none;
+    }
+
+    ::-webkit-scrollbar-corner
+    {
+        background-color: #000;
+    }
+
+    ::-webkit-scrollbar-track
+    {
+        background-color: transparent;
+        margin-block: 0.1875rem 0.1875rem;
+    }
+
+    ::-webkit-scrollbar-thumb
+    {
+        background-color: var(--scrollbarClr);
+        border-radius: 0.1875rem;
+    }
+
+    ::-webkit-scrollbar-thumb:hover
+    {
+        background-color: var(--scrollbarHoverClr);
+    }
+
+    ::-webkit-scrollbar-thumb:active
+    {
+        background-color: var(--scrollbarActiveClr);
+    }
+
+
+
+    /* ----- NavBar Notification ----- */
+
+    .navBarNotificationSub::-webkit-scrollbar
+    {
+        width: 0.3125rem;
+    }
+
+    .navBarNotificationSub::-webkit-scrollbar-thumb
+    {
+        background-color: #333333;
+    }
+
+    .navBarNotificationSub::-webkit-scrollbar-thumb:hover
+    {
+        background-color: #3f3f3f;
+    }
+
+    .navBarNotificationSub::-webkit-scrollbar-thumb:active
+    {
+        background-color: #444444;
+    }
+
+
+    /* ------- Gen Menu Modal --------- */
+    .genMenuModalBox::-webkit-scrollbar-track
+    {
+        margin-block: 0.625rem 0.625rem;
+    }
+}
+
+

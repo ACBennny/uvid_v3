@@ -1,0 +1,343 @@
+/***************************************************************
+ * This will hold the default code for the Help Center Contact page
+ * 
+****************************************************************/
+
+
+
+    // Attach listener to Init the chat
+    function attachInitHelpCtrChatBotListeners(act = "")
+    {
+        let opnChatBtn = document.querySelectorAll(".help_ctr_chatbot_open_btn");
+
+        opnChatBtn.forEach((old_btn) => 
+        {
+            if(old_btn.opn_atn)
+            {
+                old_btn.removeEventListener("click" , old_btn.opn_atn);
+            }
+        });
+
+        opnChatBtn.forEach((new_btn) => 
+        {
+            const open_atn_ = (e) => 
+            {
+                initHelpCtrChatBot(e);
+            }
+
+            new_btn.addEventListener("click", open_atn_);
+            new_btn.open_atn = open_atn_;
+        });
+
+        // Immediate initialize the chatbot
+        if(act === "call") document.querySelector(".help_ctr_chatbot_req_bdr").click();
+    }
+
+
+    // Initialize the chatbot
+    function initHelpCtrChatBot(e)
+    {
+        if(isHlpCtrChatBotInit) return startHelpCtrChatBot(e);
+
+        documentCtnt.insertAdjacentHTML('beforeend' , help_ctr_ctct_struct);
+        startHelpCtrChatBot(e);
+    }
+
+
+    // Start the chatbot
+    function startHelpCtrChatBot(call_btn)
+    {
+        if((typeof call_btn !== "undefined")) call_btn.disabled = true;
+        
+        // Definitions
+        let ctct_base = document.querySelector(".ctct_base");
+        let ctct_close_btn = document.querySelectorAll(".ctct_close_btn");
+        let ctct_chat_bdr = document.querySelector(".ctct_chat_bdr");
+        let ctct_hdr_bdr = document.querySelector(".ctct_hdr_bdr");
+        let ctct_body_bdr = document.querySelector(".ctct_body_bdr");
+        let ctct_body_box = document.querySelector(".ctct_body_box");
+        let ctct_body_scroll_btn = document.querySelector(".ctct_body_scroll_btn");
+        let ctct_ftr_bdr = document.querySelector(".ctct_ftr_bdr");
+        let ctct_ftr_input_fld = document.querySelector(".ctct_ftr_input_fldCls");
+        let ctct_ftr_send_btn = document.querySelector(".ctct_ftr_send_btn");
+        let ctct_msg_dflt_issues_btn;
+        let chatbot_timer_1;
+
+        // Opening the Chatbot
+        chatbot_timer_1 = setTimeout(() => 
+        {
+            clearTimeout(chatbot_timer_1);
+            ctct_base.classList.add("active");
+            preSanitizaUserInput();
+
+            // Insert dflt msg if not present
+            if(!(isHlpCtrChatBotInit))
+            {
+                insertDfltMsg();
+            }
+            else
+            {
+                ctct_base.addEventListener("transitionend" , function handleTransitionEnd()
+                {
+                    ctct_base.removeEventListener("transitionend" , handleTransitionEnd);
+                    ctct_ftr_input_fld.focus();
+                });
+
+                attachGenMenuModalEventListeners();
+            }
+            
+        }, 10);
+
+
+        // Inserts the defualt message
+        const insertDfltMsg = () => 
+        {
+            if(isHlpCtrChatBotInit) return;
+            if((help_ctr_dflt_chatbot_msg_arr <= 0) || (help_ctr_dflt_chatbot_msg_arr == undefined)) return;
+            
+            let insertDfltMsg_timer;
+            let dflt_count = 0;
+
+            // Insert messages in intervals
+            insertDfltMsg_timer = setInterval(() => 
+            {
+                if((dflt_count == help_ctr_dflt_chatbot_msg_arr.length))
+                {
+                    clearInterval(insertDfltMsg_timer);
+
+                    // Prevent further initialization attempts
+                    isHlpCtrChatBotInit = true;
+
+                    // Enable and focus on the input field
+                    ctct_ftr_input_fld.disabled = false;
+                    ctct_ftr_input_fld.focus();
+
+                    // Add listeners
+                    attachDfltIssueOptBtnListeners();
+                    attachGenMenuModalEventListeners();
+                }
+                else
+                {
+                    ctct_body_box.insertAdjacentHTML(`beforeend` , help_ctr_dflt_chatbot_msg_arr[dflt_count]);
+                    dflt_count++;
+                }
+
+            }, 750);
+        }
+        
+
+        // Closes the chatbot
+        const clsHelpCtrChatBot = () =>
+        {
+            ctct_base.classList.remove("active");
+
+            ctct_base.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                ctct_base.removeEventListener("transitionend" , handleTransitionEnd);
+                if((typeof call_btn !== "undefined")) call_btn.disabled = false;
+            });
+        }
+
+        ctct_close_btn.forEach((btn) => 
+        {
+            btn.addEventListener("click" , clsHelpCtrChatBot);
+        });
+
+
+        // Updating Chat area's height as user types in field
+        const updFldHeight = (reset = false) =>
+        {
+            let fld_h = (Math.round((ctct_ftr_input_fld.getBoundingClientRect().height) + 25) / 16);
+
+            if((reset == true))
+            {
+                fld_h = 4.5;
+            }
+
+            ctct_chat_bdr.setAttribute(`style`, `--ctct_ftr_input_h: ${fld_h}rem`);
+        }
+
+        ctct_ftr_input_fld.addEventListener("input" , updFldHeight);
+
+        
+        // Scroll to end of chat
+        const scroll_to_chatend = () =>
+        {
+            // Scroll to the newly added chat
+            ctct_body_box.scrollTo(
+            {
+                top: (ctct_body_box.scrollHeight - ctct_body_box.clientHeight),
+                behavior: "smooth"
+            });
+        }
+
+        ctct_body_scroll_btn.addEventListener("click" , scroll_to_chatend);
+
+        // Display scroll to bottom button
+        ctct_body_box.addEventListener("scroll", () => 
+        {
+            const s = ctct_body_box.scrollTop + ctct_body_box.clientHeight + 10;
+            ctct_body_scroll_btn.classList.toggle("is_scrolling" ,  s < ctct_body_box.scrollHeight);
+        });
+
+
+        // Sending a chat (by user)
+        const validateUsrReq = (msg) => 
+        {
+            let fld_input = postSanitizeUserInput(msg);
+
+            const filteredInp = msg.toString().trim().replace(/\s+/g, ' ');
+
+            // Return if msg is empty
+            if((filteredInp === "")) return;
+
+            // Create a wrapper div for the response
+            const resp_wrap = document.createElement("div");
+            resp_wrap.className = "ctct_rspns_wrapper";
+            resp_wrap.innerHTML = 
+            `
+                <div class="ctct_rspns_wrapper">
+                    <div class="ctct_rspns_base">
+                        <div class="ctct_rspns_ctnt_bdr">
+                            <div class="ctct_rspns_ctnt_box">
+                                <p class="ctct_rspns_ctnt_txt"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const resp_txt = resp_wrap.querySelector(".ctct_rspns_ctnt_txt");
+
+            // Format msg
+            const resp_lines = fld_input.split("\n");
+            resp_lines.forEach((line, index) =>
+            {
+                const txtNode = document.createTextNode(line);
+                resp_txt.appendChild(txtNode);
+
+                // Insert line break after each newline
+                if((index < (resp_lines.length - 1)))
+                {
+                    resp_txt.appendChild(document.createElement("br"));
+                }
+            });
+
+            // Append msg to chat
+            ctct_body_box.appendChild(resp_wrap);
+
+            // Clear input field
+            ctct_ftr_input_fld.value = "";
+
+            // Reset input field height
+            updFldHeight(true);
+
+            // Responding to user (by chatbot NB: Simulated. Does. Not. Work.)
+            chatbot_timer_1 = setTimeout(() => 
+            {
+                ctct_body_box.insertAdjacentHTML(
+                    "beforeend" , 
+                    `
+                        <div class="ctct_msg_wrapper">
+                            <div class="ctct_msg_base">
+                                <div class="ctct_msg_pfp_bdr">
+                                    <div class="ctct_msg_pfp_box">
+                                        <img loading="lazy" onload="this.classList.add('loaded')" src="/images/uvid-profile-base.webp" class="ctct_msg_pfp_img" alt="The profile picture of ACUvid V3's virtual support">
+                                    </div>
+                                </div>
+                                <div class="ctct_msg_ctnt_bdr">
+                                    <div class="ctct_msg_ctnt_box">
+                                        <p class="ctct_msg_ctnt_txt">
+                                            An error occured while processing your request.
+                                            Please try again later. Thank you.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                )
+
+                scroll_to_chatend();
+            }, 300);
+        }
+
+        ctct_ftr_send_btn.addEventListener("click" , () => 
+        {
+            validateUsrReq(ctct_ftr_input_fld.value);
+            ctct_ftr_input_fld.blur();
+        });
+
+        ctct_ftr_input_fld.addEventListener("keyup" , (e) => 
+        {
+            if((e.shiftKey) && (e.key.toLowerCase() === "enter"))
+            {
+                validateUsrReq(ctct_ftr_input_fld.value);
+                ctct_ftr_input_fld.blur();
+            }
+        });
+
+
+        // Selecting one of the defualt issue options
+        const attachDfltIssueOptBtnListeners = () => 
+        {
+            ctct_msg_dflt_issues_btn = document.querySelectorAll(".ctct_msg_dflt_issues_btn");
+            
+            ctct_msg_dflt_issues_btn.forEach((btn) => 
+            {
+                btn.addEventListener("click" , () => 
+                {
+                    // Disable button
+                    btn.classList.replace("hollowBtn", "inactiveBtn");
+                    btn.disabled = true;
+
+                    // Send chat
+                    validateUsrReq(btn.querySelector(".ctct_msg_dflt_issues_txt").textContent);
+                    ctct_ftr_input_fld.blur();
+                });
+            });
+        }
+
+    }
+
+
+    // Confirm before resetting the chatbot
+    function cnfrmB4RstChatBot()
+    {
+        initConfirmModal(
+            `Are you sure you want to end chat?`,
+            `All previous conversation will be lost.`,
+            `Yes`,
+            `No`,
+            resetHelpCtrChatBot
+        );
+    }
+
+    // Resetting the chatbot
+    function resetHelpCtrChatBot()
+    {
+        let ctct_base = document.querySelector(".ctct_base");
+
+        ctct_base.classList.remove("active");
+
+        ctct_base.addEventListener("transitionend" , function handleTransitionEnd()
+        {
+            ctct_base.removeEventListener("transitionend" , handleTransitionEnd);
+            ctct_base.remove();
+
+            // Allow Chatbot intialization
+            isHlpCtrChatBotInit = false;
+
+            // Enable open btn
+            document.querySelectorAll(".help_ctr_chatbot_open_btn").forEach(btn => btn.disabled = false);
+
+            // Notify users
+            notification('notifyGood', 'Chat session ended successfully')
+        });
+    }
+
+
+
+
+
+

@@ -1,0 +1,640 @@
+/*************************************************************
+ * This is the style for the User Settings pages
+ * ************************************************************/ 
+
+
+
+html:root
+{
+    --settingNavBdrWidth: 20.3125rem;
+    --settingNavBoxWidth: 17.5rem;
+    --settingTopPadding: 7rem;
+    --settCtntSectAtnIconSize: 2rem;
+    --settPymtLyrTopBcg: var(--genGreyTypeDark);
+    --settPymtLyrBtmBcg: var(--genGreyTypeMid);
+    --sett_prof_card_img_size: 4rem;
+}
+
+
+
+.settingBdr
+{
+    width: 100%;
+}
+
+.settingBdr .settingBox
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding: 0 var(--genBorderSpacing);
+}
+
+
+
+
+
+
+/* ========= SETTING SECTOR NAV ======== */
+.settingBox .settingNavBdr
+{
+    position: fixed;
+    top: 0;
+    left: calc((var(--sideNavBarWidth) + var(--genBorderSpacing)));
+    width: var(--settingNavBdrWidth);
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+    z-index: 0;
+}
+
+.settingNavBdr.hidden
+{
+    --settingNavBdrWidth: 0rem;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.settingNavBdr .settingNavBox
+{
+    width: var(--settingNavBoxWidth);
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--settingTopPadding);
+}
+
+.settingNavBox .settingNavTitleBox
+{
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+.settingNavTitleBox .settingNavTitleText
+{
+    color: var(--genWhiteTypeMid);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.settingNavBox .settingNavOptBox
+{
+    --settingNavOptClr: var(--genWhiteTypeLight);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.625rem 0.75rem;
+    outline: none;
+    border: none;
+    border-radius: 0.3125rem;
+    background-color: #00000000;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+}
+
+.settingNavOptBox.active 
+{
+    --settingNavOptClr: var(--genGreenTypeLight);
+    background-color: #ffffff15;
+}
+
+.settingNavOptBox .settingNavOptIcon
+{
+    width: 1.5625rem;
+    height: 1.5625rem;
+}
+
+.settingNavOptIcon .settingNavOptSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--settingNavOptClr);
+    transition: all 300ms ease-in-out;
+}
+
+.settingNavOptBox .settingNavOptText
+{
+    margin-left: 0.625rem;
+    color: var(--settingNavOptClr);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 300ms ease-in-out;
+}
+
+
+
+
+
+/* =========== SETTING CTNT =========== */
+
+.settingBox .settCtntBdr
+{
+    width: calc((100% - var(--settingNavBdrWidth)));
+    transition: all 300ms ease-in-out;
+}
+
+.settCtntBdr .settCtntBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.settCtntBox .settCtntTab
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-top: var(--settingTopPadding);
+}
+
+.settCtntTab .settCtntTitleBox
+{
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 0.0625rem solid var(--genGreyTypeLight);
+}
+
+.settCtntTitleBox .settCtntTitleText
+{
+    display: flex;
+    flex-direction: row;
+    font-size: 1.75rem;
+}
+
+.settCtntTitleText .major
+{
+    color: var(--genGreenTypeBright);
+}
+
+.settCtntTitleText .minor
+{
+    color: var(--genWhiteTypeBright);
+}
+
+
+
+/* =========== SECTION ========== */
+
+.settCtntTab .settCtntSectBdr
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2rem 0;
+    border-radius: 0.5rem;
+    background-color: #ffffff15;
+}
+
+.settCtntSectBdr .settCtntSectBox
+{
+    width: 100%;
+    padding: 0 2rem;
+}
+
+
+/* -------- Horizontal section -------- */
+.sett_ctnt_hrtl
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+/* -------- Vertical section -------- */
+.sett_ctnt_vrtl
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+
+/* ------- Section Info ------- */
+.sett_ctnt_info
+{
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.sett_ctnt_hrtl .sett_ctnt_info
+{
+    max-width: 75%;
+}
+
+.sett_ctnt_vrtl .sett_ctnt_info
+{
+    width: 100%;
+}
+
+
+.settCtntSectTitleBox .settCtntSectTitleText
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 1.125rem;
+}
+
+.sett_ctnt_info .settCtntSectDescBox
+{
+    margin-top: 0.5rem;
+}
+
+.settCtntSectDescBox .settCtntSectDescText
+{
+    width: 100%;
+    color: var(--genWhiteTypeMid);
+    font-size: 1rem;
+}
+
+
+/* -------- Section Action Btn ------- */
+
+.settCtntSectAtnBdr .settCtntSectAtnBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.settCtntSectAtnBtn
+{
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    cursor: pointer;
+}
+
+.settCtntSectAtnIcon
+{
+    width: var(--settCtntSectAtnIconSize);
+    height: var(--settCtntSectAtnIconSize);
+}
+
+.settCtntSectAtnIcon .settCtntSectAtnSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--genWhiteTypeLight);
+}
+
+
+
+
+
+/* =============== Notification Preferences ========== */
+.mngNtfyTtlBox
+{
+    width: calc((100% - 2.8125rem));
+}
+
+.mngNtfyTtlBox .mngNtfyTtlText
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 1rem;
+}
+
+
+
+
+
+
+
+/* ============ PROFILE MANAGEMENT ============ */
+
+.sett_ctnt_vrtl:has(+ .sett_ctnt_hrtl .sett_prof_card_bdr)
+{
+    margin-bottom: 2rem;
+}
+
+.sett_ctnt_hrtl:has( .sett_prof_card_bdr):not(:last-child)
+{
+    margin-bottom: 1rem;
+}
+
+.sett_prof_card_bdr
+{
+    max-width: 75%;
+}
+
+.sett_prof_card_bdr .sett_prof_card_box
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sett_prof_card_box .sett_prof_card_img_bdr
+{
+    width: var(--sett_prof_card_img_size);
+    height: var(--sett_prof_card_img_size);
+    box-shadow: 0rem 0rem 0rem 0.125rem var(--genGreenTypeMid2);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.sett_prof_card_img_bdr .sett_prof_card_img_box
+{
+    width: 100%;
+    height: 100%;
+}
+
+.sett_prof_card_img_box .sett_prof_card_img_src
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.sett_prof_card_box .sett_prof_card_ttl_box
+{
+    width: calc((100% - var(--sett_prof_card_img_size)));
+    padding-left: 0.75rem;
+}
+
+.sett_prof_card_ttl_box .sett_prof_card_ttl_txt
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 1rem;
+    text-align: left;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+
+/* ------- Profile Managemnet Modal ------- */
+
+.mng_prof_hdr_TtlTxt .mjr
+{
+    color: var(--genGreenTypeLight);
+}
+
+.mng_prof_hdr_btm
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 0.5rem;
+}
+
+.mng_profs_ctnt_box
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem var(--genStatic_pd);
+}
+
+.mng_profs_ctnt_box .mng_prof_card_bdr
+{
+    width: 100%;
+    margin-bottom: 1.25rem;
+}
+
+.mng_prof_card_bdr .mng_prof_card_box
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mng_prof_card_box .mng_prof_card_det_bdr
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    max-width: 70%;
+}
+
+.mng_prof_card_det_bdr .mng_prof_card_det_box
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mng_prof_card_det_box .mng_prof_card_det_ttl_box
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-bottom: 0.5rem;
+}
+
+.mng_prof_card_det_ttl_box .mng_prof_card_det_ttl_txt
+{
+    color: var(--genGreenTypeMid);
+    font-size: 0.875rem;
+}
+
+.mng_prof_card_det_box .mng_prof_card_det_desc_box
+{
+    width: -moz-fit-content;
+    width: fit-content;
+}
+
+.mng_prof_card_det_desc_box .mng_prof_card_det_desc_txt
+{
+    color: var(--genWhiteTypeMid);
+    font-size: 0.875rem;
+}
+
+.mng_prof_card_atn_box .genBtnBox
+{
+    max-width: 9.375rem;
+}
+
+.mng_prof_card_atn_box .genBtnBox .genBtnText
+{
+    --lineNo: 1;
+    --lineHeight: 1.4;
+    position: relative;
+    max-width: calc((100% - var(--genBtnIconSize)));
+    display: -webkit-box;
+    max-height: calc(var(--lineNo) * 1em * var(--lineHeight));
+    line-height: var(--lineHeight);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--lineNo);
+    line-clamp: var(--lineNo);
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    text-align: left;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+
+/* -------------- Profile Lock Settings -------------- */
+.mng_prof_lock_toggle_bdr
+{
+    width: 100%;
+    margin-bottom: 1.125rem;
+}
+
+.mng_prof_lock_toggle_bdr .mng_prof_lock_toggle_box
+{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.mng_prof_lock_toggle_box .mng_prof_lock_toggle_det_box
+{
+    max-width: calc((100% - var(--genTick_chkBaseW)));
+    cursor: pointer;
+}
+
+.mng_prof_lock_toggle_det_box .mng_prof_lock_toggle_det_txt
+{
+    color: var(--genWhiteTypeMid);
+    font-size: 0.875rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(hover: hover)
+{
+    .settingNavOptBox:hover
+    {
+        background-color: #ffffff15;
+    }
+}
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 64rem)
+{
+    html:root
+    {
+        --settCtntSectAtnIconSize: 1.875rem;
+    }
+
+    .settingBox .settCtntBdr
+    {
+        width: 100%;
+    }
+
+    .settCtntBdr .settCtntBox
+    {
+        gap: 0rem;
+    }
+
+    .settCtntBox .settCtntTab
+    {
+        padding-top: calc((4rem + 1.25rem));
+    }
+
+    .settCtntTitleBox .settCtntTitleText
+    {
+        color: var(--genWhiteTypeLight);
+        font-size: 1.375rem;
+    }
+
+    .settCtntSectTitleBox .settCtntSectTitleText
+    {
+        font-size: 1rem;
+    }
+    
+    .settCtntSectDescBox .settCtntSectDescText
+    {
+        font-size: 0.875rem;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 48rem)
+{
+    .mng_mbsp_base .mng_mbsp_hdr_btm
+    {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+}
+
+
+
+@media only screen and (max-width: 30.3125rem)
+{
+    html:root
+    {
+        --settCtntSectAtnIconSize: 1.625rem;
+    }
+
+    .settCtntTitleBox .settCtntTitleText
+    {
+        color: var(--genWhiteTypeLight);
+        font-size: 1.125rem;
+    }
+
+    .settCtntTab .settCtntSectBdr
+    {
+        padding: 1.5625rem 0;
+    }
+
+    .settCtntSectBdr .settCtntSectBox
+    {
+        padding: 0 1.5625rem;
+    }
+
+    .settCtntSectTitleBox .settCtntSectTitleText
+    {
+        font-size: 1rem;
+    }
+    
+    .settCtntSectDescBox .settCtntSectDescText
+    {
+        font-size: 0.875rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+

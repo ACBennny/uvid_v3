@@ -1,0 +1,560 @@
+/***********************************************************************************************
+* This will hold the styling for the Schedule page
+* 
+* @author (Anyanwu Benedict Chukwuemeka)
+* @version (v0.01)
+*
+************************************************************************************************/
+
+html:root
+{
+    --viewSelectorsBtnSize: 3.125rem;
+    --viewSelectorsBtnIconSize: 1.5625rem;
+    --schedule_ctntGridColW: 22.5rem;
+    --schedule_ctntThumbnailImgW: 7.8125rem;
+    --schedule_ctntThumbnailImgH: 12.5rem;
+    --schedule_ctntDetDescTextClr: var(--navOptionColor);
+}
+
+
+
+
+.schedule_base
+{
+    width: 100%;
+}
+
+.schedule_base .schedule_bdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.schedule_bdr .schedule_box
+{
+    width: 100%;
+    max-width: var(--genMaxContainerWidth);
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--genBorderSpacing);
+}
+
+
+
+
+
+/* ---------- Filter button --------- */
+.schedulte_filter_box,
+.schedulte_filter_box.genBtnBox
+{
+    position: fixed;
+    width: 3rem;
+    height: 3rem;
+    bottom: calc((var(--btmNavBarHeight) + var(--genBorderSpacing)));
+    right: var(--genBorderSpacing);
+    box-shadow: 0rem 0.125rem 0.125rem 0.125rem #11111150;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
+    z-index: 101;
+}
+
+
+
+
+
+
+/* =================== SELECTORS ==================== */
+
+/* -------------- Selector Wrapper ---------- */
+.schedule_selBase
+{
+    width: 100%;
+}
+
+.schedule_selBase.sticky
+{
+    margin-bottom: var(--selBtmMargin);
+}
+
+.schedule_selBase .schedule_selBdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.schedule_selBase.sticky .schedule_selBdr
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: calc((100% - var(--sideNavBarWidth)));
+    margin-bottom: 0;
+    background-image: -o-linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050, #00000000);
+    background-image: -moz-linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050, #00000000);
+    background-image: -webkit-linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050, #00000000);
+    background-image: linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050, #00000000);
+    transition: 0ms;
+    z-index: 50;
+}
+
+.schedule_selBdr .schedule_selBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule_selBase.sticky .schedule_selBox
+{
+    max-width: var(--genMaxContainerWidth);
+    padding: 0 var(--genBorderSpacing);
+}
+
+
+
+
+/* -------------- Date Section -------------- */
+
+.schedule_selBox .schedule_dateBdr
+{
+    width: 100%;
+    height: var(--selHeight);
+    padding: 0.625rem 0;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+}
+
+.schedule_selBase.sticky .schedule_dateBdr
+{
+    background-image: -o-linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+    background-image: -moz-linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+    background-image: -webkit-linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+    background-image: linear-gradient(to bottom, #000000fe, #000000ef, #000000dc, #000000cd, #00000050);
+}
+
+.schedule_dateBdr .schedule_dateBox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* -------- Date Borders --------- */
+.schedule_dateBox .schedule_dateAllBorder
+{
+    position: absolute;
+    top: 0;
+    width: 3.125rem;
+    height: 100%;
+    background-color: red;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: none;
+    transition: all 300ms ease-in-out;
+    z-index: 3;
+}
+
+.schedule_dateAllBorder.hide
+{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.schedule_dateAllBorder.schedule_dateLeftBorder
+{
+    left: 0;
+    background: linear-gradient(to right, #000000, #00000000);
+}
+
+.schedule_dateAllBorder.schedule_dateRightBorder
+{
+    right: 0;
+    background: linear-gradient(to left, #000000, #00000000);
+}
+
+
+
+/* ------------ Date Sliders --------- */
+
+.schedule_dateBox .schedule_dateSlider
+{
+    width: 100%;
+    max-width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.625rem;
+    gap: 1.5625rem;
+    scrollbar-width: none;
+    overflow: auto hidden;
+    scroll-behavior: smooth;
+    cursor: grab;
+    z-index: 2;
+}
+
+.schedule_dateSlider.isDateSliderDown,
+.schedule_dateSlider.isDateSliderDown .schedule_dateCard
+{
+    scroll-behavior: auto;
+    cursor: grabbing;
+}
+
+.schedule_dateSlider .schedule_dateCard
+{
+    display: flex;
+    flex-direction: column;
+    padding: 0.3125rem 0;
+    cursor: pointer;
+}
+
+.schedule_dateCard .schedule_dateMinorBdr
+{
+    width: 100%;
+    margin-bottom: 0.3125rem;
+}
+
+.schedule_dateMinorBdr .schedule_dateMinorBox
+{
+    width: 100%;
+    height: 100%;
+}
+
+.schedule_dateMinorBox .schedule_dateMinorText
+{
+    font-weight: 600;
+    color: var(--genWhiteTypeMid);
+    font-size: 0.875rem;
+    text-align: left;
+    transition: all 300ms ease-in-out;
+}
+
+.schedule_dateCard:active .schedule_dateMinorText
+{
+    color: var(--genWhiteTypeMid2);
+}
+
+.schedule_dateCard.curr_day .schedule_dateMinorText
+{
+    color: var(--genWhiteTypeLight) !important;
+}
+
+.schedule_dateCard .schedule_dateMajorBdr
+{
+    position: relative;
+    width: 100%;
+}
+
+.schedule_dateMajorBdr::after
+{
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0%;
+    height: 0.1563rem;
+    border-radius: 0.625rem;
+    background-color: var(--genWhiteTypeLight);
+    transform: translateY(75%);
+    transition: all 300ms ease-in-out;
+}
+
+.schedule_dateCard.curr_day .schedule_dateMajorBdr::after
+{
+    width: 100%;
+}
+
+.schedule_dateMajorBdr .schedule_dateMajorBox
+{
+    width: 100%;
+}
+
+.schedule_dateMajorBox .schedule_dateMajorText
+{
+    color: var(--genGreenTypeMid2);
+    font-size: 1.375rem;
+    transition: all 300ms ease-in-out;
+}
+
+.schedule_dateCard.curr_day .schedule_dateMajorText
+{
+    color: var(--genGreenTypeLight) !important;
+}
+
+.schedule_dateCard:active .schedule_dateMajorText
+{
+    color: var(--genGreenTypeMid);
+}
+
+
+
+
+
+
+
+/* ------------ Content Section -------------- */
+
+.schedule_box .schedule_ctntBdr
+{
+    width: 100%;
+    transition: all 300ms ease-in-out;
+}
+
+.schedule_ctntBdr .schedule_ctntBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.schedule_ctntBox .schedule_ctntGridBdr
+{
+    width: 100%;
+    display: none;
+}
+
+.schedule_ctntGridBdr.curr_day
+{
+    display: block;
+}
+
+.schedule_ctntGridBdr .schedule_ctntGridBox
+{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--schedule_ctntGridColW), 1fr));
+    grid-template-rows: auto;
+    justify-items: center;
+    gap: 0.9375rem;
+}
+
+.schedule_ctntGridBdr.curr_day .schedule_ctntGridBox
+{
+    animation: schedule_ctntGridBox_flick 300ms linear;
+}
+
+@keyframes schedule_ctntGridBox_flick 
+{
+    from
+    {
+        filter: brightness(0);
+    }
+    to
+    {
+        filter: brightness(1);
+    }
+}
+
+.schedule_ctntGridBox .schedule_ctntCardBdr
+{
+    width: 100%;
+    display: block;
+    padding: 0.9375rem;
+    border-radius: 0.625rem;
+    background-color: #171717;
+    transition: all 300ms ease-in-out;
+}
+
+.schedule_ctntCardBdr.inactive
+{
+    display: none;
+}
+
+.schedule_ctntCardBdr:active
+{
+    background-color: #222222;
+}
+
+.schedule_ctntCardBdr .schedule_ctntCardBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.schedule_ctntCardBox .schedule_ctntThumbnailBdr
+{
+    width: var(--schedule_ctntThumbnailImgW);
+    height: var(--schedule_ctntThumbnailImgH);
+}
+
+.schedule_ctntThumbnailBdr .schedule_ctntThumbnailBox
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 0.625rem;
+    overflow: hidden;
+}
+
+.schedule_ctntThumbnailBox .schedule_ctntThumbnailImg
+{
+    width: clamp(100% , 100% , 100%);
+    height: clamp(100% , 100% , 100%);
+    object-position: center;
+    object-fit: cover;
+}
+
+.schedule_ctntCardBox .schedule_ctntDetBdr
+{
+    width: calc((100% - var(--schedule_ctntThumbnailImgW)));
+}
+
+.schedule_ctntDetBdr .schedule_ctntDetBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 0.9375rem;
+}
+
+.schedule_ctntDetBox .schedule_ctntDetTitleBox
+{
+    width: 100%;
+}
+
+.schedule_ctntDetTitleBox .schedule_ctntDetTitleText
+{
+    --trendingDetTitleTextNo: 2;
+    --trendingDetTitleTextH: 1.4;
+    position: relative;
+    -webkit-line-clamp: var(--trendingDetTitleTextNo);
+    -webkit-box-orient: vertical;
+    line-clamp:  var(--trendingDetTitleTextNo);
+    display: -webkit-box;
+    max-height: calc(var(--trendingDetTitleTextNo) * 1em * var(--trendingDetTitleTextH));
+    line-height: var(--trendingDetTitleTextH);
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    color: var(--genWhiteTypeLight);
+    font-size: 1.125rem;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+.schedule_ctntDetBox .schedule_ctntDetEpBox
+{
+    width: 100%;
+    margin: 0.75rem 0;
+}
+
+.schedule_ctntDetEpBox .schedule_ctntDetEpText
+{
+    color: var(--genGreenTypeLight2);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.schedule_ctntDetBox .schedule_ctntDetDescBox
+{
+    width: 100%;
+}
+
+.schedule_ctntDetDescBox .schedule_ctntDetDescText
+{
+    --trendingDetDescTextNo: 3;
+    --trendingDetDescTextH: 1.4;
+    position: relative;
+    -webkit-line-clamp: var(--trendingDetDescTextNo);
+    -webkit-box-orient: vertical;
+    line-clamp:  var(--trendingDetDescTextNo);
+    display: -webkit-box;
+    max-height: calc(var(--trendingDetDescTextNo) * 1em * var(--trendingDetDescTextH));
+    line-height: var(--trendingDetDescTextH);
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    color: var(--genWhiteTypeMid);
+    font-size: 0.8125rem;
+    overflow-wrap: break-word;
+    overflow: hidden;
+}
+
+
+
+
+
+
+@media(hover: hover)
+{
+
+    .schedule_dateCard:hover .schedule_dateMinorText
+    {
+        color: var(--genWhiteTypeMid2);
+    }
+
+    .schedule_dateCard:hover .schedule_dateMajorText
+    {
+        color: var(--genGreenTypeMid);
+    }
+
+    .schedule_ctntCardBdr:hover
+    {
+        background-color: #222222;
+    }
+}
+
+
+
+/* ================== RESPONSIVENESS ================== */
+
+@media only screen and (max-width: 30.3125rem)
+{
+    html:root
+    {
+        --schedule_ctntThumbnailImgW: 6.25rem;
+        --schedule_ctntThumbnailImgH: 9.375rem;
+    }
+
+    .schedule_dateMinorBox .schedule_dateMinorText
+    {
+        font-size: 0.75rem;
+    }
+
+    .schedule_dateMajorBox .schedule_dateMajorText
+    {
+        font-size: 1.125rem;
+    }
+
+    .schedule_ctntBox .schedule_ctntGridBox
+    {
+        grid-template-columns: 100%;
+    }
+
+    .schedule_ctntGridBox .schedule_ctntCardBdr
+    {
+        padding: 0.625rem;
+    }
+
+    .schedule_ctntDetBdr .schedule_ctntDetBox
+    {
+        padding-left: 0.625rem;
+    }
+
+    .schedule_ctntDetTitleBox .schedule_ctntDetTitleText
+    {
+        font-size: 1rem;
+    }
+
+    .schedule_ctntDetBox .schedule_ctntDetEpBox
+    {
+        margin: 0.4375rem 0;
+    }
+
+    .schedule_ctntDetEpBox .schedule_ctntDetEpText
+    {
+        font-size: 0.75rem;
+    }
+
+    .schedule_ctntDetDescBox .schedule_ctntDetDescText
+    {
+        --trendingDetDescTextNo: 2;
+        font-size: 0.6875rem;
+    }
+}

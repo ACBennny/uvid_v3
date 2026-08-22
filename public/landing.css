@@ -1,0 +1,1124 @@
+/*************************************************************
+ * This is the style for the landing page of ACUvid V3
+ * ************************************************************/
+
+
+html:root
+{
+    --actionJoinGradientAngle: 30deg;
+    --featureCardBdrRadius: 0.3125rem 0.3125rem 4.6875rem 0.3125rem;
+    --ftrCardFrontTransform: 0.9375rem;
+}
+
+body
+{
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+
+
+
+/* ---------- Navbar ------------ */
+.navBox
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--navBarHeight);
+    z-index: 100;
+}
+
+.navBar
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--genBorderSpacing);
+    background: -o-linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+    background: -moz-linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+    background: -webkit-linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+    background: linear-gradient(to bottom, #000000ef, #000000dc, #000000ab, #00000045, #00000000);
+}
+
+.navBar.float
+{
+    background: -o-linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+    background: -moz-linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+    background: -webkit-linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+    background: linear-gradient(to bottom, #000000ff, #000000f4, #000000ef, #000000dc, #000000ab, #00000045, #00000000, #00000000);
+}
+
+.navBar .navBarLeft
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.navBar .spacing
+{
+    margin: 0 1.5625rem;
+}
+
+.navBarCompanylogo
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.navBarCompanylogo .lhead
+{
+    font-size: 1.5625rem;
+    color: var(--navElementColor_green);
+}
+
+.navBarCompanylogo .lname
+{
+    font-size: 1rem;
+    color: var(--navBarGenClr);
+}
+
+.navBar .signUpBdr
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    height: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUpBdr .signUpBox
+{
+    margin: 0 0.625rem;
+    padding: 0.625rem 1.5625rem;
+    font-size: 0.875rem;
+    border-radius: 0.3125rem;
+}
+
+.navBarRight
+{
+    height: 100%;
+}
+
+.navBarRight .navBarRightCtnt
+{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0.625rem;
+}
+
+
+
+
+/* ----------- Welcome ----------- */
+.welcome_landBcg
+{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 31.25rem;
+    max-height: 62.5rem;
+    background-image: url(/images/uvid-bcg0.webp);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-attachment:scroll;
+}
+
+.welcome_landBcg .welcome_landBcgImgBox
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: -1;
+}
+
+.welcome_landBcgImgBox .welcome_landBcgImg
+{
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    min-width: 100%;
+    min-height: 100%;
+    object-position: center;
+    object-fit: cover;
+}
+
+@supports (background-attachment: fixed)
+{
+    .welcome_landBcg
+    {
+        background-size: cover;
+        background-attachment: fixed;
+    }
+}
+  
+@supports not (-webkit-touch-callout: none)
+{
+    .welcome_landBcg
+    {
+        background-size: cover;
+        background-attachment: fixed;
+    }
+}
+
+@supports (-webkit-touch-callout: none)
+{
+    .welcome_landBcg .welcome_landBcgImgBox
+    {
+        display: block;
+    }
+
+    .welcome_landBcg
+    {
+        background-image: none;
+    }
+}
+
+.welcome_landBcg .welcome_landBdr
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000085;
+}
+
+.welcome_landBdr::after
+{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 6.25rem;
+    background: -o-linear-gradient(to top, #000000ef, #000000dc, #000000ab, #00000075, #00000038, #00000000);
+    background: -moz-linear-gradient(to top, #000000ef, #000000dc, #000000ab, #00000075, #00000038, #00000000);
+    background: -webkit-linear-gradient(to top, #000000ef, #000000dc, #000000ab, #00000075, #00000038, #00000000);
+    background: linear-gradient(to top, #000000ef, #000000dc, #000000ab, #00000075, #00000038, #00000000);
+    -moz-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.welcome_landBdr .welcome_landBox
+{
+    width: 100%;
+    max-width: 43.75rem;
+    height: fit-content;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0 var(--genBorderSpacing);
+}
+
+.welcome_landBox .welcome_landTextMajorBox
+{
+    width: 100%;
+}
+
+.welcome_landTextMajorBox .welcome_landTextMajor
+{
+    color: var(--color8);
+    font-size: 2.1875rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.welcome_landTextMajor span
+{
+    color: var(--color1);
+}
+
+.welcome_landBox .welcome_landTextMinorBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    color: var(--color2);
+    font-size: 0.9375rem;
+    text-align: center;
+}
+
+.propmpt_AccActionBdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.propmpt_AccActionBdr .propmpt_AccActionBox
+{
+    width: 100%;
+    max-width: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.propmpt_AccActionBox .propmpt_AccActionBtnBox
+{
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: 0.3125rem;
+    transition: all 300ms ease-in-out;
+}
+
+.propmpt_AccActionBtnBox:active
+{
+    transform: scale(0.96);
+}
+
+.propmpt_AccActionBtnBox.action_Join
+{
+    color: var(--color6);
+    background: -o-linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7) 45%);
+    background: -moz-linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7) 45%);
+    background: -webkit-linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7) 45%);
+    background: linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7) 45%);
+    background-size: 200%;
+    transition: all 300ms ease-in-out;
+}
+
+.propmpt_AccActionBtnBox.action_Join:active
+{
+    color: var(--color2);
+    background-position: bottom;
+}
+
+.propmpt_AccActionBtnBox.action_GetPremium
+{
+    color: var(--color1);
+    border: 0.125rem solid var(--color1);
+    background-color: #00000050;
+}
+
+.propmpt_AccActionBtnBox.action_GetPremium:active
+{
+    color: var(--color6);
+    border-color: var(--color7);
+    background-color: #00000090;
+}
+
+
+
+/* ============= FEATURES ============ */
+
+.feature_ItemsBcg
+{
+    width: 100%;
+}
+
+.feature_ItemsBdr
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.feature_ItemsBdr .feature_ItemsBox
+{
+    width: 100%;
+    height: 100%;
+    max-width: 100rem;
+}
+
+.feature_ItemsBox .feature_ItemsContainer
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.875rem;
+    padding: 1.5625rem var(--genBorderSpacing);
+}
+
+.feature_cardBaseBdr
+{
+    width: 20rem;
+    height: 25rem;
+    z-index: 5;
+}
+
+.feature_cardBaseBdr .feature_cardBaseBox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.feature_cardBaseBox .feature_card
+{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: all 300ms ease;
+}
+
+.feature_card.feature_cardUnder
+{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--featureCardBdrRadius);
+    filter: brightness(0.75);
+    background: -o-linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7), var(--color7), var(--color7));
+    background: -moz-linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7), var(--color7), var(--color7));
+    background: -webkit-linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7), var(--color7), var(--color7));
+    background: linear-gradient(var(--actionJoinGradientAngle), var(--color1), var(--color7), var(--color7), var(--color7));
+    z-index: -1;
+}
+
+.feature_card.feature_cardFront
+{
+    width: 100%;
+    height: 100%;
+    border-radius: var(--featureCardBdrRadius);
+    background-color: #1a1a1a;
+    transform: translate( var(--ftrCardFrontTransform), var(--ftrCardFrontTransform));
+    z-index: 3;
+}
+
+.feature_card .feature_cardCtnt
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature_cardCtnt .feature_header
+{
+    width: 100%;
+    padding: 0.9375rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.feature_header .fh_Major
+{
+    color: var(--color1);
+    font-size: 1.5625rem;
+}
+
+.feature_header .fh_Minor
+{
+    color: var(--color6);
+    font-size: 1.25rem;
+}
+
+.feature_cardCtnt .feature_body
+{
+    width: 100%;
+    padding: 0.9375rem 0.625rem;
+    color: var(--color9);
+    font-size: 0.9375rem;
+}
+
+
+
+/* ========== Device Support =========== */
+
+.streamBase
+{
+    width: 100%;
+}
+
+.streamBase .streamBdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.streamBdr .streamBox
+{
+    width: 100%;
+    max-width: 100rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9375rem;
+}
+
+.feature_ItemsBox .feature_TitleBox,
+.streamBox .streamHeader
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.3125rem;
+}
+
+.feature_TitleBox .ftrTitle,
+.streamHeader .streamTitle
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color6);
+    font-size: 1.5625rem;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 0.3125rem;
+}
+
+.feature_TitleBox .ftrSubTitle,
+.streamHeader .streamSubTitle
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color6);
+    font-size: 0.9375rem;
+    text-align: center;
+    padding: 0.3125rem;
+}
+
+.streamBox .streamSampleBdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.streamSampleBdr .streamSampleBox
+{
+    width: 100%;
+    max-height: 45.9375rem;
+    padding: 0.625rem var(--genBorderSpacing);
+}
+
+.streamSampleBox .streamSampleImg
+{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+
+
+/* ============= Prompt Register ============ */
+.prompt_regBase
+{
+    width: 100%;
+}
+
+.prompt_regBase .prompt_regBdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.prompt_regBdr .prompt_regBox
+{
+    width: 100%;
+    max-width: 100rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3125rem;
+    padding: 0 var(--genBorderSpacing);
+}
+
+.prompt_regBox .prompt_regText
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.625rem;
+    color: var(--color6);
+    font-size: 1.125rem;
+    text-align: center;
+}
+
+.prompt_regBox .propmpt_AccActionBdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+/* ========== FAQ =========== */
+.questions_base
+{
+    width: 100%;
+}
+
+.questions_base .questions_bdr
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.questions_bdr .questions_box
+{
+    width: 100%;
+    max-width: 62.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--genBorderSpacing);
+}
+
+.questions_box .questions_Header
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5625rem 0;
+    color: var(--color6);
+    font-size: 1.5625rem;
+    text-align: center;
+}
+
+.questions_box .questions_Body
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.625rem 0;
+}
+
+.questions_Body .questions_Card
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.3125rem;
+    background-color: var(--color3);
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.questions_Card:active
+{
+    background-color: var(--color11);
+}
+
+.questions_Card .questions_CardBtn
+{
+    width: 100%;
+    height: 4.6875rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5625rem;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.questions_CardBtn .questions_CardAsk
+{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    text-align-last: left;
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+}
+
+.questions_CardAsk .qca_Major
+{
+    color: var(--color1);
+    font-size: 1.25rem;
+}
+
+.questions_CardAsk .qca_Minor
+{
+    color: var(--color9);
+    font-size: 1.125rem;
+}
+
+.questions_CardBtn .questions_CardIconBox
+{
+    position: relative;
+    width: 0.9375rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.questions_CardIconBox .questions_CardIcon
+{
+    width: 0.1875rem;
+    height: 0.9375rem;
+    background-color: var(--color9);
+    transition: all 150ms ease-in-out;
+}
+
+.questions_CardIcon::after
+{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.9375rem;
+    height: 0.1875rem;
+    background-color: var(--color9);
+    transform: translate(-50%, -50%);
+    transition: all 150ms ease-in-out;
+}
+
+.questions_Card.active .questions_CardIcon
+{
+    transform: rotate(270deg);
+}
+
+.questions_Card.active .questions_CardIcon::after
+{
+    display: none;
+}
+
+.questions_Card .questions_CardTextBox
+{
+    width: 100%;
+    height: 0rem;
+    max-height: fit-content;
+    padding: 0 1.5625rem;
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.questions_Card.active .questions_CardTextBox
+{
+    height: 100%;
+    padding: 0 1.5625rem 1.5625rem;
+}
+
+.questions_CardTextBox .questions_CardText
+{
+    width: 100%;
+    height: 100%;
+    color: var(--genWhiteTypeMid);
+    font-size: 0.9375rem;
+    line-height: 1.375rem;
+}
+
+.questions_box .questions_footerBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3125rem;
+    padding: 1.25rem 0;
+    color: var(--color10);
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+}
+
+
+
+
+
+
+
+@media(hover: hover)
+{
+    .genBtn:hover
+    {
+        box-shadow: 0 0 1.25rem var(--color1);
+    }
+
+    .navBarSignOutBtn:hover
+    {
+        --navBarProfileCardLinkClr: var(--navElementColor_green);
+    }
+
+    .propmpt_AccActionBtnBox.action_Join:hover
+    {
+        color: var(--color2);
+        background-position: bottom;
+    }
+
+    .propmpt_AccActionBtnBox.action_GetPremium:hover
+    {
+        color: var(--color6);
+        border-color: var(--color7);
+        background-color: #00000090;
+    }
+
+    .feature_cardBaseBox:hover .feature_card.feature_cardUnder
+    {
+        top: var(--ftrCardFrontTransform);
+        left: var(--ftrCardFrontTransform);
+    }
+
+    .feature_cardBaseBox:hover .feature_card.feature_cardFront
+    {
+        --ftrCardFrontTransform: 0rem;
+        background-color: #222222;
+    }
+
+    .questions_Card:hover
+    {
+        background-color: var(--color11);
+    }
+}
+
+
+
+
+
+
+/* ====== ======== ======= Responsive= ===========  == == */
+
+
+
+/* ------------- Height ------------ */
+
+
+/*  ----------- ---- Width ---- --------- */
+
+@media only screen and (min-width: 156.25rem)
+{
+    .welcome_landBdr .welcome_landBox
+    {
+        max-width: 93.75rem;
+        gap: 3.125rem;
+    }
+
+    .welcome_landTextMajorBox .welcome_landTextMajor
+    {
+        font-size: 4.0625rem;
+    }
+
+    .welcome_landTextMinorBox .welcome_landTextMinor
+    {
+        font-size: 1.25rem;
+    }
+
+    .propmpt_AccActionBdr .propmpt_AccActionBox
+    {
+        max-width: 65.625rem;
+    }
+
+    .propmpt_AccActionBox .propmpt_AccActionBtnBox
+    {
+        height: 3.75rem;
+        font-size: 1.125rem;
+    }
+}
+
+@media only screen and (max-width: 156.25rem)
+{
+
+    .welcome_landTextMajorBox .welcome_landTextMajor
+    {
+        font-size: 3.4375rem;
+    }
+
+    .welcome_landTextMinorBox .welcome_landTextMinor
+    {
+        font-size: 1.1875rem;
+    }
+
+    .propmpt_AccActionBdr .propmpt_AccActionBox
+    {
+        max-width: 28.125rem;
+    }
+
+    .propmpt_AccActionBox .propmpt_AccActionBtnBox
+    {
+        height: 3.75rem;
+        font-size: 1.125rem;
+    }
+
+    .feature_cardBaseBdr
+    {
+        width: 16.25rem;
+        height: 18.75rem;
+    }
+}
+
+@media only screen and (max-width: 64.0625rem)
+{
+    .navBar .spacing
+    {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 68.75rem)
+{
+
+    .welcome_landTextMajorBox .welcome_landTextMajor
+    {
+        font-size: 2.8125rem;
+    }
+
+    .welcome_landTextMinorBox .welcome_landTextMinor
+    {
+        font-size: 1.0625rem;
+    }
+
+    .propmpt_AccActionBox .propmpt_AccActionBtnBox
+    {
+        height: 3.4375rem;
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 48rem)
+{
+
+    .welcome_landTextMajorBox .welcome_landTextMajor
+    {
+        font-size: 2.1875rem;
+    }
+
+    .welcome_landTextMinorBox .welcome_landTextMinor
+    {
+        font-size: 0.9375rem;
+    }
+
+    .propmpt_AccActionBox .propmpt_AccActionBtnBox
+    {
+        height: 3.125rem;
+        font-size: 0.8125rem;
+    }
+
+    .feature_cardBaseBdr
+    {
+        width: 16.25rem;
+        height: 18.75rem;
+    }
+
+    .propmpt_AccActionBdr .propmpt_AccActionBox
+    {
+        max-width: 28.125rem;
+    }
+
+    .propmpt_AccActionBox .propmpt_AccActionBtnBox
+    {
+        height: 2.8125rem;
+        font-size: 0.8125rem;
+    }
+
+    .feature_header .fh_Major
+    {
+        font-size: 1.4375rem;
+    }
+    
+    .feature_header .fh_Minor
+    {
+        font-size: 1.1875rem;
+    }
+    
+    .feature_cardCtnt .feature_body
+    {
+        width: 100%;
+        font-size: 0.875rem;
+    }
+
+    .feature_TitleBox .ftrTitle,
+    .streamHeader .streamTitle
+    {
+        font-size: 1.4375rem;
+    }
+
+    .feature_TitleBox .ftrSubTitle,
+    .streamHeader .streamSubTitle
+    {
+        font-size: 0.8125rem;
+    }
+
+    .prompt_regBox .prompt_regText
+    {
+        font-size: 0.8125rem;
+    }
+
+    .questions_box .questions_Header
+    {
+        font-size: 1.1875rem;
+        padding: 0.625rem;
+    }
+
+    .questions_CardAsk .qca_Major
+    {
+        font-size: 1.125rem;
+    }
+
+    .questions_CardAsk .qca_Minor
+    {
+        font-size: 0.9375rem;
+    }
+
+    .questions_CardTextBox .questions_CardText
+    {
+        font-size: 0.75rem;
+    }
+}
+
+@media only screen and (max-width: 37.5rem)
+{
+    html:root
+    {
+        --ftrCardFrontTransform: 0.625rem;
+        --featureCardBdrRadius: 0.3125rem 0.3125rem 0.3125rem 0.3125rem;
+    }
+
+    .propmpt_AccActionBdr .propmpt_AccActionBox
+    {
+        max-width: 18.75rem;
+    }
+
+    .feature_TitleBox .ftrTitle,
+    .streamHeader .streamTitle
+    {
+        font-size: 1.125rem;
+    }
+
+    .feature_cardBaseBdr
+    {
+        width: 100%;
+        height: 15.625rem;
+    }
+
+    .feature_cardBaseBox:hover .feature_card.feature_cardUnder
+    {
+        top: 0;
+        left: 0;
+    }
+
+    .feature_card.feature_cardFront
+    {
+        width: calc(100% - 1.25rem);
+        height: calc(100% - 1.25rem);
+        transform: translate(0.625rem, 0.625rem);
+    }
+    
+    .feature_cardCtnt .feature_body
+    {
+        padding: 0.3125rem 0.625rem 0.625rem;
+    }
+
+    .questions_CardAsk .qca_Major
+    {
+        font-size: 0.9375rem;
+    }
+
+    .questions_CardAsk .qca_Minor
+    {
+        font-size: 0.875rem;
+    }
+    
+    .questions_Card .questions_CardTextBox
+    {
+        padding: 0rem 1.25rem;
+    }
+}
+
+
+@media only screen and (max-width: 30.3125rem)
+{
+
+    .welcome_landTextMajorBox .welcome_landTextMajor
+    {
+        font-size: 1.625rem;
+    }
+
+    .propmpt_AccActionBdr .propmpt_AccActionBox
+    {
+        max-width: none;
+    }
+}
+
+
+@media only screen and (max-width: 21.875rem)
+{
+
+    .welcome_landTextMajorBox .welcome_landTextMajor
+    {
+        font-size: 1.5rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

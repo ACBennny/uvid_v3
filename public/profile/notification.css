@@ -1,0 +1,309 @@
+/*************************************************************
+ * This is the style for the Notification modal
+ * ************************************************************/
+
+
+
+html:root
+{
+    --notification_thumbnail_width: 7.8125rem;
+    --notification_thumbnail_height: 11.5625rem;
+    --notification_SubTopic_margin: 0.625rem;
+}
+
+
+
+
+/* ------ NOTIFICATION STATUS NUMBER ------ */
+
+.navBarNotificationStatusNo_bdr
+{
+    --navBarNotificationStatusNo_sizing: 1.25rem;
+    position: absolute;
+    bottom: 50%;
+    left: 100%;
+    transform: translate(-50% ,0);
+    pointer-events: none;
+}
+
+.navBarNotificationStatusNo_bdr .navBarNotificationStatusNo_box
+{
+    width: var(--navBarNotificationStatusNo_sizing);
+    height: var(--navBarNotificationStatusNo_sizing);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #ce2a2a;
+}
+
+.navBarNotificationStatusNo_box.active
+{
+    display: flex;
+}
+
+.navBarNotificationStatusNo_box .navBarNotificationStatusNo_text
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 0.875rem;
+}
+
+
+
+
+
+
+
+/* ============ NOTIFICATION MODAL ============ */
+.genStaticHdr_btm .ntfy_hdr_atnBdr
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    gap: 0.3125rem;
+}
+
+.ntfy_hdr_atnBdr .clear_ntfy_half
+{
+    display: none;
+}
+
+.genStaticCtntBox .ntfy_ctnt_box
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--genBorderSpacing);
+}
+
+.ntfy_ctnt_box .notification_card_bdr
+{
+    width: 100%;
+    margin-bottom: 1.25rem;
+    transition: all 300ms ease-in-out;
+    overflow: hidden;
+}
+
+.notification_card_bdr:active
+{
+    border-radius: 0.625rem;
+    background-color: #171717;
+}
+
+.notification_card_bdr[data-read-status="true"]
+{
+    filter: brightness(0.5);
+}
+
+.notification_card_bdr .notification_card_box
+{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.notification_card_box .notification_thumbnail_bdr
+{
+    width: var(--notification_thumbnail_width);
+    height: var(--notification_thumbnail_height);
+}
+
+.notification_thumbnail_bdr .notification_thumbnail_box
+{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.notification_thumbnail_box .notification_thumbnail_img
+{
+    width: clamp(100% , 100% , 100%);
+    height: clamp(100% , 100% , 100%);
+    object-fit: cover;
+    object-position: center;
+}
+
+.notification_card_box .notification_detail_bdr
+{
+    width: calc(100% - var(--notification_thumbnail_width));
+    height: 100%;
+    margin-left: 0.625rem;
+}
+
+.notification_detail_bdr .notification_detail_box
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem 0;
+}
+
+.notification_detail_box .notification_MainTopic_bdr
+{
+    width: 100%;
+}
+
+.notification_MainTopic_bdr .notification_MainTopic_box
+{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+
+.notification_MainTopic_box .notification_MainTopic_text
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    color: var(--genWhiteTypeLight);
+    font-size: 1.125rem;
+    text-align: left;
+}
+
+.notification_detail_box .notification_date_bdr
+{
+    width: 100%;
+    margin-top: var(--notification_SubTopic_margin);
+}
+
+.notification_date_bdr .notification_date_box
+{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
+
+.notification_date_box .notification_date_text
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    color: var(--genWhiteTypeDark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.notification_detail_box .notification_SubTopic_bdr
+{
+    width: 100%;
+    margin: var(--notification_SubTopic_margin) 0;
+}
+
+.notification_SubTopic_bdr .notification_SubTopic_box
+{
+    width: 100%;
+}
+
+.notification_SubTopic_box .notification_SubTopic_text
+{
+    width: -moz-fit-content;
+    width: fit-content;
+    color: var(--genWhiteTypeMid);
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+.notification_detail_box .notification_action_bdr
+{
+    width: 100%;
+}
+
+.notification_action_bdr .notification_action_box
+{
+    width: 100%;
+}
+
+.notification_action_box .notification_action_text
+{
+    color: var(--genGreenTypeMid);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 300ms ease-in-out;
+}
+
+.notification_action_text:active
+{
+    color: var(--genGreenTypeLight);
+}
+
+
+
+
+@media(hover: hover)
+{
+
+    .notification_card_bdr:hover
+    {
+        border-radius: 0.625rem;
+        background-color: #171717;
+    }
+
+    .notification_action_text:hover
+    {
+        color: var(--genGreenTypeLight);
+    }
+}
+
+
+
+
+
+
+
+/* ================== RESPONSIVENESS ================ */
+
+@media only screen and (max-width: 35.3125rem)
+{
+    html:root
+    {
+        --notification_thumbnail_width: 5.3125rem;
+        --notification_SubTopic_margin: 0.4375rem;
+    }
+
+    .ntfy_hdr_atnBdr .clear_ntfy_full
+    {
+        display: none;
+    }
+
+    .ntfy_hdr_atnBdr .clear_ntfy_half
+    {
+        display: flex;
+    }
+
+    .notification_MainTopic_box .notification_MainTopic_text
+    {
+        font-size: 1.125rem;
+    }
+
+    .notification_SubTopic_box .notification_SubTopic_text
+    {
+        font-size: 0.8125rem;
+    }
+
+    .notification_action_box .notification_action_text
+    {
+        font-size: 0.8125rem;
+    }
+}
+
+
+
+@media only screen and (max-width: 30.3125rem)
+{
+    .notification_thumbnail_bdr
+    {
+        display: none;
+    }
+
+    .notification_card_box  .notification_detail_bdr
+    {
+        width: 100%;
+        margin-left: 0rem;
+    }
+}
+ 

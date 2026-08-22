@@ -1,0 +1,770 @@
+/*************************************************************
+ * This is the style for the catalog page of ACUvid V3
+ * ************************************************************/
+
+html:root
+{
+    --exploreCardWidth: 12.5rem;
+    --catalogHeadBoxItemTitleClr: var(--genWhiteTypeBright);
+    --catalogHeadBoxItemDisplayBcg: var(--navBarBcgSolid);
+    --catalogHeadBoxItemDisplayClr: var(--genWhiteTypeMid);
+    --catalogHeadBoxItemDisplayHeight: 3.125rem;
+    --catalogHeadBoxItemDisplayRadius: 0.625rem;
+    --catalogHeadBoxItemDisplayFontSize: 0.875rem;
+    --catalogHeadBoxItemDisplaySvgSize: 1.25rem;
+    --catalogSearchInputItemPadding: 2.8125rem;
+    --catalogSearchIconWidth: 3.125rem;
+    --catalogSearchSvgWidth: 1.5625rem;
+    --catalogFilterBoxWidth: 9.375rem;
+    --catalogFilterTitleBoxW: 2.8125rem;
+}
+
+
+.exploreBase, .catalogBase
+{
+    min-height: 100vh;
+    padding: 0 var(--genBorderSpacing);
+}
+
+
+.exploreBase
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.exploreBase.hide
+{
+    display: none;
+}
+
+.exploreBase .exploreBdr
+{
+    width: 100%;
+    max-width: var(--genMaxContainerWidth);
+    display: flex;
+    flex-direction: column;
+    padding: calc((var(--navBarHeight) + 1.25rem)) 0 0;
+}
+
+.exploreBdr .exploreBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5625rem;
+}
+
+.exploreBox .exploreTitleBox
+{
+    width: 100%;
+    margin: 0.9375rem 0;
+}
+
+.exploreTitleBox .exploreTitleText
+{
+    font-size: 1.125rem;
+    color: var(--genWhiteTypeLight);
+}
+
+.exploreBox .exploreGridBdr
+{
+    width: 100%;
+}
+
+.exploreGridBdr .exploreGridBox
+{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--exploreCardWidth), 1fr));
+    grid-template-rows: auto;
+    justify-items: center;
+    gap: 1.25rem;
+}
+
+.exploreGridBox .exploreGridCardBdr
+{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 0.625rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.exploreGridCardBdr .exploreGridCardBcg
+{
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(100% 100% at 20% 80%, var(--catBcgClr) 10%, #000000 70%);
+    filter: blur(0.625rem) brightness(0.250);
+}
+
+.exploreGridCardBdr .exploreGridCardBox
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #ffffff15;
+}
+
+.exploreGridCardBox .exploreGridCardLabelBox
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.exploreGridCardLabelBox .exploreGridCardLabelText
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 1rem;
+    text-align: center;
+}
+
+.exploreGridCardBdr .exploreGridCardLink
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+}
+
+
+
+
+/* ================= CATALOG ================ */
+
+.catalogBase
+{
+    width: 100%;
+    display: block;
+    background-image: radial-gradient(circle at 50% 50%, var(--genGreenTypeDark2) 0%, #00000000 60%);
+}
+
+.catalogBase.hide
+{
+    display: none;
+}
+
+.catalogBase .catalogBdr
+{
+    width: 100%;
+}
+
+.catalogBdr .catalogBox
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--navBarHeight);
+}
+
+
+
+
+
+/* ========== CATALOG SEARCH =========== */
+
+.catalogSearchBase
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 var(--genBorderSpacing);
+}
+
+.catalogSearchBase .catalogSearchBdr
+{
+    position: relative;
+    width: 100%;
+    max-width: calc((80% - (var(--catalogSearchIconWidth) * 2)));
+    height: var(--catalogHeadBoxItemDisplayHeight);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--catalogHeadBoxItemDisplayRadius);
+    background-color: var(--catalogHeadBoxItemDisplayBcg);
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+}
+
+.catalogSearchBdr:focus-within
+{
+    --catalogHeadBoxItemDisplayClr: var(--genWhiteTypeLight);
+    box-shadow: 0rem 0rem 0rem 0.15625rem var(--genGreenTypeMid);
+}
+
+.catalogSearchBdr .catalogSearchBox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+}
+
+.catalogSearchBdr .catalogSearchInputCover
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: #00000000;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.catalogSearchBdr.search_atv  .catalogSearchInputCover
+{
+    display: none;
+}
+
+.catalogSearchBox .catalogSearchFieldClass
+{
+    width: 100%;
+    height: 100%;
+    padding: 0 var(--catalogSearchInputItemPadding);
+    font-size: var(--catalogHeadBoxItemDisplayFontSize);
+    color: var(--catalogHeadBoxItemDisplayClr);
+    outline: none;
+    border: none;
+    background-color: #00000000;
+    filter: brightness(1.0);
+    transition: all 300ms ease-in-out;
+}
+
+.catalogSearchBdr .catalogSearchInputIcon
+{
+    position: absolute;
+    top: 0;
+    width: var(--catalogSearchInputItemPadding);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.catalogSearchInputIcon.catalogSearchInputLeftIcon
+{
+    left: 0;
+    pointer-events: none;
+}
+
+.catalogSearchInputIcon.catalogSearchInputRightIcon
+{
+    right: 0;
+    cursor: pointer;
+}
+
+.catalogSearchBdr.search_atv  .catalogSearchFieldIcon,
+.catalogSearchInputLeftIcon.openCatalogSearchInputCoverIcon,
+.catalogSearchInputRightIcon.catalogSearchInputClearIcon
+{
+    display: none;
+}
+
+.catalogSearchBdr.search_atv .openCatalogSearchInputCoverIcon,
+.catalogSearchBdr.search_atv .catalogSearchItem,
+.catalogSearchInputClearIcon.isTyping
+{
+    display: flex;
+}
+
+.catalogSearchBdr.search_atv .openCatalogSearchInputCoverIcon
+{
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.catalogSearchInputIcon .catalogSearchInputSvg
+{
+    width: calc(( var(--catalogSearchSvgWidth) / 1.15));
+    height: calc(( var(--catalogSearchSvgWidth) / 1.15));
+    fill: var(--catalogHeadBoxItemDisplayClr);
+    transition: all 300ms ease-in-out;
+}
+
+.catalogSearchBox .catalogSearchItem
+{
+    width: var(--catalogSearchIconWidth);
+    height: 100%;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.catalogSearchItem .catalogSearchIcon
+{
+    width: var(--catalogSearchSvgWidth);
+    height: var(--catalogSearchSvgWidth);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catalogSearchIcon .catalogSearchSvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--catalogHeadBoxItemTitleClr);
+    transition: all 300ms ease-in-out;
+}
+
+.catalogSearchItem .catalogSearchText
+{
+    display: none;
+    margin-left: 0.3125rem;
+    font-size: var(--catalogHeadBoxItemDisplayFontSize);
+    color: var(--catalogHeadBoxItemDisplayClr);
+}
+
+
+
+
+
+
+
+/* ============ CATALOG HEAD BOX ========== */
+
+.catalogBox .catalogHeadBdr
+{
+    width: 100%;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms ease-out;
+}
+
+.catalogHeadBdr.show
+{
+    grid-template-rows: 1fr;
+}
+
+.catalogHeadBdr .catalogHeadBcg
+{
+    border-radius: 0.9375rem;
+    overflow: hidden;
+}
+
+.catalogHeadBdr .catalogHeadBox
+{
+    position: relative;
+    width: 100%;
+    max-width: calc((var(--genMaxContainerWidth)));
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 2.1875rem;
+    padding: var(--genBorderSpacing);
+    border-radius: 0.9375rem;
+    background-color: var(--navMenuBcgClr);
+}
+
+
+
+/* =========== Toggle Button ========== */
+.toggleCatFiltBox
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+
+
+/* ============ FILTER TITLE TEXTS ========= */
+.catalogHeadTitleBox
+{
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.catalogHeadTitleBox .catalogHeadTitleText
+{
+    color: var(--genWhiteTypeLight);
+    font-size: 0.875rem;
+}
+
+
+
+/* ============= FILTER OPTIONS ============= */
+
+.catalogHeadBox .catalogFilterBdr
+{
+    --catalogHeadBoxItemDisplayBcg: var(--navMenuBcgClr);
+    width: 100%;
+    max-height: none;
+    margin-bottom: 1.875rem;
+    overflow: unset;
+}
+
+.catalogFilterBdr .catalogFilterBox
+{
+    width: 100%;
+    max-width: var(--genMaxContainerWidth);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--catalogFilterBoxWidth), 1fr));
+    grid-template-rows: auto;
+    justify-items: center;
+    gap: 0.625rem;
+}
+
+.catalogFilterBox .catalogFilterCardBdr
+{
+    width: 100%;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid var(--genGreyTypeBright);
+}
+
+.catalogFilterCardBdr .catalogFilterCardBox
+{
+    position: relative;
+    width: 100%;
+    height: calc((var(--catalogHeadBoxItemDisplayHeight) - 0.625rem));
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.625rem 0.75rem;
+    border-radius: var(--catalogHeadBoxItemDisplayRadius);
+    background-color: var(--catalogHeadBoxItemDisplayBcg);
+    transition: all 300ms ease-in-out;
+    overflow: hidden;
+}
+
+.catalogFilterCardBox .catalogFilterTitleBox
+{
+    width: var(--catalogFilterTitleBoxW);
+    margin-right: 0.3125rem;
+}
+
+.catalogFilterTitleBox .catalogFilterTitleText
+{
+    width: 100%;
+    font-size: 0.75rem;
+    color: var(--genWhiteTypeMid2);
+}
+
+.catalogFilterCardBox .catalogFilterDisplayIcon
+{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: var(--catalogHeadBoxItemDisplaySvgSize);
+    height: var(--catalogHeadBoxItemDisplaySvgSize);
+    transform: translate(-50% , -50%);
+    pointer-events: none;
+}
+
+.catalogFilterDisplayIcon .catalogFilterDisplaySvg
+{
+    width: 100%;
+    height: 100%;
+    fill: var(--catalogHeadBoxItemDisplayClr);
+}
+
+.catalogFilterCardBox .catalogFilterSelectBdr
+{
+    width: calc((100% - (var(--catalogFilterTitleBoxW) + var(--catalogHeadBoxItemDisplaySvgSize))));
+    height: 100%;
+}
+
+.catalogFilterSelectBdr .catalogFilterSelectBox
+{
+    width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    padding: 0 0.3125rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--genGreenTypeLight);
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+    box-shadow: none;
+    background: #00000000;
+    background-color: var(--catalogHeadBoxItemDisplayBcg);
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+
+
+
+
+/* =========== GENRE OPTIONS ========= */
+.catalogGenreBdr
+{
+    width: 100%;
+    margin-bottom: 2.5rem;
+}
+
+.catalogGenreBdr .catalogGenreBox
+{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3125rem;
+}
+
+.catalogGenreBox .catalogGenreCard
+{
+    font-weight: 500;
+    padding: 0.3125rem 0.625rem;
+    color: var(--genWhiteTypeMid);
+    font-size: 0.75rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid var(--genGreyTypeLight);
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+.catalogGenreCard.active
+{
+    color: var(--genGreenTypeLight);
+    border-color: var(--genGreenTypeLight);
+}
+
+
+
+
+/* ======== Action Buttons ======== */
+
+.catalogActionBdr
+{
+    width: 100%;
+}
+
+.catalogActionBdr .catalogActionBox
+{
+    display: flex;
+    flex-direction: row;
+    gap: 0.625rem;
+}
+
+
+
+
+/* ============= RESULTS CONTAINER ============*/
+.catalogBox .catalogResultBdr
+{
+    width: 100%;
+    min-height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.625rem 0;
+}
+
+.catalogResultBdr .catalogResultBox
+{
+    width: 100%;
+    max-width: var(--genMaxContainerWidth);
+    height: -moz-fit-content;
+    height: fit-content;
+}
+
+.catalogResultBdr .catalogResultTitleBox
+{
+    width: 100%;
+    max-width: var(--genMaxContainerWidth);
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.catalogResultTitleBox .catalogResultTitleText
+{
+    color: var(--genGreenTypeMid);
+    font-size: 1rem;
+}
+
+.catalogResultTitleBox .catalogResultTitleDynamic
+{
+    margin-left: 0.3125rem;
+    color: var(--genWhiteTypeMid2);
+    font-style: italic;
+}
+
+.emptyResultBdr
+{
+    width: 100%;
+    display: none;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+.emptyResultBdr.active 
+{
+    display: flex;
+    margin: 2rem 0;
+}
+
+.emptyResultBdr .emptyResultBox
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emptyResultBox .emptyResultText
+{
+    font-size: 1.125rem;
+    color: var(--genWhiteTypeLight);
+}
+
+
+
+
+
+
+
+
+
+
+
+@media(hover: hover)
+{
+
+    .catalogSearchItem:hover .catalogSearchSvg
+    {
+        --catalogHeadBoxItemTitleClr: var(--genGreenTypeLight);
+    }
+
+    .catalogGenreCard:hover
+    {
+        color: var(--genGreenTypeLight);
+    }
+}
+
+
+
+
+
+
+
+/* ================== RESPONSIVENESS ================ */
+
+
+@media only screen and (max-width: 48rem)
+{
+    html:root
+    {
+        --exploreCardWidth: 10.625rem;
+    }
+
+    .exploreTitleBox .exploreTitleText
+    {
+        font-size: 1rem;
+    }
+
+    .exploreGridBdr .exploreGridBox
+    {
+        gap: 0.9375rem;
+    }
+
+    .exploreGridCardLabelBox .exploreGridCardLabelText
+    {
+        font-size: 0.875rem;
+    }
+
+    .catalogSearchBase .catalogSearchBdr
+    {
+        max-width: none;
+    }
+}
+
+@media only screen and (max-width: 37.5rem)
+{
+    html:root
+    {
+        --exploreCardWidth: 9.375rem;
+    }
+
+    .exploreTitleBox .exploreTitleText
+    {
+        font-size: 0.875rem;
+    }
+
+    .exploreGridBdr .exploreGridBox
+    {
+        gap: 0.625rem;
+    }
+
+    .exploreGridCardLabelBox .exploreGridCardLabelText
+    {
+        font-size: 0.75rem;
+    }
+
+    .catalogBox .catalogHeadBdr
+    {
+        padding: 0;
+    }
+}
+
+
+@media only screen and (max-width: 30.3125rem)
+{
+    html:root
+    {
+        --catalogHeadBoxItemDisplayFontSize: 0.75rem;
+        --catalogHeadBoxItemDisplaySvgSize: 1rem;
+        --catalogSearchIconWidth: 2.1875rem;
+        --catalogSearchSvgWidth: 1.375rem;
+    }
+
+    .catalogFilterBdr .catalogFilterBox
+    {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+@media only screen and (max-width: 25rem)
+{
+    html:root
+    {
+        --exploreCardWidth: 7.5rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

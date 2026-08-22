@@ -1,0 +1,2952 @@
+/*************************************************************
+ * This holds the general functions for the User Settings page
+ * 
+ * Navigation Keys:
+ * Profile & Parental Controls = preferences
+ * App experience = experience
+ * Privacy & Security = privacy
+ * Help & More = information
+ * ************************************************************/
+
+
+
+
+// DECLARATIONS
+
+    let sett_base_struct = 
+    `
+        <div class="settingBdr">
+            <div class="settingBox">
+                <div class="settingNavBdr hidden">
+                    <div class="settingNavBox">
+                        <div class="settingNavTitleBox">
+                            <p class="settingNavTitleText">Settings</p>
+                        </div>
+                        <button type="button" class="settingNavOptBox settSectNavOptBtn" data-sett-sect="preferences">
+                            <div class="settingNavOptIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settingNavOptSvg">
+                                    <path d="M15.5 7.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0m2.5 9c0 1.933-2.686 3.5-6 3.5s-6-1.567-6-3.5S8.686 13 12 13s6 1.567 6 3.5M7.122 5q.267 0 .518.05A5 5 0 0 0 7 7.5c0 .868.221 1.685.61 2.396q-.237.045-.488.045c-1.414 0-2.561-1.106-2.561-2.47S5.708 5 7.122 5M5.447 18.986C4.88 18.307 4.5 17.474 4.5 16.5c0-.944.357-1.756.896-2.423C3.49 14.225 2 15.267 2 16.529c0 1.275 1.517 2.325 3.447 2.457M17 7.5c0 .868-.221 1.685-.61 2.396q.236.045.488.045c1.414 0 2.56-1.106 2.56-2.47S18.293 5 16.879 5q-.267 0-.518.05c.407.724.64 1.56.64 2.45m1.552 11.486c1.93-.132 3.447-1.182 3.447-2.457c0-1.263-1.491-2.304-3.396-2.452c.54.667.896 1.479.896 2.423c0 .974-.38 1.807-.947 2.486" />
+                                </svg>
+                            </div>
+                            <p class="settingNavOptText">Profile & Parental Controls</p>
+                        </button>
+                        <button type="button" class="settingNavOptBox settSectNavOptBtn" data-sett-sect="experience">
+                            <div class="settingNavOptIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settingNavOptSvg">
+                                    <path fill-rule="evenodd" d="M5.467 4.392a.75.75 0 0 1-.001 1.06A9.22 9.22 0 0 0 2.75 12a9.22 9.22 0 0 0 2.775 6.606a.75.75 0 1 1-1.05 1.071A10.72 10.72 0 0 1 1.25 12c0-2.972 1.207-5.664 3.156-7.609a.75.75 0 0 1 1.06.001m13.15.072a.75.75 0 0 1 1.06.011A10.72 10.72 0 0 1 22.75 12c0 2.964-1.2 5.65-3.141 7.594a.75.75 0 1 1-1.062-1.06A9.22 9.22 0 0 0 21.25 12a9.22 9.22 0 0 0-2.644-6.475a.75.75 0 0 1 .01-1.06M8.308 7.488a.75.75 0 0 1-.035 1.06c-.949.888-1.524 2.102-1.524 3.434c0 1.348.589 2.575 1.558 3.466a.75.75 0 1 1-1.016 1.104c-1.252-1.151-2.042-2.77-2.042-4.57c0-1.779.771-3.38 2-4.53a.75.75 0 0 1 1.06.036m7.434.038a.75.75 0 0 1 1.06-.024c1.197 1.145 1.947 2.727 1.947 4.48c0 1.775-.767 3.373-1.99 4.521a.75.75 0 1 1-1.027-1.093c.945-.887 1.517-2.1 1.517-3.428c0-1.313-.559-2.512-1.484-3.396a.75.75 0 0 1-.023-1.06" clip-rule="evenodd" />
+                                    <path d="M13.656 10.451c.896.658 1.344.987 1.344 1.55c0 .562-.448.89-1.344 1.548a13 13 0 0 1-.718.495c-.197.125-.421.254-.653.381c-.894.49-1.34.734-1.741.463s-.437-.838-.51-1.971c-.02-.32-.034-.635-.034-.917s.013-.596.034-.917c.072-1.133.109-1.7.51-1.97c.4-.271.847-.027 1.74.462c.233.127.457.256.654.381c.226.143.471.314.718.495" />
+                                </svg>
+                            </div>
+                            <p class="settingNavOptText">App Experience</p>
+                        </button>
+                        <button type="button" class="settingNavOptBox settSectNavOptBtn" data-sett-sect="privacy">
+                            <div class="settingNavOptIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settingNavOptSvg">
+                                    <path fill-rule="evenodd" d="m4.614 8.545l-.426 1.705H2a.75.75 0 0 0 0 1.5h20a.75.75 0 0 0 0-1.5h-2.187l-.427-1.705c-.546-2.183-.818-3.274-1.632-3.91C16.94 4 15.815 4 13.565 4h-3.13c-2.25 0-3.375 0-4.189.635c-.814.636-1.087 1.727-1.632 3.91M6.5 21a3.5 3.5 0 0 0 3.384-2.604l1.11-.555a2.25 2.25 0 0 1 2.012 0l1.11.555A3.501 3.501 0 0 0 21 17.5a3.5 3.5 0 0 0-6.91-.794l-.413-.206a3.75 3.75 0 0 0-3.354 0l-.413.206A3.501 3.501 0 0 0 3 17.5A3.5 3.5 0 0 0 6.5 21" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <p class="settingNavOptText">Privacy & Security</p>
+                        </button>
+                        <button type="button" class="settingNavOptBox settSectNavOptBtn" data-sett-sect="information">
+                            <div class="settingNavOptIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settingNavOptSvg">
+                                    <path d="m2.755 14.716l.517 1.932c.604 2.255.907 3.383 1.592 4.114a4 4 0 0 0 2.01 1.16c.976.228 2.104-.074 4.36-.678c2.254-.604 3.382-.906 4.113-1.591q.091-.086.176-.176a9 9 0 0 1-1.014-.15c-.696-.138-1.523-.36-2.501-.622l-.107-.029l-.025-.006c-1.064-.286-1.953-.524-2.663-.78c-.747-.27-1.425-.603-2.002-1.143a5.5 5.5 0 0 1-1.596-2.765c-.18-.769-.128-1.523.012-2.304c.134-.749.374-1.647.662-2.722l.535-1.994l.018-.07c-1.92.517-2.931.823-3.605 1.454a4 4 0 0 0-1.161 2.012c-.228.975.074 2.103.679 4.358" />
+                                    <path fill-rule="evenodd" d="m20.83 10.715l-.518 1.932c-.605 2.255-.907 3.383-1.592 4.114a4 4 0 0 1-2.01 1.161q-.145.034-.295.052c-.915.113-2.032-.186-4.064-.73c-2.255-.605-3.383-.907-4.114-1.592a4 4 0 0 1-1.161-2.011c-.228-.976.074-2.103.679-4.358l.517-1.932l.244-.905c.455-1.666.761-2.583 1.348-3.21a4 4 0 0 1 2.01-1.16c.976-.228 2.104.074 4.36.679c2.254.604 3.382.906 4.113 1.59a4 4 0 0 1 1.161 2.012c.228.976-.075 2.103-.679 4.358m-9.778-.91a.75.75 0 0 1 .919-.53l4.83 1.295a.75.75 0 1 1-.389 1.448l-4.83-1.294a.75.75 0 0 1-.53-.918m-.776 2.898a.75.75 0 0 1 .918-.53l2.898.777a.75.75 0 1 1-.388 1.448l-2.898-.776a.75.75 0 0 1-.53-.919" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <p class="settingNavOptText">App Information</p>
+                        </button>
+                    </div>
+                </div>
+                <div class="settCtntBdr">
+                    <div class="settCtntBox">
+                        <section class="settCtntTab" id="sett_preferences">
+                            <div class="settCtntTitleBox">
+                                <h2 class="settCtntTitleText">
+                                    <span class="major">P</span>
+                                    <span class="minor">rofile & Parental Controls</span>
+                                </h2>
+                            </div>
+                        </section>
+                        <section class="settCtntTab" id="sett_experience">
+                            <div class="settCtntTitleBox">
+                                <h2 class="settCtntTitleText">
+                                    <span class="major">A</span>
+                                    <span class="minor">pp Experience</span>
+                                </h2>
+                            </div>
+                        </section>
+                        <section class="settCtntTab" id="sett_privacy">
+                            <div class="settCtntTitleBox">
+                                <h2 class="settCtntTitleText">
+                                    <span class="major">P</span>
+                                    <span class="minor">rivacy & Security</span>
+                                </h2>
+                            </div>
+                        </section>
+                        <section class="settCtntTab" id="sett_information">
+                            <div class="settCtntTitleBox">
+                                <h2 class="settCtntTitleText">
+                                    <span class="major">A</span>
+                                    <span class="minor">pp Information</span>
+                                </h2>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    let settPageNav = 
+    `
+        <div class="topNavBdr dlPgNav">
+            <div class="topNavBox">
+                <section class="topNav_section">
+                    <div class="topNav_titleBox">
+                        <div class="topNav_titleText">Settings</div>
+                    </div>
+                </section>
+                <section class="topNav_section">
+                    <button type="button" class="genBtnBox greySolidBtn openGenMenuModalBtn" data-gen-menu-modal-type="sett_sect_nav">
+                        <div class="genBtnIcon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="genBtnSvg">
+                                <path fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="genBtnText">Menu</div>
+                    </button>
+                </section>
+            </div>
+        </div>
+    `;
+    let settNavBdr;
+    let sett_mng_prfls_curr_pid = null;
+    let isSectNavBtnPress = false;
+    let sectNavBtnIndex = 5;
+
+
+
+
+// INIT SETTINGS PAGE
+
+    // Initialize
+    function initSettPage()
+    {
+        // Update Navbar active states
+        sideNavLinks[4].classList.add("active");
+
+        documentCtnt.insertAdjacentHTML(`beforeend`, sett_base_struct);
+        settNavBdr = document.querySelector(".settingNavBdr");
+        topNavBar.innerHTML = settPageNav;
+        sectNavBtnIndex = 5;
+
+        toggleSettNav();
+        sett_cmpnt_builder();
+    }
+
+    // Functions to call
+    function settCallFunc()
+    {
+        window.addEventListener("resize", toggleSettNav);
+        init_sett_profile_cards();
+        sett_sect_router();
+        sett_sect_auto();
+        attachGenMenuModalEventListeners();
+        attachSettSectNavListeners();
+        upd_sett_info();
+        attachSectAtnTglListeners();
+        attachSettSectMdlListeners();
+    }
+
+    // Toggle Nav for smaller screens
+    function toggleSettNav()
+    {
+        if((hash_parts[1] === "settings"))
+        {
+            settNavBdr.classList.toggle("hidden", window.innerWidth < winWidth1025);
+            topNavBar.classList.toggle("initialize", window.innerWidth < winWidth1025);
+        }
+    }
+
+    // Build the components of each section
+    function sett_cmpnt_builder()
+    {
+        for(let i = 0; i < sett_cmpnt_lib.length; i++)
+        {
+            const item = sett_cmpnt_lib[i];
+            const reqEmPswd = item.sett_reqEmPswd;
+
+            let settCtntStruct = ``;
+            let sectCtntInfoStruct = ``;
+            let settCtntAtnStruct = ``;
+            let settCtntOrientStruct = ``;
+            let settCtntOrientFlag = item.sett_orientation === "vertical" ? true : false;
+
+            // Create the info structure
+            sectCtntInfoStruct = 
+            `
+                <div class="sett_ctnt_info">
+                    <div class="settCtntSectTitleBox">
+                        <div class="settCtntSectTitleText">${item.sett_title}</div>
+                    </div>
+                    <div class="settCtntSectDescBox">
+                        <p class="settCtntSectDescText">${item.sett_desc}</p>
+                    </div>
+                </div>
+            `;
+
+            // Determine and set the appropriate content for the action btn
+            if((reqEmPswd == false) && (settCtntOrientFlag == false))
+            {
+
+                if(item.sett_atn_type === "toggle")
+                {
+                    settCtntAtnStruct = 
+                    `
+                        <div class="settCtntSectAtnBdr">
+                            <div class="settCtntSectAtnBox">
+                                <button class="settCtntSectAtnBtn ">
+                                    <div class="genCheckBoxBase">
+                                        <input type="checkbox" id="${item.sett_atn_id}" class="genCheckBoxInput settCtntSectAtnToggle" tabindex="-1">
+                                        <label for="${item.sett_atn_id}" class="genCheckBoxToggle">
+                                            <span class="genCheckBoxToggleCircle"></span>
+                                        </label>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+                else if(item.sett_atn_type === "menu")
+                {
+                    settCtntAtnStruct = 
+                    `
+                        <div class="settCtntSectAtnBdr">
+                            <div class="settCtntSectAtnBox">
+                                <button id="${item.sett_atn_id}" class="settCtntSectAtnBtn settCtntSectAtnIcon openGenMenuModalBtn" data-gen-menu-modal-type="sett_sect_menu">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settCtntSectAtnSvg">
+                                        <path fill-rule="evenodd" d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+                else if(item.sett_atn_type === "modal")
+                {
+                    settCtntAtnStruct = item.sett_atn_func !== "" 
+                    ?   `
+                            <div class="settCtntSectAtnBdr">
+                                <div class="settCtntSectAtnBox">
+                                    <button data-sett-sect-type="modal" data-modal-atn="${item.sett_atn_func}" id="${item.sett_atn_id}" class="settCtntSectAtnBtn settCtntSectAtnIcon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settCtntSectAtnSvg">
+                                            <path fill-rule="evenodd" d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        `
+                    :    `
+                            <div class="settCtntSectAtnBdr">
+                                <div class="settCtntSectAtnBox">
+                                    <button onclick="notification('notifyBad', 'Feature currently unavailable')" id="${item.sett_atn_id}" class="settCtntSectAtnBtn settCtntSectAtnIcon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settCtntSectAtnSvg">
+                                            <path fill-rule="evenodd" d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                }
+                else if(item.sett_atn_type === "link")
+                {
+                    settCtntAtnStruct = 
+                    `
+                        <div class="settCtntSectAtnBdr">
+                            <div class="settCtntSectAtnBox">
+                                <button onclick="window.open('${item.sett_atn_func}', '_self')" id="${item.sett_atn_id}" class="settCtntSectAtnBtn settCtntSectAtnIcon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settCtntSectAtnSvg">
+                                        <path fill-rule="evenodd" d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Combine the two structs and set as content of the orient element
+                settCtntOrientStruct = 
+                `
+                    <div class="sett_ctnt_hrtl">
+                        ${sectCtntInfoStruct + settCtntAtnStruct}
+                    </div>
+                `;
+            }
+            else
+            {
+                // Only add the info struct
+                settCtntOrientStruct = 
+                `
+                    <div class="sett_ctnt_hrtl">
+                        ${sectCtntInfoStruct}
+                    </div>
+                `;
+            }
+
+            // Complete the ctnt structure
+            settCtntStruct = 
+            `
+                <div class="settCtntSectBdr">
+                    <div class="settCtntSectBox">
+                        ${settCtntOrientStruct}
+                    </div>
+                </div>
+            `;
+
+            // Append to the appropriate section
+            document.querySelectorAll(".settCtntTab").forEach((sect) => 
+            {
+                let sect_id = sect.getAttribute("id");
+
+                if(sect_id === `sett_${item.sett_sect.trim().toLowerCase()}`)
+                {
+                    sect.insertAdjacentHTML(`beforeend` , settCtntStruct);
+                }
+            });
+        }
+
+        // Call functions after initializing
+        settCallFunc();
+    }
+
+
+
+// NAVIGATING SETTINGS PAGE
+
+    function attachSettSectNavListeners()
+    {
+        let settSectNavBtn = document.querySelectorAll(".settSectNavOptBtn");
+
+        settSectNavBtn.forEach((oldBtn) => 
+        {
+            if(oldBtn.snav_atn)
+            {
+                oldBtn.removeEventListener("click", oldBtn.snav_atn);
+            }
+        });
+
+        settSectNavBtn.forEach((newBtn, index) => 
+        {
+            if((newBtn.classList.contains("genMenuModalCtntBtnBox")) && ((index) == (sectNavBtnIndex)))
+            {
+                newBtn.classList.add("selected");
+            }
+            
+            const nav_action = () => 
+            {
+                let btn_sect = newBtn.getAttribute("data-sett-sect");
+                
+                sectNavBtnIndex = index;
+                sett_sect_dstn(btn_sect);
+            }
+
+            newBtn.addEventListener("click", nav_action);
+            newBtn.snav_atn = nav_action;
+        });
+    }
+
+    // Routes to section based off the url
+    function sett_sect_router()
+    {
+        let settNav = hash_parts[2];
+
+        if(settNav === "experience")
+        {
+            sett_sect_dstn("experience");
+        }
+        else if(settNav === "privacy")
+        {
+            sett_sect_dstn("privacy");
+        }
+        else if(settNav === "information")
+        {
+            sett_sect_dstn("information");
+        }
+        else
+        {
+            // Defaults to preferences section
+            sett_sect_dstn("preferences");
+        }
+    }
+
+
+    // Updates the url to include the current sect
+    function sett_url_upd(url)
+    {
+        const newSetturl = `#/settings/${url}`;
+
+        if(url === "")
+        {
+            window.history.replaceState(null, '', '#/settings/preferences');
+        }
+        else
+        {
+            window.history.replaceState(null, '', newSetturl);
+        }
+    }
+
+
+    // Scrolls to the selected section
+    function sett_sect_dstn(sect = "preferences")
+    {
+        let sectTab = document.getElementById(`sett_${sect.trim().toLowerCase()}`).getBoundingClientRect();
+
+        // Return if no match is found
+        if(!sectTab) return;
+
+        // Disable observer
+        isSectNavBtnPress = true;
+
+        // Update the url
+        sett_url_upd(sect);
+
+        // Add selected class
+        document.querySelectorAll(".settSectNavOptBtn").forEach((allBtn) => 
+        {
+            if(allBtn.classList.contains("active"))
+            {
+                allBtn.classList.remove("active");
+            }
+
+            if(allBtn.getAttribute("data-sett-sect") === sect)
+            {
+                allBtn.classList.add("active");
+            }
+        });
+
+        // Scroll to the section's position
+        let sectTabH = Math.ceil((sectTab.top + window.pageYOffset));
+
+        window.scrollTo(
+        {
+            top: sectTabH,
+            behavior: "smooth"
+        });
+        
+        // Enable observer
+        if("onscrollend" in window)
+        {
+            // For browsers that support "scrollend"
+            window.onscrollend = () => 
+            {
+                isSectNavBtnPress = false;
+            };
+        }
+        else
+        {
+            // Fallback: detect manual scrolling
+            let settNavBtnScrollTmr;
+
+            const settNavBtnScrollEv = () => 
+            {
+                clearTimeout(settNavBtnScrollTmr);
+                window.removeEventListener("scroll", settNavBtnScrollEv);
+
+                settNavBtnScrollTmr = setTimeout(() => 
+                {
+                    isSectNavBtnPress = false;
+                }, 150);
+            }
+
+            window.addEventListener("scroll", settNavBtnScrollEv);
+        }
+
+
+    }
+
+    // Automatically updates the selected section when in view
+    function sett_sect_auto()
+    {
+        const settTabs = document.querySelectorAll(".settCtntTab");
+        const settSectObserver = new IntersectionObserver((entries) => 
+        {
+            if((isSectNavBtnPress == true)) return;
+
+            let visibleEntry = null;
+
+            // Get the entry that's mostly in visible in viewport
+            entries.forEach((entry) => 
+            {
+                if(entry.isIntersecting)
+                {
+                    if(!(visibleEntry) || (entry.intersectionRatio > visibleEntry.intersectionRatio))
+                    {
+                        visibleEntry = entry;
+                    }
+                }
+            });
+
+            // Select the the most visible entry in viewport
+            if(visibleEntry)
+            {
+                const eid = visibleEntry.target.id.trim().toLowerCase();
+                const etab = eid.slice(5);
+
+                document.querySelectorAll(".settSectNavOptBtn").forEach(btn => btn.classList.remove("active"));
+
+                document.querySelector(`.settSectNavOptBtn[data-sett-sect='${etab}']`)?.classList.add("active");
+                
+                sectNavBtnIndex = Math.abs(Array.from(settTabs).indexOf(visibleEntry.target)) + 5;
+            }
+        }, {
+            root: null,
+            rootMargin: '0px',
+            threshold: [0.25, 0.5, 0.75, 1.0]
+        });
+
+        settTabs.forEach(tab => settSectObserver.observe(tab));
+    }
+
+
+
+
+
+// GENERAL SETTINGS
+
+    // Adds the current information of their corresponding sectors
+    async function upd_sett_info()
+    {
+
+        // Return if no user is signed in
+        if(!isUserSignedIn())
+        {
+            notification(`notifyBad`, "No user is currently signed in.");
+            return;
+        }
+
+        const email = acuvid_v3_obj.email;
+        const fullname = acuvid_v3_obj?.full_name || acuvid_v3_obj?.displayName;
+        const wifi_only_dwld = acuvid_v3_obj.wifi_only_dwld;
+        const wifi_only_strm = acuvid_v3_obj.wifi_only_stream;
+        const cell_strm_ntfy = acuvid_v3_obj.cellular_stream_ntfy;
+
+        // Update based on seup origin (Email/Password or Provider)
+        let fname_prnt = document.getElementById("sett_change_fullname").closest(".sett_ctnt_hrtl");
+        fname_prnt.querySelector(".settCtntSectDescText").textContent = fullname;
+
+        let email_prnt = document.getElementById("sett_change_email").closest(".sett_ctnt_hrtl");
+        email_prnt.querySelector(".settCtntSectDescText").textContent = email;
+
+        // Wifi Only dowload
+        document.getElementById("sett_wifi_dwld").checked = typeof wifi_only_dwld === "boolean" ? wifi_only_dwld : null;
+
+        // Wifi Only stream
+        document.getElementById("sett_wifi_stream").checked = typeof wifi_only_strm === "boolean" ? wifi_only_strm : null;
+
+        // Cellular Stream notification
+        document.getElementById("sett_cellular_stream").checked = typeof cell_strm_ntfy === "boolean" ? cell_strm_ntfy : null;
+    }
+
+
+    // Updates items with toggle buttons
+    function attachSectAtnTglListeners()
+    {
+        const sett_rad_btn = document.querySelectorAll(".settCtntSectAtnToggle");
+
+        sett_rad_btn.forEach((olditem) => 
+        {
+            if((olditem.sett_atn))
+            {
+                olditem.removeEventListener("click" , olditem.sett_atn)
+            }
+        });
+
+        sett_rad_btn.forEach((newBtn) => 
+        {
+            const rad_atn = async () => 
+            {
+                sett_rad_btn.forEach(item => item.disabled = true);
+                let checkBtn = newBtn.parentElement.querySelector(`input[type="checkbox"]#${newBtn.id}:checked`);
+                let ischk = false;
+
+                if(checkBtn)
+                {
+                    // Update flag to true
+                    ischk = true;
+                }
+                else
+                {
+                    // Update flag to false
+                    ischk = false;
+                }
+
+                //  Update the corresponding property
+                try 
+                {
+                    switch(newBtn.id)
+                    {
+                        case 'sett_wifi_dwld':
+                            acuvid_v3_obj[`wifi_only_dwld`] = ischk;
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+                            
+                        case 'sett_wifi_stream':
+                            acuvid_v3_obj[`wifi_only_stream`] = ischk;
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+                            
+                        case 'sett_cellular_stream':
+                            acuvid_v3_obj[`cellular_stream_ntfy`] = ischk;
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+
+                        default:
+                            notification('notifyBad', 'Failed to update preferences');
+                            break;
+                    }
+
+                    // Re-enable toggle buttons
+                    sett_rad_btn.forEach(item => item.disabled = false);
+                }
+                catch(err)
+                {
+                    // Log any errors and re-enable toggle buttons
+                    console.error(err);
+                    sett_rad_btn.forEach(item => item.disabled = false);
+                }
+            }
+
+            newBtn.addEventListener("click", rad_atn);
+            newBtn.sett_atn = rad_atn;
+        });
+    }
+
+
+    // Updates items with draggable menus
+    async function attachSettSectMenuListeners(event)
+    {
+        // Get the clicked button
+        let settCardMenuBtn = event.target.closest("[data-gen-menu-modal-type='sett_sect_menu']");
+        
+        if (!settCardMenuBtn)
+        {
+            console.error("Button with attribute [data-gen-menu-modal-type='sett_sect_menu'] not found.");
+            return;
+        }
+
+        // Get the id
+        let settCardId = settCardMenuBtn.id;
+
+        if (!settCardId)
+        {
+            console.error("Button is invalid");
+            return;
+        }
+
+        // Generate the content of the menu
+        let menuCtntBox = document.querySelector(".settSectMenuCtntBox");
+        let menuUpdId = settCardId !== "sett_dwld_qlty" ? settCardId !== "sett_dwld_lang" ? "cast_data_usage_ul" : "dwld_audio_pref" : "dwld_qlty_pref";
+        let menuCtntStruct = ``;
+
+        // Build up the menu
+        if((settCardId === "sett_dwld_lang"))
+        {
+            // Default Option
+            menuCtntStruct = 
+            `
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="0">
+                    <div class="genMenuModalCtntBtnText">None</div>
+                </button>
+            `;
+
+            // Insert other options
+            for(let i = 0; i < LangOptLib.langOptInv.audioLangSelect.lang_options.length; i++)
+            {
+                let item = LangOptLib.langOptInv.audioLangSelect.lang_options[i];
+                
+                menuCtntStruct += 
+                `
+                    <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="${i+1}">
+                        <div class="genMenuModalCtntBtnText">${item.opt}</div>
+                    </button>
+                `;
+            }
+        }
+        else if((settCardId === "sett_dwld_qlty"))
+        {
+            menuCtntStruct = 
+            `
+                <div class="genMenuModalCtntSectBox">
+                    <p class="genMenuModalCtntSectText">Max Size for approx. 25mins</p>
+                </div>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="0">
+                    <div class="genMenuModalCtntBtnText">Always ask</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="1">
+                    <div class="genMenuModalCtntBtnText">Best (0.7GB)</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="2">
+                    <div class="genMenuModalCtntBtnText">Better (0.45GB)</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="3">
+                    <div class="genMenuModalCtntBtnText">Good (0.3GB)</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="4">
+                    <div class="genMenuModalCtntBtnText">Data Saver (0.11GB)</div>
+                </button>
+            `;
+        }
+        else if((settCardId === "sett_cast_data_usage"))
+        {
+            menuCtntStruct = 
+            `
+                <div class="genMenuModalCtntSectBox">
+                    <p class="genMenuModalCtntSectText">Max Allocated Bandwidth</p>
+                </div>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="0">
+                    <div class="genMenuModalCtntBtnText">Unlimited</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="1">
+                    <div class="genMenuModalCtntBtnText">250GB</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="2">
+                    <div class="genMenuModalCtntBtnText">100GB</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="3">
+                    <div class="genMenuModalCtntBtnText">50GB</div>
+                </button>
+                <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="4">
+                    <div class="genMenuModalCtntBtnText">10GB</div>
+                </button>
+            `;
+        }
+        else
+        {
+            console.error("NOt");
+            notification(`notifyBad`, `An error occured`);
+            return;
+        }
+
+        // Insert menu options and add seletors
+        menuCtntBox.innerHTML = menuCtntStruct;
+        let menuOptBtns = document.querySelectorAll(".settSectMenuOptBtn");
+        let timer;
+
+        // Get, select, and scroll to the chosen option
+        try 
+        {
+            let usrCtg = Number(acuvid_v3_obj[menuUpdId]) || 0;
+            
+            menuOptBtns[usrCtg].classList.add("selected");
+            setTimeout(() => 
+            {
+                genMenuModalBox.scrollTo(
+                {
+                    top: (Math.ceil((menuOptBtns[usrCtg].getBoundingClientRect().top - (window.innerHeight - (genMenuModalBox.getBoundingClientRect().height * 0.80)) - 25))),
+                    behavior: "smooth"
+                });
+            }, 100);
+        }
+        catch(error)
+        {
+            console.error(error);
+            menuOptBtns[0].classList.add("selected");
+        }
+
+        // Updates the user's prefered option for the chosen category
+        menuOptBtns.forEach((btn) => 
+        {
+            const menu_atn = async () => 
+            {
+                try 
+                {
+                    let btnOptNo = Number(btn.getAttribute("data-sett-sect-opt")) || 0;
+                    acuvid_v3_obj[`${menuUpdId}`] = btnOptNo;
+                    notification(`notifyGood`, `Preferences saved`);
+                } 
+                catch(error) 
+                {
+                    console.error(error);
+                    notification(`notifyBad`, `Failed to update preferences`);
+                }
+            }
+
+            btn.addEventListener("click", menu_atn);
+        });
+    }
+
+
+    // Adds listeners for data-sett-sect-type: modal
+    function attachSettSectMdlListeners()
+    {
+        const btns = document.querySelectorAll(".settCtntSectAtnBtn[data-sett-sect-type='modal']");
+
+        btns.forEach((oldBtn) => 
+        {
+            if((oldBtn.sett_atn)) oldBtn.removeEventListener("click", oldBtn.sett_atn);
+        });
+
+        btns.forEach((newBtn) => 
+        {
+            const btn_sett_atn = (e) =>
+            {
+                const mdl_atn = newBtn.getAttribute("data-modal-atn");
+
+                try
+                {
+                    callGlobalFunctions(mdl_atn, [e]);
+                    // newBtn.disabled = true;
+                }
+                catch(error)
+                {
+                    console.error(error);
+                    notification(`notifyBad`, `An error occured`);
+                    newBtn.disabled = false;
+                }
+            }
+
+            newBtn.addEventListener("click", btn_sett_atn);
+            newBtn.sett_atn = btn_sett_atn;
+        });
+    }
+
+
+
+
+// PROFILE & PARENTAL CONTROL SETTINGS
+
+    // Initializes the profile cards in the settings menu
+    async function init_sett_profile_cards()
+    {
+        const userProfiles = acuvid_v3_obj.profiles;
+        let prof_struct = ``;
+
+        if(userProfiles == null)
+        {
+            notification(`notifyBad`, `Failed to fetch profiles`);
+            document.querySelector("#sett_preferences").insertAdjacentHTML(
+                `beforeend`,
+                `
+                    <div class="settCtntSectBox">
+                        <div class="sett_ctnt_vrtl">
+                            <div class="sett_ctnt_info">
+                                <div class="settCtntSectTitleBox">
+                                    <div class="settCtntSectTitleText">Manage Profiles</div>
+                                </div>
+                                <div class="settCtntSectDescBox">
+                                    <p class="settCtntSectDescText">
+                                        Manage profile settings, set viewing restrictions, lock profiles and more.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            );
+            return;
+        }
+
+        Object.entries(userProfiles).forEach(([key, prfl]) =>
+        {
+            prof_struct += 
+            `
+                <div class="sett_ctnt_hrtl">
+                    <div class="sett_prof_card_bdr">
+                        <div class="sett_prof_card_box">
+                            <div class="sett_prof_card_img_bdr">
+                                <div class="sett_prof_card_img_box">
+                                    <div class="img_preload_box">
+                                        <div class="img_preload_sibling"></div>
+                                        <img loading="lazy" 
+                                            onload="if(!(this.parentElement.classList.contains('loaded'))) this.parentElement.classList.add('loaded')" 
+                                            src="${prfl.prof_frgImg}" alt="Thumbnail image of ${prfl.prof_name}'s profile" class="sett_prof_card_img_src"
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sett_prof_card_ttl_box">
+                                <div class="sett_prof_card_ttl_txt">${prfl.prof_name}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="settCtntSectAtnBdr">
+                        <div class="settCtntSectAtnBox">
+                            <button id="${key}" class="settCtntSectAtnBtn settCtntSectAtnIcon sett_prof_card_btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="settCtntSectAtnSvg">
+                                    <path fill-rule="evenodd" d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        const prfl_bdr = document.createElement("div");
+        prfl_bdr.classList.add("settCtntSectBdr");
+        prfl_bdr.innerHTML = 
+        `
+            <div class="settCtntSectBox">
+                <div class="sett_ctnt_vrtl">
+                    <div class="sett_ctnt_info">
+                        <div class="settCtntSectTitleBox">
+                            <div class="settCtntSectTitleText">Manage Profiles</div>
+                        </div>
+                        <div class="settCtntSectDescBox">
+                            <p class="settCtntSectDescText">
+                                Manage profile settings, set viewing restrictions, lock profiles and more.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                ${prof_struct}
+            </div>
+        `;
+        document.querySelector("#sett_preferences").insertAdjacentElement('beforeend', prfl_bdr);
+
+        const prfl_card_btns = prfl_bdr.querySelectorAll(".sett_prof_card_btn");
+        prfl_card_btns.forEach((btn) => 
+        {
+            btn.onclick = () => init_mng_prfls(btn, btn.id);
+        });
+    }
+
+
+    // Initialize modal for managing a profile's preferences
+    async function init_mng_prfls(btnEv, prof_id)
+    {
+        // Get Profile data
+        const userProfiles = acuvid_v3_obj.profiles;
+
+        if(userProfiles == null)
+        {
+            notification(`notifyBad`, `Failed to fetch profile information`);
+            if(typeof btnEv !== "undefined") btnEv.disabled = false;
+            return;
+        }
+
+        sett_mng_prfls_curr_pid = prof_id;
+        const thisProf = userProfiles[`${prof_id}`];
+        const mngProfBase = document.createElement("div");
+        mngProfBase.classList.add("genStaticBase", "mng_prof_base");
+        mngProfBase.innerHTML = 
+        `
+            <div class="genStaticBcg mng_prof_close"></div>
+            <div class="genStaticBdr">
+                <div class="genStaticBox">
+                    <div class="genStaticHdrBdr">
+                        <div class="genStaticHdrBox">
+                            <div class="genStaticHdr_top">
+                                <button type="button" class="genBtnBox genIconBtn transBtn mng_prof_close">
+                                    <div class="genBtnIcon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="genBtnSvg">
+                                            <path fill-rule="evenodd" d="M10.53 5.47a.75.75 0 0 1 0 1.06l-4.72 4.72H20a.75.75 0 0 1 0 1.5H5.81l4.72 4.72a.75.75 0 1 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                                <div class="genStaticHdr_TitleBox">
+                                    <div class="genStaticHdr_TitleText mng_prof_hdr_TtlTxt">
+                                        Preferences for <span class="mjr">N/A</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="genStaticHdr_btm">
+                                <div class="mng_prof_hdr_btm">
+                                    <button type="button" class="genBtnBox greySolidBtn mng_prof_lock_btn">
+                                        <div class="genBtnIcon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="genBtnSvg">
+                                                <path fill-rule="evenodd" d="M5.25 10.055V8a6.75 6.75 0 0 1 13.5 0v2.055c1.115.083 1.84.293 2.371.824C22 11.757 22 13.172 22 16s0 4.243-.879 5.121C20.243 22 18.828 22 16 22H8c-2.828 0-4.243 0-5.121-.879C2 20.243 2 18.828 2 16s0-4.243.879-5.121c.53-.531 1.256-.741 2.371-.824M6.75 8a5.25 5.25 0 0 1 10.5 0v2.004Q16.676 9.999 16 10H8q-.677-.001-1.25.004zM8 17a1 1 0 1 0 0-2a1 1 0 0 0 0 2m4 0a1 1 0 1 0 0-2a1 1 0 0 0 0 2m5-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span class="genBtnText">Profile Lock</span>
+                                    </button>
+                                    <button type="button" class="genBtnBox greySolidBtn openGenMenuModalBtn" data-gen-menu-modal-type="sett_mng_prof_fld_del">
+                                        <div class="genBtnIcon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="genBtnSvg">
+                                                <path d="M3 6.524c0-.395.327-.714.73-.714h4.788c.006-.842.098-1.995.932-2.793A3.68 3.68 0 0 1 12 2a3.68 3.68 0 0 1 2.55 1.017c.834.798.926 1.951.932 2.793h4.788c.403 0 .73.32.73.714a.72.72 0 0 1-.73.714H3.73A.72.72 0 0 1 3 6.524" />
+                                                <path fill-rule="evenodd" d="M11.596 22h.808c2.783 0 4.174 0 5.08-.886c.904-.886.996-2.34 1.181-5.246l.267-4.187c.1-1.577.15-2.366-.303-2.866c-.454-.5-1.22-.5-2.753-.5H8.124c-1.533 0-2.3 0-2.753.5s-.404 1.289-.303 2.866l.267 4.188c.185 2.906.277 4.36 1.182 5.245c.905.886 2.296.886 5.079.886m-1.35-9.811c-.04-.434-.408-.75-.82-.707c-.413.043-.713.43-.672.864l.5 5.263c.04.434.408.75.82.707c.413-.044.713-.43.672-.864zm4.329-.707c.412.043.713.43.671.864l-.5 5.263c-.04.434-.409.75-.82.707c-.413-.044-.713-.43-.672-.864l.5-5.264c.04-.433.409-.75.82-.707" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span class="genBtnText">Delete...</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="genStaticCtntBdr">
+                        <div class="genStaticCtntBox">
+                            <div class="mng_profs_ctnt_box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const mngProfHdrTxt = mngProfBase.querySelector(".mng_prof_hdr_TtlTxt .mjr");
+        const mngProfClsBtns = mngProfBase.querySelectorAll(".mng_prof_close");
+        const mngProfCtnt = mngProfBase.querySelector(".mng_profs_ctnt_box");
+        const mngProfLockBtn = mngProfBase.querySelector(".mng_prof_lock_btn");
+        let profCtntStruct = ``;
+        let mngPrflTimer;
+
+        // Set Title
+        mngProfHdrTxt.textContent = `${thisProf?.prof_name}`;
+
+        // Build up the options
+        sett_prof_pref_cmp.forEach((item) => 
+        {
+            const {
+                p_type,
+                p_id,
+                p_name,
+                p_desc
+            } = item;
+
+            if((p_type === "toggle"))
+            {
+                profCtntStruct += 
+                `
+                    <div class="mng_prof_card_bdr">
+                        <div class="mng_prof_card_box">
+                            <div class="mng_prof_card_det_bdr">
+                                <div class="mng_prof_card_det_box">
+                                    <div class="mng_prof_card_det_ttl_box">
+                                        <div class="mng_prof_card_det_ttl_txt">${p_name}</div>
+                                    </div>
+                                    <div class="mng_prof_card_det_desc_box">
+                                        <p class="mng_prof_card_det_desc_txt">${p_desc}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mng_prof_card_atn_bdr">
+                                <div class="mng_prof_card_atn_box">
+                                    <div class="genCheckBoxBase" title="${p_name}">
+                                        <input type="checkbox" id="${p_id}" class="genCheckBoxInput settMngProfTglInp" tabindex="-1" checked="">
+                                        <label for="${p_id}" class="genCheckBoxToggle">
+                                            <span class="genCheckBoxToggleCircle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            else if((p_type === "menu"))
+            {
+                profCtntStruct += 
+                `
+                    <div class="mng_prof_card_bdr">
+                        <div class="mng_prof_card_box">
+                            <div class="mng_prof_card_det_bdr">
+                                <div class="mng_prof_card_det_box">
+                                    <div class="mng_prof_card_det_ttl_box">
+                                        <div class="mng_prof_card_det_ttl_txt">${p_name}</div>
+                                    </div>
+                                    <div class="mng_prof_card_det_desc_box">
+                                        <p class="mng_prof_card_det_desc_txt">${p_desc}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mng_prof_card_atn_bdr">
+                                <div class="mng_prof_card_atn_box">
+                                    <button type="button" id="${p_id}" aria-labelledby="${p_name}" class="genBtnBox greySolidBtn openGenMenuModalBtn" data-gen-menu-modal-type="sett_mng_prof_menu">
+                                        <div class="genBtnIcon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="genBtnSvg">
+                                                <path fill-rule="evenodd" d="M4.43 8.512a.75.75 0 0 1 1.058-.081L12 14.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057" clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span class="genBtnText">N/A</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        mngProfCtnt.innerHTML = profCtntStruct;
+
+        // Get the current info for each option
+        const sbtl_aprnc = thisProf?.prof_show_subtitles;
+        const auto_mute = thisProf?.prof_auto_mute;
+        const auto_next = thisProf?.prof_auto_next;
+        const auto_play = thisProf?.prof_auto_play;
+        const auto_skip = thisProf?.prof_auto_skip;
+        const adult_ctnt = thisProf?.prof_show_adult_ctnt;
+        const audio_lang = LangOptLib.langOptInv.audioLangSelect.lang_options[thisProf?.prof_audio_lang].opt || "N/A";
+        const sbtl_lang = LangOptLib.langOptInv.subCCLangSelect.lang_options[thisProf?.prof_subtitle_lang].opt || "N/A";
+        const ctnt_lang = sett_ctnt_restrictions_opt[thisProf?.prof_ctnt_restriction] || "N/A";
+
+        // Display content
+        documentCtnt.insertAdjacentElement('beforeend', mngProfBase);
+        mngPrflTimer = setTimeout(() => 
+        {
+            clearTimeout(mngPrflTimer);
+            mngProfBase.classList.add("active");
+            documentBody.classList.add("bodystop");
+        }, 300);
+
+        // Update toggle buttons
+        mngProfBase.querySelector("#sett_mng_prof_sbtl_aprnc").checked = typeof sbtl_aprnc === "boolean" ? sbtl_aprnc : null;
+        mngProfBase.querySelector("#sett_mng_prof_auto_mute").checked = typeof auto_mute === "boolean" ? auto_mute : null;
+        mngProfBase.querySelector("#sett_mng_prof_auto_next").checked = typeof auto_next === "boolean" ? auto_next : null;
+        mngProfBase.querySelector("#sett_mng_prof_auto_play").checked = typeof auto_play === "boolean" ? auto_play : null;
+        mngProfBase.querySelector("#sett_mng_prof_auto_skip").checked = typeof auto_skip === "boolean" ? auto_skip : null;
+        mngProfBase.querySelector("#sett_mng_prof_adult_ctnt").checked = typeof adult_ctnt === "boolean" ? adult_ctnt : null;
+
+        // Update the menu items
+        const audio_lang_btn = mngProfBase.querySelector("#sett_mng_prof_audio_lang");
+        const sbtl_lang_btn = mngProfBase.querySelector("#sett_mng_prof_sbtl_lang");
+        const ctnt_lang_btn = mngProfBase.querySelector("#sett_mng_prof_ctnt_restriction");
+
+        audio_lang_btn.querySelector(".genBtnText").textContent = audio_lang;
+        audio_lang_btn.setAttribute("title", `${audio_lang}`);
+        sbtl_lang_btn.querySelector(".genBtnText").textContent = sbtl_lang;
+        sbtl_lang_btn.setAttribute("title", `${sbtl_lang}`);
+        ctnt_lang_btn.querySelector(".genBtnText").textContent = ctnt_lang;
+        ctnt_lang_btn.setAttribute("title", `${ctnt_lang}`);
+
+        // Update Toggle buttons
+        const sett_rad_btn = document.querySelectorAll(".settMngProfTglInp");
+
+        sett_rad_btn.forEach((newBtn) => 
+        {
+            const rad_atn = async () => 
+            {
+                sett_rad_btn.forEach(item => item.disabled = true);
+                let checkBtn = newBtn.parentElement.querySelector(`input[type="checkbox"]#${newBtn.id}:checked`);
+                let ischk = false;
+
+                if(checkBtn)
+                {
+                    // Update flag to true
+                    ischk = true;
+                }
+                else
+                {
+                    // Update flag to false
+                    ischk = false;
+                }
+
+                //  Update the corresponding property
+                try 
+                {
+                    switch(newBtn.id)
+                    {
+                        case 'sett_mng_prof_sbtl_aprnc':
+                            await updUsrProfFlds(
+                            {
+                                prof_show_subtitles: ischk
+                            }, prof_id);
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+                            
+                        case 'sett_mng_prof_auto_mute':
+                            await updUsrProfFlds(
+                            {
+                                prof_auto_mute: ischk
+                            }, prof_id);
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+                            
+                        case 'sett_mng_prof_auto_next':
+                            await updUsrProfFlds(
+                            {
+                                prof_auto_next: ischk
+                            }, prof_id);
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+                            
+                        case 'sett_mng_prof_auto_play':
+                            await updUsrProfFlds(
+                            {
+                                prof_auto_play: ischk
+                            }, prof_id);
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+                            
+                        case 'sett_mng_prof_auto_skip':
+                            await updUsrProfFlds(
+                            {
+                                prof_auto_skip: ischk
+                            }, prof_id);
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+                            
+                        case 'sett_mng_prof_adult_ctnt':
+                            await updUsrProfFlds(
+                            {
+                                prof_show_adult_ctnt: ischk
+                            }, prof_id);
+                            notification('notifyGood', 'Preferences saved');
+                            break;
+
+                        default:
+                            notification('notifyBad', 'Failed to update preferences');
+                            break;
+                    }
+
+                    // Re-enable toggle buttons
+                    sett_rad_btn.forEach(item => item.disabled = false);
+                }
+                catch(err)
+                {
+                    // Log any errors and re-enable toggle buttons
+                    console.error(err);
+                    sett_rad_btn.forEach(item => item.disabled = false);
+                }
+            }
+
+            newBtn.addEventListener("click", rad_atn);
+        });
+
+
+        mngProfLockBtn.onclick = () => reqPassB4MngPrflLock(prof_id);
+        
+        // Update menu items
+        attachGenMenuModalEventListeners();
+
+
+        // Close the modal
+        function closeMngPrflMdl()
+        {
+            if(typeof btnEv !== "undefined") btnEv.disabled = false;
+            mngProfBase.classList.remove("active");
+
+            mngProfBase.addEventListener("transitionend", function handleTransitionEnd()
+            {
+                mngProfBase.removeEventListener("transitionend", handleTransitionEnd);
+                mngProfBase.remove();
+                documentBody.classList.remove("bodystop");
+            });
+        }
+
+        mngProfClsBtns.forEach((btn) => 
+        {
+            btn.addEventListener("click", closeMngPrflMdl);
+        });
+    }
+
+
+    // Updates items with draggable menus
+    async function attachSettMngProfMenuListeners(event)
+    {
+        // Get the clicked button
+        let settCardMenuBtn = event.target.closest("[data-gen-menu-modal-type='sett_mng_prof_menu']");
+        
+        if (!settCardMenuBtn)
+        {
+            console.error("Button with attribute [data-gen-menu-modal-type='sett_mng_prof_menu'] not found.");
+            return;
+        }
+
+        // Get the id
+        let settCardId = settCardMenuBtn.id;
+
+        if (!settCardId)
+        {
+            console.error("Button is invalid");
+            return;
+        }
+
+        // Generate the content of the menu
+        let menuCtntBox = document.querySelector(".settMngProfCtntBox");
+        let menuUpdId = settCardId !== "sett_mng_prof_sbtl_lang" ? settCardId !== "sett_mng_prof_audio_lang" ? "prof_ctnt_restriction" : "prof_audio_lang" : "prof_subtitle_lang";
+        let menuCtntStruct = ``;
+
+        // Build up the menu
+        if((settCardId === "sett_mng_prof_audio_lang"))
+        {
+            for(let i = 0; i < LangOptLib.langOptInv.audioLangSelect.lang_options.length; i++)
+            {
+                let item = LangOptLib.langOptInv.audioLangSelect.lang_options[i];
+                
+                menuCtntStruct += 
+                `
+                    <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="${i}">
+                        <div class="genMenuModalCtntBtnText">${item.opt}</div>
+                    </button>
+                `;
+            }
+        }
+        else if((settCardId === "sett_mng_prof_sbtl_lang"))
+        {
+            for(let i = 0; i < LangOptLib.langOptInv.subCCLangSelect.lang_options.length; i++)
+            {
+                let item = LangOptLib.langOptInv.subCCLangSelect.lang_options[i];
+                
+                menuCtntStruct += 
+                `
+                    <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="${i}">
+                        <div class="genMenuModalCtntBtnText">${item.opt}</div>
+                    </button>
+                `;
+            }
+        }
+        else if((settCardId === "sett_mng_prof_ctnt_restriction"))
+        {
+            let i = 0;
+            Object.entries(sett_ctnt_restrictions_opt).forEach(([key, opt]) => 
+            {
+                menuCtntStruct += 
+                `
+                    <button class="genMenuModalCtntBtnBox settSectMenuOptBtn" data-sett-sect-opt="${i}">
+                        <div class="genMenuModalCtntBtnText">${opt}</div>
+                    </button>
+                `;
+                i++;
+            });
+        }
+        else
+        {
+            console.error("NOt");
+            notification(`notifyBad`, `An error occured`);
+            return;
+        }
+
+        // Insert menu options and add seletors
+        menuCtntBox.innerHTML = menuCtntStruct;
+        let menuOptBtns = document.querySelectorAll(".settSectMenuOptBtn");
+
+        // Get, select, and scroll to the chosen option
+        try 
+        {
+            let usrData = await getUsrProfInv();
+            let usrCtg = (Number(usrData[`${sett_mng_prfls_curr_pid}`][menuUpdId])) || 0;
+            
+            menuOptBtns[usrCtg].classList.add("selected");
+            setTimeout(() => 
+            {
+                genMenuModalBox.scrollTo(
+                {
+                    top: (Math.ceil((menuOptBtns[usrCtg].getBoundingClientRect().top - (window.innerHeight - (genMenuModalBox.getBoundingClientRect().height * 0.80)) - 25))),
+                    behavior: "smooth"
+                });
+            }, 100);
+        }
+        catch(error)
+        {
+            console.error(error);
+            menuOptBtns[0].classList.add("selected");
+        }
+
+        // Updates the user's prefered option for the chosen category
+        menuOptBtns.forEach((btn) => 
+        {
+            const menu_atn = async () => 
+            {
+                try 
+                {
+                    let btnOptNo = Number(btn.getAttribute("data-sett-sect-opt")) || 0;
+                    let btnText = btn.querySelector(".genMenuModalCtntBtnText")?.textContent || "N/A";
+
+                    // Update user info
+                    await updUsrProfFlds(
+                    {
+                        [`${menuUpdId}`]: btnOptNo
+                    }, sett_mng_prfls_curr_pid);
+
+                    // Update button in modal
+                    document.querySelector(`#${settCardId}`).querySelector(".genBtnText").textContent = btnText;
+
+                    // Notify user
+                    notification(`notifyGood`, `Preferences saved`);
+                } 
+                catch(error) 
+                {
+                    console.error(error);
+                    notification(`notifyBad`, `Failed to update preferences`);
+                }
+            }
+
+            btn.addEventListener("click", menu_atn);
+        });
+    }
+
+
+    // Confirms password before opening the profile lock settings
+    async function reqPassB4MngPrflLock(prof_id)
+    {
+        const cfrmPassBdr = document.createElement("div");
+        cfrmPassBdr.classList.add("genAtnModalBdr");
+        cfrmPassBdr.innerHTML = 
+        `
+            <div class="genAtnModalBcg closeCfrmPassBtn"></div>
+            <div class="genAtnModalBox">
+                <div class="genAtnModalCtnt">
+                    <div class="genAtnModalHeader">
+                        <div class="genAtnModalHeaderIconBox closeCfrmPassBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="genAtnModalHeaderIcon">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                            </svg>
+                        </div>
+                        <div class="genAtnModalHeaderText">
+                            <span class="large">C</span>
+                            <span class="small">onfirm Password</span>
+                        </div>
+                    </div>
+                    <div class="genAtnModalOptBcg ">
+                        <div class="genAtnModalOptBdr createProfItemBox">
+                            <div class="newCLBdr active">
+                                <div class="newCLBox">
+                                    <div class="newCLInputBdr">
+                                        <div class="newCLInputBox">
+                                            <input type="password" name="cfrmPassField" id="cfrmPassInputId" class="newCLInputClass" placeholder="Enter password" />
+                                        </div>
+                                    </div>
+                                    <div class="newCLWarnBdr">
+                                        <div class="newCLWarnBox">
+                                            <p id="cfrmPassWarnId" class="newCLWarnText empty" tabindex="-1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="newCLAtnBdr">
+                                        <div class="newCLAtnBox">
+                                            <button type="button" id="cfrmCurrPassBtn" class="genBtnBox midSolidBtn">
+                                                <div class="genBtnText">Continue</div>
+                                            </button>
+                                            <button type="button" id="cnclPassBtn" class="genBtnBox hollowBtn closeCfrmPassBtn">
+                                                <div class="genBtnText">Cancel</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        documentCtnt.appendChild(cfrmPassBdr);
+
+        const cfrmCurrPassCloseBtn = document.querySelectorAll(".closeCfrmPassBtn");
+        const cfrmCurrPassCfrmBtn = document.querySelector("#cfrmCurrPassBtn");
+        const currPassWarn = document.querySelector("#cfrmPassWarnId");
+        const currPassInput = document.querySelector("#cfrmPassInputId");
+        const usr_pass_cond = new RegExp("^[A-Za-z0-9!@#$%^&*_+-~`)(></\"?|]");
+        let isCurrPassValid = false;
+        let cfrmPassTimer;
+
+        // Transitioning elements
+        cfrmPassTimer = setTimeout(() => 
+        {
+            clearTimeout(cfrmPassTimer);
+            documentBody.setAttribute(`data-modal-state` , `open`);
+            cfrmPassBdr.classList.add("active");
+            currPassInput.focus();
+        }, 250);
+
+        // Only allow valid characters
+        currPassInput.addEventListener("beforeinput", (event) => 
+        {
+            if(event.data != null && !(usr_pass_cond).test(event.data))
+                event.preventDefault();
+        });
+
+        // Validate current "Password"
+        function valPass(pass = "", warn = null) 
+        {
+            pass = pass.toString().trim();
+            const userPass_Cond_SpecialChar = /\W/g;
+            const userPass_Cond_num = /\d/g;
+            const userPass_Cond_Lett_Upr = /[A-Z]/g;
+            const userPass_Cond_Lett_Lwr = /[a-z]/g;
+
+
+            // Checks if there is any value in the input field
+            if(((pass === "") && (pass.length <= 0)))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = `Required`;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // Checks if the input fits the specified pattern
+            else if(!(pass.match(userPass_Cond_SpecialChar) 
+                && pass.match(userPass_Cond_num)
+                && pass.match(userPass_Cond_Lett_Upr)
+                && pass.match(userPass_Cond_Lett_Lwr)
+            ))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = 
+                    `
+                        Password must contain:
+                        </br>
+                        1. Uppercase and lowercase letter
+                        </br>
+                        2. Special character ex. "/$%^&*"
+                        </br>
+                        3. A number 0-9
+                        </br>
+                        4. At least eight characters
+                        </br>
+                    `;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // Checks if the pattern is less "8" characters and above than "100" characters
+            else if(((pass.length > 0) && (pass.length < 8)))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = `Password length must be at least 8 characters`;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // If all checks are completed then it is accepted
+            else
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = ``;
+                    warn.classList.remove("active");
+                }
+                return true;
+            }
+        }
+        
+        currPassInput.addEventListener("input", () => 
+        {
+            isCurrPassValid = valPass(currPassInput.value, currPassWarn);
+        });
+
+        // Validate pass by pressing the "Enter" key
+        currPassInput.addEventListener("keyup" , (e) => 
+        {
+            if((isCurrPassValid == false) || (typeof e === undefined) || (typeof e.key === "undefined")) return;
+
+            if((e.key.toLowerCase() === "enter"))
+            {
+                cfrmCurrPassCfrmBtn.click();
+            }
+        });
+
+        //  Verification inputs for reauthentication
+        cfrmCurrPassCfrmBtn.addEventListener("click" , () => 
+        {
+            if((isCurrPassValid == true))
+            {
+                currPassInput.disabled = true;
+                cfrmCurrPassCfrmBtn.disabled = true;
+                closeCfrmPassMdl(true);
+            }
+            else
+            {
+                notification(`notifyBad`, "Check all fields are filled correctly");
+            }
+        });
+
+        // Closes the cfrmPassBdr modal
+        async function closeCfrmPassMdl(isPass = false)
+        {
+            let isVrfd = false;
+            if(isPass == true) isVrfd = await reauthToCfrmPass(currPassInput.value);
+
+            cfrmCurrPassCfrmBtn.classList.replace("midSolidBtn" , "inactiveBtn");
+            currPassInput.value = "";
+            currPassInput.disabled = true;
+            cfrmCurrPassCfrmBtn.disabled = true;
+            cfrmPassBdr.classList.remove("active");
+            
+            cfrmPassBdr.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                cfrmPassBdr.removeEventListener("transitionend" , handleTransitionEnd);
+                cfrmPassBdr.remove();
+                documentBody.removeAttribute(`data-modal-state`);
+
+                if(isVrfd) sett_mng_prfl_lock(prof_id);
+            });
+        }
+
+        // Closes the modal
+        cfrmCurrPassCloseBtn.forEach(one => 
+        {
+            one.addEventListener("mousedown" , closeCfrmPassMdl);
+        });
+
+
+        // Reauthenticate user to confirm password
+        async function reauthToCfrmPass(currPass)
+        {
+            // Return if no user is signed in
+            if(!isUserSignedIn())
+            {
+                notification(`notifyBad`, "No user is currently signed in.");
+                return false;
+            }
+
+            const pass = (currPass === acuvid_v3_obj.pass) ? true : false;
+
+            if(pass) return true;
+
+            notification(`notifyBad`, "Incorrect password");
+            return false;
+        }
+    }
+
+    // Manage the profile locks
+    async function sett_mng_prfl_lock(prof_id)
+    {
+
+        const mngPrflLockBdr = document.createElement("div");
+        mngPrflLockBdr.classList.add("genAtnModalBdr");
+        mngPrflLockBdr.innerHTML = 
+        `
+            <div class="genAtnModalBcg closeMngPrflLockBtn"></div>
+            <div class="genAtnModalBox">
+                <div class="genAtnModalCtnt">
+                    <div class="genAtnModalHeader">
+                        <div class="genAtnModalHeaderIconBox closeMngPrflLockBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="genAtnModalHeaderIcon">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                            </svg>
+                        </div>
+                        <div class="genAtnModalHeaderText">
+                            <span class="large">P</span>
+                            <span class="small">rofile Lock Settings</span>
+                        </div>
+                    </div>
+                    <div class="genAtnModalOptBcg ">
+                        <div class="genAtnModalOptBdr createProfItemBox">
+                            <div class="newCLBdr active">
+                                <div class="newCLBox">
+                                    <div class="newCLInputBdr">
+                                        <div class="newCLInputBox">
+                                            <input type="text" name="mngPrflLockField" id="mngPrflLockInputId" class="newCLInputClass" inputmode="numeric" pattern="\d*" maxlength="4" placeholder="Enter a 4-digit PIN" required />
+                                        </div>
+                                    </div>
+                                    <div class="newCLWarnBdr">
+                                        <div class="newCLWarnBox">
+                                            <p id="mngPrflLockWarnId" class="newCLWarnText empty" tabindex="-1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="mng_prof_lock_toggle_bdr genTick_chkSelState" data-cards-are-selectable="true">
+                                        <div class="mng_prof_lock_toggle_box">
+                                            <div class="mng_prof_lock_toggle_atn_bdr">
+                                                <div class="mng_prof_lock_toggle_atn_box">
+                                                    <div class="genTick_chkBase">
+                                                        <div class="genTick_chkBdr">
+                                                            <div class="genTick_chkBox">
+                                                                <label for="mng_prof_tgl_btn" class="genTick_chkFldLbl">
+                                                                    <input type="checkbox" id="mng_prof_tgl_btn" class="genTick_chkFldCls">
+                                                                    <div class="genTick_chkFldIconBox">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="genTick_chkFldIconSvg">
+                                                                            <path fill-rule="evenodd" d="M18.493 6.935a.75.75 0 0 1 .072 1.058l-7.857 9a.75.75 0 0 1-1.13 0l-3.143-3.6a.75.75 0 0 1 1.13-.986l2.578 2.953l7.292-8.353a.75.75 0 0 1 1.058-.072" clip-rule="evenodd" />
+                                                                        </svg>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <label for="mng_prof_tgl_btn" class="mng_prof_lock_toggle_det_box">
+                                                <p class="mng_prof_lock_toggle_det_txt">Require PIN to select profile</p>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="newCLAtnBdr">
+                                        <div class="newCLAtnBox">
+                                            <button type="button" id="cfrmMngPrflLock" class="genBtnBox midSolidBtn">
+                                                <div class="genBtnText">Save</div>
+                                            </button>
+                                            <button type="button" id="cnclMngPrflLock" class="genBtnBox hollowBtn closeMngPrflLockBtn">
+                                                <div class="genBtnText">Cancel</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        documentCtnt.appendChild(mngPrflLockBdr);
+
+        const mngPrflLockCloseBtn = document.querySelectorAll(".closeMngPrflLockBtn");
+        const mngPrflLockWarn = document.querySelector("#mngPrflLockWarnId");
+        const mngPrflLockInput = document.querySelector("#mngPrflLockInputId");
+        const mngPrflLockBtn = document.querySelector("#cfrmMngPrflLock");
+        const lock_code_cond = new RegExp("^[0-9]*$");
+        let isLockCodeValid = true;
+        let mngPrflLockTimer;
+
+        // Transitioning elements
+        mngPrflLockTimer = setTimeout(async () => 
+        {
+            clearTimeout(mngPrflLockTimer);
+
+            // Fetch current data
+            const l_c = acuvid_v3_obj[`profiles.${prof_id}`];
+            mngPrflLockInput.value = l_c[1]?.prof_lock_pin || "0000";
+            mngPrflLockBdr.querySelector("#mng_prof_tgl_btn").checked = l_c[1]?.prof_lock_state || false;
+            mngPrflLockInput.focus();
+
+            documentBody.setAttribute(`data-modal-state` , `open`);
+            mngPrflLockBdr.classList.add("active");
+        }, 250);
+        
+        // Automatically focus on input field after transition
+        mngPrflLockBdr.addEventListener("transitionend" , function handleTransitionEnd()
+        {
+            mngPrflLockBdr.removeEventListener("transitionend" , handleTransitionEnd);
+            mngPrflLockInput.focus();
+        });
+
+        // Only allow valid characters
+        mngPrflLockInput.addEventListener("beforeinput", (event) => 
+        {
+            if((event.data != null) && !(lock_code_cond).test(event.data))
+                event.preventDefault();
+        });
+
+        // Validate fullname
+        function valLockComb(event) 
+        {
+            let lckCd = mngPrflLockInput.value.toString().trim();
+
+            // Return if value is not a number
+            if(!(/^\d+$/.test(lckCd)))
+            {
+                mngPrflLockWarn.textContent = "Required";
+                mngPrflLockWarn.classList.add("active");
+                isLockCodeValid = false;
+                return;
+            }
+
+            // Strip non-digits and cap at 4 digits
+            let digits = lckCd.replace(/\D/g, '').slice(0, 4);
+
+            // Checks if the field is empty
+            if((event.data == null) && (digits.length <= 0))
+            {
+                mngPrflLockWarn.textContent = "Required";
+                mngPrflLockWarn.classList.add("active");
+                isLockCodeValid = false;
+            }
+            // Check that 
+            else if((digits.length != 4))
+            {
+                mngPrflLockWarn.textContent = "PIN must be 4 digits long";
+                mngPrflLockWarn.classList.add("active");
+                isLockCodeValid = false;
+            }
+            // If all conditions are met, the input is valid, i.e "true";
+            else
+            {
+                mngPrflLockWarn.textContent = "";
+                mngPrflLockWarn.classList.remove("active");
+                isLockCodeValid = true;
+            }
+        }
+        
+        mngPrflLockInput.addEventListener("input", valLockComb);
+
+        // Verify the lock combination
+        mngPrflLockBtn.addEventListener("click" , () => 
+        {
+            if(isLockCodeValid == true)
+            {
+                mngPrflLockInput.disabled = true;
+                mngPrflLockBtn.disabled = true;
+                closeMngPrflLock(true);
+            }
+            else
+            {
+                notification(`notifyBad`, "Check that the field has been filled correctly");
+            }
+        });
+
+        // Confirm before closing the mngPrflLock modal
+        function cfrmB4Cls()
+        {
+            initConfirmModal(
+                `Are you sure you want to close this modal`,
+                `Any unsaved changes may be lost`,
+                `Yes`,
+                `No`,
+                closeMngPrflLock
+            );
+        }
+
+        // Closes the mngPrflLock modal
+        async function closeMngPrflLock(isLock = false)
+        {
+            if(isLock == true)
+            {
+                try
+                {
+                    // Get the toggle state
+                    let isReq = false;
+                    const tglBtn = mngPrflLockBdr.querySelector("#mng_prof_tgl_btn:checked");
+
+                    // Update to true if selected
+                    if(tglBtn) isReq = true;
+
+                    // Update user data
+                    acuvid_v3_obj[`profiles.${prof_id}.prof_lock_pin`] = mngPrflLockInput.value;
+                    acuvid_v3_obj[`profiles.${prof_id}.prof_lock_state`] = isReq;
+
+                    // Notify the user
+                    notification(`notifyGood`, `Profile lock settings updated successfully`); 
+                }
+                catch(err)
+                {
+                    console.error(err);
+                    notification(`notifyBad`, `Failed to update profile lock settings`); 
+                }
+            }
+
+            mngPrflLockBtn.classList.replace("midSolidBtn" , "inactiveBtn");
+            mngPrflLockInput.value = "";
+            mngPrflLockInput.disabled = true;
+            mngPrflLockBtn.disabled = true;
+            mngPrflLockBdr.classList.remove("active");
+            
+            mngPrflLockBdr.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                mngPrflLockBdr.removeEventListener("transitionend" , handleTransitionEnd);
+                mngPrflLockBdr.remove();
+                documentBody.removeAttribute(`data-modal-state`);
+            });
+        }
+
+        // Closes the modal
+        mngPrflLockCloseBtn.forEach(one => 
+        {
+            one.addEventListener("click" , cfrmB4Cls);
+        });
+    }
+
+
+
+    // Confirm before deleting a field associated with a profile (e.g. history, likes, dislikes, etc.)
+    function preSettMngProfFldDel()
+    {
+        const fldDelSels = document.querySelectorAll(".settMngProfFldDelBtn");
+
+        fldDelSels.forEach((btn) => 
+        {
+            const sel_atn = () => 
+            {
+                // Get field attribute
+                const fld_id = btn.getAttribute("data-prof-field").toLowerCase() || "";
+
+                // Get field name (exclude the delete text)
+                const fld_name = btn.querySelector(".genMenuModalCtntBtnText")?.textContent.split(" ").at(-1) || "";
+
+                // Request deletion
+                reqSettMngProfFldDel(fld_id, fld_name);
+            }
+
+            btn.addEventListener("click", sel_atn);
+        });
+    }
+    
+    async function reqSettMngProfFldDel(prof_fld_id = "", prof_fld_name = "")
+    {
+        if((
+            ((typeof prof_fld_id === "string") && (prof_fld_id !== ""))
+            && ((typeof prof_fld_name === "string") && (prof_fld_name !== ""))
+        ))
+        {
+            const prof_id = sett_mng_prfls_curr_pid;
+
+            // Delete the selected field
+            const proceedToDelProfData = async () =>
+            {
+                try
+                {
+                    acuvid_v3_obj.profiles[`${prof_id}`][`${prof_fld_id}`] = [];
+                    notification(`notifyGood`, `Your ${prof_fld_name} was deleted successfully`);
+                }
+                catch(error)
+                {
+                    console.error(`Failed to perform deletion on the ${prof_fld_name}'s profile field: ${prof_fld_id}\n${error}`);
+                    notification(`notifyBad`, `Failed to delete your ${prof_fld_name}`);
+                }
+            }
+
+            // Ask user for confirmation before clearing
+            initConfirmModal(
+                `Are you sure you want to delete your ${prof_fld_name}?`,
+                `Once deleted, it can not be recovered`,
+                `Delete`,
+                `Cancel`,
+                proceedToDelProfData
+            );
+        }
+        else
+        {
+            console.error(`Failed to request deletion\n The fld name: ${prof_fld_name} or id: ${prof_fld_id} is invalid`);
+            notification(`notifyBad`, `An error occured. Please try again later.`);
+        }
+    }
+
+
+
+    
+// APP EXPERIENCE SETTINGS
+
+    // Updating Notification Preferences
+    function init_ntfy_preference()
+    {
+        const mngNtfyBdr = document.createElement("div");
+        mngNtfyBdr.classList.add("genAtnModalBdr");
+        mngNtfyBdr.innerHTML = 
+        `
+            <div class="genAtnModalBcg closeMngNtfyBtn"></div>
+            <div class="genAtnModalBox">
+                <div class="genAtnModalCtnt">
+                    <div class="genAtnModalHeader">
+                        <div class="genAtnModalHeaderIconBox closeMngNtfyBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="genAtnModalHeaderIcon">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                            </svg>
+                        </div>
+                        <div class="genAtnModalHeaderText">
+                            <span class="large">N</span>
+                            <span class="small">otification Preferences</span>
+                        </div>
+                    </div>
+                    <div class="genAtnModalOptBcg ">
+                        <div class="genAtnModalOptBdr createProfItemBox">
+                            <div class="genAtnModalOptBox">
+                                <div class="mngNtfyTtlBox">
+                                    <p class="mngNtfyTtlText">What you stream</p>
+                                </div>
+                                <div class="mngNtfyAtnBtn">
+                                    <div class="genCheckBoxBase">
+                                        <input type="checkbox" id="ntfy_watch" class="genCheckBoxInput mngNtfyAtnBtnTgl" tabindex="-1">
+                                        <label for="ntfy_watch" class="genCheckBoxToggle">
+                                            <span class="genCheckBoxToggleCircle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="genAtnModalOptBox">
+                                <div class="mngNtfyTtlBox">
+                                    <p class="mngNtfyTtlText">Watch recommendations & more</p>
+                                </div>
+                                <div class="mngNtfyAtnBtn">
+                                    <div class="genCheckBoxBase">
+                                        <input type="checkbox" id="ntfy_recommend" class="genCheckBoxInput mngNtfyAtnBtnTgl" tabindex="-1">
+                                        <label for="ntfy_recommend" class="genCheckBoxToggle">
+                                            <span class="genCheckBoxToggleCircle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="genAtnModalOptBox">
+                                <div class="mngNtfyTtlBox">
+                                    <p class="mngNtfyTtlText">Exploring ACUvid V3</p>
+                                </div>
+                                <div class="mngNtfyAtnBtnBox">
+                                    <div class="genCheckBoxBase">
+                                        <input type="checkbox" id="ntfy_explore" class="genCheckBoxInput mngNtfyAtnBtnTgl" tabindex="-1">
+                                        <label for="ntfy_explore" class="genCheckBoxToggle">
+                                            <span class="genCheckBoxToggleCircle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="genAtnModalOptBox">
+                                <div class="mngNtfyTtlBox">
+                                    <p class="mngNtfyTtlText">Promotions</p>
+                                </div>
+                                <div class="mngNtfyAtnBtn">
+                                    <div class="genCheckBoxBase">
+                                        <input type="checkbox" id="ntfy_promotions" class="genCheckBoxInput mngNtfyAtnBtnTgl" tabindex="-1">
+                                        <label for="ntfy_promotions" class="genCheckBoxToggle">
+                                            <span class="genCheckBoxToggleCircle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="genAtnModalOptBox">
+                                <div class="mngNtfyTtlBox">
+                                    <p class="mngNtfyTtlText">Surveys, research & more</p>
+                                </div>
+                                <div class="mngNtfyAtnBtn">
+                                    <div class="genCheckBoxBase">
+                                        <input type="checkbox" id="ntfy_participation" class="genCheckBoxInput mngNtfyAtnBtnTgl" tabindex="-1">
+                                        <label for="ntfy_participation" class="genCheckBoxToggle">
+                                            <span class="genCheckBoxToggleCircle"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        documentCtnt.appendChild(mngNtfyBdr);
+
+        const mngNtfyCloseBtn = document.querySelectorAll(".closeMngNtfyBtn");
+        let mngNtfyTimer;
+
+        // Disabling btn to prevent multiple calls
+        if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = true;
+
+        // Transitioning elements
+        mngNtfyTimer = setTimeout(() => 
+        {
+            clearTimeout(mngNtfyTimer);
+            documentBody.setAttribute(`data-modal-state` , `open`);
+            mngNtfyBdr.classList.add("active");
+
+            // Update toggles with currently selected preferences
+            if((acuvid_v3_obj?.ntfy_pref !== undefined) && (acuvid_v3_obj?.ntfy_pref != null));
+            {
+                document.querySelector(".mngNtfyAtnBtnTgl#ntfy_watch").checked = acuvid_v3_obj?.ntfy_pref?.ntfy_what_you_stream;
+                document.querySelector(".mngNtfyAtnBtnTgl#ntfy_recommend").checked = acuvid_v3_obj?.ntfy_pref?.ntfy_recommendation;
+                document.querySelector(".mngNtfyAtnBtnTgl#ntfy_explore").checked = acuvid_v3_obj?.ntfy_pref?.ntfy_exploration;
+                document.querySelector(".mngNtfyAtnBtnTgl#ntfy_promotions").checked = acuvid_v3_obj?.ntfy_pref?.ntfy_promotions;
+                document.querySelector(".mngNtfyAtnBtnTgl#ntfy_participation").checked = acuvid_v3_obj?.ntfy_pref?.ntfy_surveys;
+            }
+        }, 250);
+
+        // Closes the mngNtfy modal
+        function closeMngNtfyMdl()
+        {
+            mngNtfyBdr.classList.remove("active");
+            mngNtfyBdr.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                mngNtfyBdr.removeEventListener("transitionend" , handleTransitionEnd);
+                mngNtfyBdr.remove();
+                documentBody.removeAttribute(`data-modal-state`);
+                if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = false;
+            });
+        }
+
+        // Closes the modal
+        mngNtfyCloseBtn.forEach(one => 
+        {
+            one.addEventListener("mousedown" , closeMngNtfyMdl);
+        });
+    }
+
+    
+    // Connecting to 3rd-party apps (Non-operational)
+    function init_3rd_party_connect()
+    {
+        const cnct3rdPartyAppBdr = document.createElement("div");
+        cnct3rdPartyAppBdr.classList.add("genAtnModalBdr");
+        cnct3rdPartyAppBdr.innerHTML = 
+        `
+            <div class="genAtnModalBcg closeCnct3rdPartyAppBtn"></div>
+            <div class="genAtnModalBox">
+                <div class="genAtnModalCtnt">
+                    <div class="genAtnModalHeader">
+                        <div class="genAtnModalHeaderIconBox closeCnct3rdPartyAppBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="genAtnModalHeaderIcon">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                            </svg>
+                        </div>
+                        <div class="genAtnModalHeaderText">
+                            <span class="large">C</span>
+                            <span class="small">onnected Apps</span>
+                        </div>
+                    </div>
+                    <div class="genAtnModalOptBcg ">
+                        <div class="genAtnModalOptBdr createProfItemBox">
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Discord</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Epic Games</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Facebook</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Guilded</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Nitendo</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Playstation</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Steam</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Twitch</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Ubisoft</span>
+                                </div>
+                            </button>
+                            <button class="genAtnModalOptBox cnct3rdPartyAppItem">
+                                <div class="genAtnModalOptIconBox">
+                                    <svg transform="scale(0.85)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="genAtnModalOptIconSvg">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"></path>
+                                    </svg>
+                                </div>
+                                <div class="genAtnModalOptTextBox ">
+                                    <span class="genAtnModalOptText ">Xbox</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        documentCtnt.appendChild(cnct3rdPartyAppBdr);
+
+        const cnct3rdPartyAppCloseBtn = document.querySelectorAll(".closeCnct3rdPartyAppBtn");
+        const cnct3rdPartyAppItemBtn = document.querySelectorAll(".cnct3rdPartyAppItem");
+        let cnct3rdPartyAppTimer;
+
+        // Disabling btn to prevent multiple calls
+        if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = true;
+
+        // Transitioning elements
+        cnct3rdPartyAppTimer = setTimeout(async () => 
+        {
+            clearTimeout(cnct3rdPartyAppTimer);
+            documentBody.setAttribute(`data-modal-state` , `open`);
+            cnct3rdPartyAppBdr.classList.add("active");
+        }, 250);
+
+        // Closes the Cnct3rdPartyApp modal
+        async function closeCnct3rdPartyApp()
+        {
+            cnct3rdPartyAppBdr.classList.remove("active");
+            cnct3rdPartyAppBdr.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                cnct3rdPartyAppBdr.removeEventListener("transitionend" , handleTransitionEnd);
+                cnct3rdPartyAppBdr.remove();
+                documentBody.removeAttribute(`data-modal-state`);
+                if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = false;
+            });
+        }
+
+        // Let user know it's non-operational
+        cnct3rdPartyAppItemBtn.forEach((btn) => 
+        {
+            btn.onclick = () => 
+            {
+                notification(
+                    `notifyBad`,
+                    `Unable to connect to ${btn.querySelector(".genAtnModalOptText").textContent} at this time.`
+                );
+            }
+        });
+
+        // Closes the modal
+        cnct3rdPartyAppCloseBtn.forEach(one => 
+        {
+            one.addEventListener("mousedown" , closeCnct3rdPartyApp);
+        });
+    }
+
+
+
+
+// PRIVACY & SECURITY SETTINGS
+
+    // Update User's fullname
+    function updUsrFullName(btnEv)
+    {
+        const updFullnameBdr = document.createElement("div");
+        updFullnameBdr.classList.add("genAtnModalBdr");
+        updFullnameBdr.innerHTML = 
+        `
+            <div class="genAtnModalBcg closeUpdFullnameBtn"></div>
+            <div class="genAtnModalBox">
+                <div class="genAtnModalCtnt">
+                    <div class="genAtnModalHeader">
+                        <div class="genAtnModalHeaderIconBox closeUpdFullnameBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="genAtnModalHeaderIcon">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                            </svg>
+                        </div>
+                        <div class="genAtnModalHeaderText">
+                            <span class="large">U</span>
+                            <span class="small">pdate Fullname</span>
+                        </div>
+                    </div>
+                    <div class="genAtnModalOptBcg ">
+                        <div class="genAtnModalOptBdr createProfItemBox">
+                            <div class="newCLBdr active">
+                                <div class="newCLBox">
+                                    <div class="newCLInputBdr">
+                                        <div class="newCLInputBox">
+                                            <input type="text" name="updNameField" id="updFullnameInputId" class="newCLInputClass" placeholder="Enter your fullname" />
+                                        </div>
+                                    </div>
+                                    <div class="newCLWarnBdr">
+                                        <div class="newCLWarnBox">
+                                            <p id="updFullnameWarnId" class="newCLWarnText empty" tabindex="-1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="newCLAtnBdr">
+                                        <div class="newCLAtnBox">
+                                            <button type="button" id="cfrmUpdFullname" class="genBtnBox midSolidBtn">
+                                                <div class="genBtnText">Save</div>
+                                            </button>
+                                            <button type="button" id="cnclUpdFullname" class="genBtnBox hollowBtn closeUpdFullnameBtn">
+                                                <div class="genBtnText">Cancel</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        documentCtnt.appendChild(updFullnameBdr);
+
+        const updFullnameCloseBtn = document.querySelectorAll(".closeUpdFullnameBtn");
+        const updFullnameWarn = document.querySelector("#updFullnameWarnId");
+        const updFullnameInput = document.querySelector("#updFullnameInputId");
+        const updFullnameBtn = document.querySelector("#cfrmUpdFullname");
+        let isUpdNameValid = false;
+        let updFullnameTimer;
+
+        // Disabling btn to prevent multiple calls
+        if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = true;
+
+        // Transitioning elements
+        updFullnameTimer = setTimeout(async () => 
+        {
+            clearTimeout(updFullnameTimer);
+            updFullnameInput.value = acuvid_v3_obj.full_name || "";
+            documentBody.setAttribute(`data-modal-state` , `open`);
+            updFullnameBdr.classList.add("active");
+        }, 250);
+        
+        // Automatically focus on input field after transition
+        updFullnameBdr.addEventListener("transitionend" , function handleTransitionEnd()
+        {
+            updFullnameBdr.removeEventListener("transitionend" , handleTransitionEnd);
+            updFullnameInput.focus();
+        });
+
+        // Validate fullname
+        function valFullname(event) 
+        {
+            let fname = updFullnameInput.value.toString().trim();
+            let fullName_Condition = /^\s*\S+(?:\s+\S+)+\s*$/;
+
+            // Checks if empty
+            if((event.data == null) && (fname === ""))
+            {
+                updFullnameWarn.textContent = "Required";
+                updFullnameWarn.classList.add("active");
+                isUpdNameValid = false;
+            }
+            // Checks if Full name was entered
+            else if(!(fullName_Condition.test(fname)))
+            {
+                updFullnameWarn.textContent = "First and last name required";
+                updFullnameWarn.classList.add("active");
+                isUpdNameValid = false;
+            }
+            else
+            {
+                updFullnameWarn.textContent = "";
+                updFullnameWarn.classList.remove("active");
+                isUpdNameValid = true;
+            }
+        }
+        
+        updFullnameInput.addEventListener("input", valFullname);
+
+        // Verify the fullname by pressing the "Enter" key
+        updFullnameInput.addEventListener("keyup" , (e) => 
+        {
+            if((typeof e === undefined) || (typeof e.key === "undefined")) return;
+
+            if((e.key.toLowerCase() === "enter"))
+            {
+                updFullnameBtn.click();
+            }
+        });
+
+        // Verify the fullname
+        updFullnameBtn.addEventListener("click" , () => 
+        {
+            if(isUpdNameValid == true)
+            {
+                updFullnameInput.disabled = true;
+                updFullnameBtn.disabled = true;
+                closeUpdFullname(true);
+            }
+            else
+            {
+                notification(`notifyBad`, "Check that the field has been filled correctly");
+            }
+        });
+
+        // Closes the updFullname modal
+        async function closeUpdFullname(isName = false)
+        {
+            if(isName == true)
+            {
+                try 
+                {
+                    acuvid_v3_obj.full_name = updFullnameInput.value;
+                    document.getElementById("sett_change_fullname").closest(".sett_ctnt_hrtl").querySelector(".settCtntSectDescText").textContent = updFullnameInput.value;
+                    notification(`notifyGood`, `Fullname updated successfully`);
+                }
+                catch (error)
+                {
+                    console.error(error);
+                    notification(`notifyBad`, `Failed to update fullname`); 
+                }
+            }
+
+            updFullnameBtn.classList.replace("midSolidBtn" , "inactiveBtn");
+            updFullnameInput.value = "";
+            updFullnameInput.disabled = true;
+            updFullnameBtn.disabled = true;
+            updFullnameBdr.classList.remove("active");
+            
+            updFullnameBdr.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                updFullnameBdr.removeEventListener("transitionend" , handleTransitionEnd);
+                updFullnameBdr.remove();
+                documentBody.removeAttribute(`data-modal-state`);
+                if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = false;
+            });
+        }
+
+        // Closes the modal
+        updFullnameCloseBtn.forEach(one => 
+        {
+            one.addEventListener("mousedown" , closeUpdFullname);
+        });
+    }
+
+
+    // Updates User's password
+    function valPassUpd()
+    {
+        const updUsrPassBdr = document.createElement("div");
+        updUsrPassBdr.classList.add("genAtnModalBdr");
+        updUsrPassBdr.innerHTML = 
+        `
+            <div class="genAtnModalBcg closeUpdPassBtn"></div>
+            <div class="genAtnModalBox">
+                <div class="genAtnModalCtnt">
+                    <div class="genAtnModalHeader">
+                        <div class="genAtnModalHeaderIconBox closeUpdPassBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="genAtnModalHeaderIcon">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                            </svg>
+                        </div>
+                        <div class="genAtnModalHeaderText">
+                            <span class="large">U</span>
+                            <span class="small">pdate Password</span>
+                        </div>
+                    </div>
+                    <div class="genAtnModalOptBcg ">
+                        <div class="genAtnModalOptBdr createProfItemBox">
+                            <div class="newCLBdr active">
+                                <div class="newCLBox">
+                                    <div class="newCLInputBdr">
+                                        <div class="newCLInputBox">
+                                            <input type="password" name="currPassField" id="currPassInputId" class="newCLInputClass" placeholder="Current password" />
+                                        </div>
+                                    </div>
+                                    <div class="newCLWarnBdr">
+                                        <div class="newCLWarnBox">
+                                            <p id="currPassWarnId" class="newCLWarnText empty" tabindex="-1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="newCLInputBdr">
+                                        <div class="newCLInputBox">
+                                            <input type="password" name="newPassField" id="newPassInputId" class="newCLInputClass" placeholder="New password" />
+                                        </div>
+                                    </div>
+                                    <div class="newCLWarnBdr">
+                                        <div class="newCLWarnBox">
+                                            <p id="newPassWarnId" class="newCLWarnText empty" tabindex="-1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="newCLAtnBdr">
+                                        <div class="newCLAtnBox">
+                                            <button type="button" id="cfrmUpdPass" class="genBtnBox midSolidBtn">
+                                                <div class="genBtnText">Update</div>
+                                            </button>
+                                            <button type="button" id="cnclUpdPass" class="genBtnBox hollowBtn closeUpdPassBtn">
+                                                <div class="genBtnText">Cancel</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        documentCtnt.appendChild(updUsrPassBdr);
+
+        const updUsrPassCloseBtn = document.querySelectorAll(".closeUpdPassBtn");
+        const updUsrPassCfrmBtn = document.querySelector("#cfrmUpdPass");
+        const currPassWarn = document.querySelector("#currPassWarnId");
+        const newPassWarn = document.querySelector("#newPassWarnId");
+        const currPassInput = document.querySelector("#currPassInputId");
+        const newPassInput = document.querySelector("#newPassInputId");
+        const usr_pass_cond = new RegExp("^[A-Za-z0-9!@#$%^&*_+-~`)(></\"?|]");
+        let isCurrPassValid = false;
+        let isNewPassValid = false;
+        let updUsrPassTimer;
+
+        // Disabling btn to prevent multiple calls
+        if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = true;
+
+        // Transitioning elements
+        updUsrPassTimer = setTimeout(() => 
+        {
+            documentBody.setAttribute(`data-modal-state` , `open`);
+            updUsrPassBdr.classList.add("active");
+            clearTimeout(updUsrPassTimer);
+        }, 250);
+        
+        // Automatically focus on input field after transition
+        updUsrPassBdr.addEventListener("transitionend" , function handleTransitionEnd()
+        {
+            updUsrPassBdr.removeEventListener("transitionend" , handleTransitionEnd);
+            currPassInput.focus();
+        });
+
+        // Allow any character but whitespaces
+        currPassInput.addEventListener("beforeinput", (event) => 
+        {
+            if(event.data != null && !(usr_pass_cond).test(event.data))
+                event.preventDefault();
+        });
+        newPassInput.addEventListener("beforeinput", (event) => 
+        {
+            if(event.data != null && !(usr_pass_cond).test(event.data))
+                event.preventDefault();
+        });
+
+        // Validate current password
+        function valPass(pass = "", warn = null) 
+        {
+            pass = pass.toString();
+            const userPass_Cond_SpecialChar = /\W/g;
+            const userPass_Cond_num = /\d/g;
+            const userPass_Cond_Lett_Upr = /[A-Z]/g;
+            const userPass_Cond_Lett_Lwr = /[a-z]/g;
+
+
+            // Checks if there is any value in the input field
+            if(((pass === "") && (pass.length <= 0)))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = `Required`;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // Checks if the input fits the specified pattern
+            else if(!(pass.match(userPass_Cond_SpecialChar) 
+                && pass.match(userPass_Cond_num)
+                && pass.match(userPass_Cond_Lett_Upr)
+                && pass.match(userPass_Cond_Lett_Lwr)
+            ))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = 
+                    `
+                        Password must contain:
+                        </br>
+                        1. Uppercase and lowercase letter
+                        </br>
+                        2. Special character ex. "/$%^&*"
+                        </br>
+                        3. A number 0-9
+                        </br>
+                        4. At least eight characters
+                        </br>
+                    `;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // Checks if the pattern is less "8" characters and above than "100" characters
+            else if(((pass.length > 0) && (pass.length < 8)))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = `Password length must be at least 8 characters`;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // If all checks are completed then it is accepted
+            else
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = ``;
+                    warn.classList.remove("active");
+                }
+                return true;
+            }
+        }
+        
+        currPassInput.addEventListener("input", () => 
+        {
+            isCurrPassValid = valPass(currPassInput.value, currPassWarn);
+        });
+        
+        newPassInput.addEventListener("input", () => 
+        {
+            isNewPassValid = valPass(newPassInput.value, newPassWarn);
+        });
+
+        // Validate pass by pressing the "Enter" key
+        currPassInput.addEventListener("keyup" , (e) => 
+        {
+            if((isCurrPassValid == false) || (typeof e === undefined) || (typeof e.key === "undefined")) return;
+
+            if((e.key.toLowerCase() === "enter"))
+            {
+                newPassInput.focus();
+            }
+        });
+
+        // Validate pass by pressing the "Enter" key
+        newPassInput.addEventListener("keyup" , (e) => 
+        {
+            if((isNewPassValid == false) || (typeof e === undefined) || (typeof e.key === "undefined")) return;
+
+            if((e.key.toLowerCase() === "enter"))
+            {
+                updUsrPassCfrmBtn.click();
+            }
+        });
+
+        // Get pass input for verification
+        updUsrPassCfrmBtn.addEventListener("click" , () => 
+        {
+            if((isCurrPassValid == true) && (isNewPassValid == true))
+            {
+                currPassInput.disabled = true;
+                newPassInput.disabled = true;
+                updUsrPassCfrmBtn.disabled = true;
+                closeUpdPass(true);
+            }
+            else
+            {
+                notification(`notifyBad`, "Check all fields are filled correctly");
+            }
+        });
+
+        // Closes the updUsrPass modal
+        async function closeUpdPass(isPass = false)
+        {
+            if(isPass == true) await reauthB4PassUpd(currPassInput.value, newPassInput.value);
+
+            updUsrPassCfrmBtn.classList.replace("midSolidBtn" , "inactiveBtn");
+            currPassInput.value = "";
+            newPassInput.value = "";
+            currPassInput.disabled = true;
+            newPassInput.disabled = true;
+            updUsrPassCfrmBtn.disabled = true;
+            updUsrPassBdr.classList.remove("active");
+            
+            updUsrPassBdr.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                updUsrPassBdr.removeEventListener("transitionend" , handleTransitionEnd);
+                updUsrPassBdr.remove();
+                documentBody.removeAttribute(`data-modal-state`);
+                if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = false;
+            });
+        }
+
+        // Closes the modal
+        updUsrPassCloseBtn.forEach(one => 
+        {
+            one.addEventListener("mousedown" , closeUpdPass);
+        });
+
+
+        // Reauthenticate user before updating their password
+        async function reauthB4PassUpd(currpass, newpass)
+        {
+
+            // Return if no user is signed in
+            if(!isUserSignedIn()) return notification(`notifyBad`, "No user is currently signed in.");
+
+            if(currpass !== acuvid_v3_obj.pass) return notification(`notifyBad`, "Incorrect password.");
+
+            acuvid_v3_obj.pass = newpass;
+            notification(`notifyGood`, `Email Updated!`);
+            signOutUser();
+        }
+    }
+
+
+    // Updates User's email
+    function valEmailUpd()
+    {
+        const updUsrEmailBdr = document.createElement("div");
+        updUsrEmailBdr.classList.add("genAtnModalBdr");
+        updUsrEmailBdr.innerHTML = 
+        `
+            <div class="genAtnModalBcg closeUpdEmailBtn"></div>
+            <div class="genAtnModalBox">
+                <div class="genAtnModalCtnt">
+                    <div class="genAtnModalHeader">
+                        <div class="genAtnModalHeaderIconBox closeUpdEmailBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="genAtnModalHeaderIcon">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                            </svg>
+                        </div>
+                        <div class="genAtnModalHeaderText">
+                            <span class="large">U</span>
+                            <span class="small">pdate Email</span>
+                        </div>
+                    </div>
+                    <div class="genAtnModalOptBcg ">
+                        <div class="genAtnModalOptBdr createProfItemBox">
+                            <div class="newCLBdr active">
+                                <div class="newCLBox">
+                                    <div class="newCLInputBdr">
+                                        <div class="newCLInputBox">
+                                            <input type="text" name="newEmailField" id="newEmailInputId" class="newCLInputClass" placeholder="New email" />
+                                        </div>
+                                    </div>
+                                    <div class="newCLWarnBdr">
+                                        <div class="newCLWarnBox">
+                                            <p id="newEmailWarnId" class="newCLWarnText empty" tabindex="-1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="newCLInputBdr">
+                                        <div class="newCLInputBox">
+                                            <input type="password" name="currPassField" id="currPassInputId" class="newCLInputClass" placeholder="Current password" />
+                                        </div>
+                                    </div>
+                                    <div class="newCLWarnBdr">
+                                        <div class="newCLWarnBox">
+                                            <p id="currPassWarnId" class="newCLWarnText empty" tabindex="-1"></p>
+                                        </div>
+                                    </div>
+                                    <div class="newCLAtnBdr">
+                                        <div class="newCLAtnBox">
+                                            <button type="button" id="cfrmUpdEmail" class="genBtnBox midSolidBtn">
+                                                <div class="genBtnText">Update</div>
+                                            </button>
+                                            <button type="button" id="cnclUpdEmail" class="genBtnBox hollowBtn closeUpdEmailBtn">
+                                                <div class="genBtnText">Cancel</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        documentCtnt.appendChild(updUsrEmailBdr);
+
+        const updUsrEmailCloseBtn = document.querySelectorAll(".closeUpdEmailBtn");
+        const updUsrEmailCfrmBtn = document.querySelector("#cfrmUpdEmail");
+        const newEmailWarn = document.querySelector("#newEmailWarnId");
+        const newEmailInput = document.querySelector("#newEmailInputId");
+        const currPassWarn = document.querySelector("#currPassWarnId");
+        const currPassInput = document.querySelector("#currPassInputId");
+        const usr_email_cond = new RegExp("^[A-Za-z0-9@.%_+-]*$");
+        const usr_pass_cond = new RegExp("^[A-Za-z0-9!@#$%^&*_+-~`)(></\"?|]");
+        let isNewEmailValid = false;
+        let isCurrPassValid = false;
+        let updUsrEmailTimer;
+
+        // Disabling btn to prevent multiple calls
+        if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = true;
+
+        // Transitioning elements
+        updUsrEmailTimer = setTimeout(() => 
+        {
+            documentBody.setAttribute(`data-modal-state` , `open`);
+            updUsrEmailBdr.classList.add("active");
+            clearTimeout(updUsrEmailTimer);
+        }, 250);
+        
+        // Automatically focus on input field after transition
+        updUsrEmailBdr.addEventListener("transitionend" , function handleTransitionEnd()
+        {
+            updUsrEmailBdr.removeEventListener("transitionend" , handleTransitionEnd);
+            newEmailInput.focus();
+        });
+
+        // Allow any character but whitespaces
+        newEmailInput.addEventListener("beforeinput", (event) => 
+        {
+            if(event.data != null && !(usr_email_cond).test(event.data))
+                event.preventDefault();
+        });
+        currPassInput.addEventListener("beforeinput", (event) => 
+        {
+            if(event.data != null && !(usr_pass_cond).test(event.data))
+                event.preventDefault();
+        });
+
+        // Validation function for "Email"
+        function valEmail(event)
+        {
+            let eml = newEmailInput.value.toString().trim();
+            let check_for_AtSign_in_Email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            // Checks if the field is empty
+            if((event.data == null) && (eml.length == ""))
+            {
+                newEmailWarn.textContent = "Required";
+                newEmailWarn.classList.add("active");
+                isNewEmailValid = false;
+            }
+            else if(!(check_for_AtSign_in_Email.test(eml)))
+            {
+                newEmailWarn.textContent = "Invalid Email";
+                newEmailWarn.classList.add("active");
+                isNewEmailValid = false;
+            }
+            // If all conditions are met, the Email is valid, i.e "true";
+            else
+            {
+                newEmailWarn.textContent = "";
+                newEmailWarn.classList.remove("active");
+                isNewEmailValid = true;
+            }
+        }
+        
+        newEmailInput.addEventListener("input", valEmail);
+
+        // Validate pass by pressing the "Enter" key
+        newEmailInput.addEventListener("keyup" , (e) => 
+        {
+            if((isNewEmailValid == false) || (typeof e === undefined) || (typeof e.key === "undefined")) return;
+
+            if((e.key.toLowerCase() === "enter"))
+            {
+                newEmailInput.focus();
+            }
+        });
+
+        // Validate current "Password"
+        function valPass(pass = "", warn = null) 
+        {
+            pass = pass.toString().trim();
+            const userPass_Cond_SpecialChar = /\W/g;
+            const userPass_Cond_num = /\d/g;
+            const userPass_Cond_Lett_Upr = /[A-Z]/g;
+            const userPass_Cond_Lett_Lwr = /[a-z]/g;
+
+
+            // Checks if there is any value in the input field
+            if(((pass === "") && (pass.length <= 0)))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = `Required`;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // Checks if the input fits the specified pattern
+            else if(!(pass.match(userPass_Cond_SpecialChar) 
+                && pass.match(userPass_Cond_num)
+                && pass.match(userPass_Cond_Lett_Upr)
+                && pass.match(userPass_Cond_Lett_Lwr)
+            ))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = 
+                    `
+                        Password must contain:
+                        </br>
+                        1. Uppercase and lowercase letter
+                        </br>
+                        2. Special character ex. "/$%^&*"
+                        </br>
+                        3. A number 0-9
+                        </br>
+                        4. At least eight characters
+                        </br>
+                    `;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // Checks if the pattern is less "8" characters and above than "100" characters
+            else if(((pass.length > 0) && (pass.length < 8)))
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = `Password length must be at least 8 characters`;
+                    warn.classList.add("active");
+                }
+                return false;
+            }
+            // If all checks are completed then it is accepted
+            else
+            {
+                if((warn != null))
+                {
+                    warn.innerHTML = ``;
+                    warn.classList.remove("active");
+                }
+                return true;
+            }
+        }
+        
+        currPassInput.addEventListener("input", () => 
+        {
+            isCurrPassValid = valPass(currPassInput.value, currPassWarn);
+        });
+
+        // Validate pass by pressing the "Enter" key
+        currPassInput.addEventListener("keyup" , (e) => 
+        {
+            if((isCurrPassValid == false) || (typeof e === undefined) || (typeof e.key === "undefined")) return;
+
+            if((e.key.toLowerCase() === "enter"))
+            {
+                updUsrEmailCfrmBtn.click();
+            }
+        });
+
+        //  Verification inputs for reauthentication
+        updUsrEmailCfrmBtn.addEventListener("click" , () => 
+        {
+            if((isCurrPassValid == true) && (isNewEmailValid == true))
+            {
+                currPassInput.disabled = true;
+                newEmailInput.disabled = true;
+                updUsrEmailCfrmBtn.disabled = true;
+                closeEmailUpd(true);
+            }
+            else
+            {
+                notification(`notifyBad`, "Check all fields are filled correctly");
+            }
+        });
+
+        // Closes the updUsrEmail modal
+        async function closeEmailUpd(isEmail = false)
+        {
+            if(isEmail == true) await reauthB4EmailUpd(currPassInput.value, newEmailInput.value);
+
+            updUsrEmailCfrmBtn.classList.replace("midSolidBtn" , "inactiveBtn");
+            currPassInput.value = "";
+            newEmailInput.value = "";
+            currPassInput.disabled = true;
+            newEmailInput.disabled = true;
+            updUsrEmailCfrmBtn.disabled = true;
+            updUsrEmailBdr.classList.remove("active");
+            
+            updUsrEmailBdr.addEventListener("transitionend" , function handleTransitionEnd()
+            {
+                updUsrEmailBdr.removeEventListener("transitionend" , handleTransitionEnd);
+                updUsrEmailBdr.remove();
+                documentBody.removeAttribute(`data-modal-state`);
+                if(typeof btnEv !== "undefined") btnEv.target.closest(`.settCtntSectAtnBtn[data-sett-sect-type='modal']`).disabled = false;
+            });
+        }
+
+        // Closes the modal
+        updUsrEmailCloseBtn.forEach(one => 
+        {
+            one.addEventListener("mousedown" , closeEmailUpd);
+        });
+
+
+        // Reauthenticate user before updating their email
+        async function reauthB4EmailUpd(currPass, newEmail)
+        {
+            if(!isUserSignedIn()) return notification(`notifyBad`, "No user is currently signed in.");
+
+            if(currPass !== acuvid_v3_obj.pass) return notification(`notifyBad`, `Incorrect password`);
+            
+            acuvid_v3_obj.email = newEmail;
+            notification(`notifyGood`, `Email Updated!`);
+            signOutUser();
+        }
+    }
