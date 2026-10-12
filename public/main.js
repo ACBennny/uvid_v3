@@ -1058,6 +1058,13 @@
     `;
 
 
+    // Warn before leaving the page
+    window.addEventListener("beforeunload", (event) => 
+    {
+        event.preventDefault();
+        event.returnValue = true;
+    });
+
 
     // CALLING GLOBAL SCOPE FUNCTIONS
     
