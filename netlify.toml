@@ -6,3 +6,8 @@
     Content-Security-Policy = "frame-ancestors 'self'"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
+[[redirects]]
+  from = "https://acuvid-v3.netlify.app/*"
+  to = "https://uv3.abcx.fyi/:splat"
+  status = 301
+  force = true
