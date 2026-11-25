@@ -23,16 +23,16 @@
                                 ACUvid V3 ("Uvid", "ACUvid", "we", "us") is a project developed by the GitHub account
                                 <a class="goToHome" href="https://github.com/ACBennny" target="_blank">acbennny</a> 
                                 and accessible for free as a static "demo" through 
-                                <a class="goToHome" href="https://acuvid-v3.netlify.app" target="_blank">acuvid-v3.netlify.app</a>
+                                <a class="goToHome" href="https://uv3.abcx.fyi" target="_blank">uv3.abcx.fyi</a>
                                 which simulates the user interface and user experience of a streaming platform.
                                 It is provided as is, without warranty, and without guarantee, of any kind.
                                 <br><br>
                                 By creating an account on 
-                                <a class="goToHome" href="https://acuvid-v3.netlify.app" target="_blank">ACUvid V3</a>,
+                                <a class="goToHome" href="https://uv3.abcx.fyi" target="_blank">ACUvid V3</a>,
                                 you voluntaringly agree to respect, value, uphold, and be binded by these terms. 
                                 <br>
                                 Likewise, by deleting your
-                                <a class="goToHome" href="https://acuvid-v3.netlify.app" target="_blank">ACUvid V3</a> account,
+                                <a class="goToHome" href="https://uv3.abcx.fyi" target="_blank">ACUvid V3</a> account,
                                 you are immediately relieved of these terms.
                                 <br><br>
                                 As ACUvid V3 is simulating a streaming service, you may see elements or components of the demo that appear to conflict with our policy. 
