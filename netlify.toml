@@ -6,8 +6,3 @@
     Content-Security-Policy = "frame-ancestors 'self'"
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
-[[redirects]]
-  from = "https://ac-search-engine-clone.netlify.app/*"
-  to = "https://lets-search.abcx.fyi/:splat"
-  status = 301
-  force = true
